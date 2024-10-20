@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.0"
+   width="21.999887"
+   height="22.000109"
+   id="svg2">
+  <g
+     transform="translate(600.36469,-242.62505)"
+     id="g2319">
+    <path
+       d=""
+       id="path2323"
+       style="fill:#ffffff;stroke:none" />
+  </g>
+  <g
+     transform="translate(600.36469,-242.62505)"
+     id="g2325">
+    <path
+       d=""
+       id="path2329"
+       style="fill:#ffffff;stroke:none" />
+  </g>
+  <g
+     transform="matrix(0.03794065,0,0,0.0378749,-5.6043435e-5,3.9161276e-5)"
+     id="g3778">
+    <path
+       d="M 66.275,1.768 C 24.94,1.768 1.704,23.139 1.704,66.804 l 0,450.123 c 0,40.844 20.894,62.229 62.192,62.229 l 452.024,0 c 41.307,0 62.229,-20.316 62.229,-62.229 l 0,-450.123 c 0,-42.601 -20.922,-65.036 -63.522,-65.036 -0.003,0 -448.494,-0.143 -448.352,0 z"
+       id="path1329"
+       style="fill:#004e75;fill-opacity:1;stroke:#eeeeee;stroke-width:3.40799999" />
+    <path
+       d="m 145.35836,505.1504 0,-419.584101 158.27422,0 c 27.85754,4.21e-4 49.13248,1.336067 63.82487,4.006949 20.60684,3.434931 37.87482,9.970057 51.80402,19.605392 13.92857,9.63613 25.13846,23.1357 33.62969,40.49874 8.49056,17.36376 12.736,36.44441 12.73636,57.24204 -3.6e-4,35.68112 -11.35336,65.87626 -34.05901,90.58551 -22.70631,24.70965 -63.72972,37.06439 -123.07038,37.06422 l -107.61501,0 0,170.58125 -55.52476,0 z m 55.52476,-220.09562 108.47366,0 c 35.87143,2.3e-4 61.34409,-6.678 76.4181,-20.03471 15.07343,-13.35621 22.6103,-32.15067 22.6106,-56.38341 -3e-4,-17.5539 -4.43654,-32.5799 -13.30877,-45.07808 -8.87281,-12.4975 -20.5597,-20.74989 -35.06075,-24.75718 -9.34977,-2.48013 -26.61777,-3.72037 -51.80402,-3.72073 l -107.32882,0 0,149.97411 z"
+       id="text2419"
+       style="font-size:143.53205872px;font-style:normal;font-weight:normal;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:22.6878624;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;font-family:Bitstream Vera Sans" />
+  </g>
+</svg>

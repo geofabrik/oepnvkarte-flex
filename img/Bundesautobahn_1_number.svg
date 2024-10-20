@@ -1,0 +1,7 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="200.000000" height="120.000000" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<rect x=".25" y=".25" width="199.5" height="119.5" rx="10" ry="10" stroke="black" stroke-width=".25" fill="white" />
+<path fill="#003399" stroke="none" d="M7 60 L7 22 Q7 20 10 19 L98 5.1 Q98 5 100 5Q102 5 102 5.1 L190 19 Q193 20 193 22 L193 98       Q193 100 190 101 L102 114.9 Q102 115 100 115       Q98 115 98 114.9 L10 101 Q7 100 7 98" />
+<path fill="white" fill-rule="evenodd" stroke="none" d="M99.9307374224673 94.184700206754 V36.973811164714 L90.3263266712612 43.9924190213646 V33.7415575465196 L99.9307374224673 26.7691247415575 H109.62749827705 V94.184700206754 H99.9307374224673 Z" />
+</svg>
