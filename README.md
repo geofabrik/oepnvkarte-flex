@@ -2,21 +2,7 @@
 
 ## requirements
 
-### planet land polygons
-
-under /opt/mapnik
-```
-wget --trust-server-names https://osmdata.openstreetmap.de/download/land-polygons-split-3857.zip
-unzip land-polygons-split-3857.zip
-```
-
-### natural earth
-
-under /opt/mapnik
-```
-wget https://naciscdn.org/naturalearth/packages/natural_earth_vector.zip
-unzip natural_earth_vector.zip
-```
+run `./scripts/get-external-data.sh`
 
 ### osm2db database
 
