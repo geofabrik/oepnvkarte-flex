@@ -1,0 +1,3 @@
+[submodule "osm2pgsql-flex/osm2pgsql-themepark"]
+	path = osm2pgsql-flex/osm2pgsql-themepark
+	url = https://github.com/osm2pgsql-dev/osm2pgsql-themepark.git
