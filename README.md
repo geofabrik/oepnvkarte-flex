@@ -4,15 +4,17 @@
 
 run `./scripts/get-external-data.sh`
 
-### osm2db database
+## Data import
 
-```
-wget https://planet.openstreetmap.org/pbf/planet-latest.osm.pbf
-osm2db -c -H localhost -U update -W UpdatePw -d gis planet-latest.osm.pbf
+Need osm2pgsql version 1.9.0 or later.
+
+```bash
+cd osm2pgsql-flex
+osm2pgsql -O flex -S ./config/oepnv.lua FILENAME.osm.pbf
 ```
 
 ## compile style:
-Adjust database settings in project.mml to your needs
+
 ```
 apt-get install nodejs nodejs-legacy npm unifont
 npm install -g lodash
