@@ -16,6 +16,9 @@ themepark:add_table{
         { column = 'refs', type = 'text'},
         { column = 'type', type = 'text'},
 
+		-- Not filled in yet
+        { column = 'role', type = 'text'},
+
     }),
     tiles = {
         minzoom = 8,
