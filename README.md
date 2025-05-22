@@ -29,3 +29,9 @@ carto project.mml > style.xml
 
 * [“Public Transport Map” on Geofabrik Blog](https://blog.geofabrik.de/index.php/2025/03/21/public-transport-map/) _(March 2025)_
 * [OpenStreetMap Wiki article on ÖPNVKarte](https://wiki.openstreetmap.org/wiki/%C3%96PNVKarte)
+
+## Copyright
+
+This project is released under the [CC-0](https://creativecommons.org/publicdomain/zero/1.0/) licence. (See [./`LICENCE`](./LICENCE)).
+
+Maps produced with OpenStreetMap data, which is open data, © OpenStreetMap Contributors, under the [ODbL 1.0](https://www.openstreetmap.org/copyright) licence. See also the [Attribution Guidelines from the OpenStreetMap Foundation](https://osmfoundation.org/wiki/Licence/Attribution_Guidelines).
