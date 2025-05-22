@@ -1,6 +1,8 @@
-# OEPNV style
+# OEPNV / ÖPNV style
 
-## requirements
+A version of the [ÖPNVKarte](https://www.öpnvkarte.de/) (aka public transport map) originally created by Melchior Moos, of [MeMoMaps](https://memomaps.de/). This version uses [osm2pgsql](https://osm2pgsql.org/)'s flex backend. It is currently hosted by [Geofabrik](https://geofabrik.de).
+
+## Requirements
 
 run `./scripts/get-external-data.sh`
 
@@ -22,3 +24,8 @@ npm install -g carto
 
 carto project.mml > style.xml
 ```
+
+## Metions / See also
+
+* [“Public Transport Map” on Geofabrik Blog](https://blog.geofabrik.de/index.php/2025/03/21/public-transport-map/) _(March 2025)_
+* [OpenStreetMap Wiki article on ÖPNVKarte](https://wiki.openstreetmap.org/wiki/%C3%96PNVKarte)
