@@ -210,10 +210,10 @@ themepark:add_proc('gen', function(data)
         ),
 
         themepark.expand_template([[
-         create index oepnv_nodecontrolstations_member_type_member_id_idx on oepnv_nodecontrolstations using btree(member_type,member_id)]]  
+         create index if not exists oepnv_nodecontrolstations_member_type_member_id_idx on oepnv_nodecontrolstations using btree(member_type,member_id)]]  
         ),
         themepark.expand_template([[
-         create index oepnv_stops_name_idx on oepnv_stops using btree(name)]]  
+         create index if not exists oepnv_stops_name_idx on oepnv_stops using btree(name)]]  
         ),
         themepark.expand_template([[
          insert into oepnv_stations select 'X', 0, name, 'X', 0, 0, null, st_buffer(st_convexhull(unnest(ST_ClusterWithin(geom, 150))),20), 'GEOMETRYCOLLECTION EMPTY'::geometry FROM oepnv_stops s left join oepnv_nodecontrolstations c on s.osm_id=c.member_id and s.osm_type=c.member_type where name is not null and c.member_id is null GROUP BY name]]       
