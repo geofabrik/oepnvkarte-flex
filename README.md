@@ -1,6 +1,6 @@
 # OEPNV / ÖPNV style
 
-A version of the [ÖPNVKarte](https://www.öpnvkarte.de/) (aka public transport map) originally created by Melchior Moos, of [MeMoMaps](https://memomaps.de/). This version uses [osm2pgsql](https://osm2pgsql.org/)'s flex backend. It is currently hosted by [Geofabrik](https://geofabrik.de), under the [Geofabrik Public Transport Map](https://tools.geofabrik.de/map/?type=Public_Transport).
+A version of the [ÖPNVKarte](https://www.öpnvkarte.de/) (aka public transport map) originally created by Melchior Moos, of [MeMoMaps](https://memomaps.de/). This version uses [osm2pgsql](https://osm2pgsql.org/)'s flex backend. It is currently hosted by [Geofabrik](https://geofabrik.de), under the [Geofabrik Public Transport Map](https://tools.geofabrik.de/map/#Public%20Transport/).
 
 ## Requirements
 
