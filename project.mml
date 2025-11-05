@@ -251,15 +251,9 @@ Layer:
   - geometry: linestring
     <<: *extents
     Datasource:
-      type: postgis
+      <<: *osm2pgsql
       table: (SELECT geom, type::text, "type" as "order", name FROM oepnv_waterways
         ORDER BY "order" DESC) AS waterways
-      key_field: ''
-      geometry_field: geom
-      srid: '900913'
-      extent_cache: custom
-      extent: -20037508,-19929239,20037508,19929239
-      dbname: gis
     properties:
       minzoom: 8
       maxzoom: 12
@@ -271,16 +265,10 @@ Layer:
   - geometry: linestring
     <<: *extents
     Datasource:
-      type: postgis
+      <<: *osm2pgsql
       table: (SELECT geom, type::text, "type" as "order", name FROM oepnv_waterways
         UNION ALL SELECT geom, type::text, "type" as "order", name FROM oepnv_minorwaterways
         ORDER BY "order" DESC) AS waterways
-      key_field: ''
-      geometry_field: geom
-      srid: '900913'
-      extent_cache: custom
-      extent: -20037508,-19929239,20037508,19929239
-      dbname: gis
     properties:
       minzoom: 13
       maxzoom: 22
@@ -292,16 +280,10 @@ Layer:
   - geometry: linestring
     <<: *extents
     Datasource:
-      type: postgis
+      <<: *osm2pgsql
       table: (SELECT geom, type::text, "type" as "order", '' as name, 'false' as tunnel,
         'false' as bridge, 'false' as oneway, 0 AS ref_length, '' AS ref_content FROM
         oepnv_largeways ORDER BY "order" DESC) AS ways
-      key_field: ''
-      geometry_field: geom
-      srid: '900913'
-      extent_cache: custom
-      extent: -20037508,-19929239,20037508,19929239
-      dbname: gis
     properties:
       minzoom: 8
       maxzoom: 9
@@ -313,17 +295,11 @@ Layer:
   - geometry: linestring
     <<: *extents
     Datasource:
-      type: postgis
+      <<: *osm2pgsql
       table: (SELECT geom, type::text, "type" as "order", name, tunnel::text, bridge::text,
         oneway::text, CHAR_LENGTH(ref) AS ref_length, (CASE WHEN CHAR_LENGTH(ref)
         BETWEEN 2 AND 9 THEN ref ELSE NULL END) AS ref_content FROM oepnv_ways ORDER
         BY layer ASC, tunnel DESC, bridge ASC, "order" DESC) AS ways
-      key_field: ''
-      geometry_field: geom
-      srid: '900913'
-      extent_cache: custom
-      extent: -20037508,-19929239,20037508,19929239
-      dbname: gis
     properties:
       minzoom: 10
       maxzoom: 13
@@ -334,19 +310,13 @@ Layer:
   - geometry: linestring
     <<: *extents
     Datasource:
-      type: postgis
+      <<: *osm2pgsql
       table: (SELECT geom, type::text, "type" as "order", name, tunnel::text, bridge::text,
         oneway::text, CHAR_LENGTH(ref) AS ref_length, (CASE WHEN CHAR_LENGTH(ref)
         BETWEEN 2 AND 9 THEN ref ELSE NULL END) AS ref_content FROM (SELECT name,
         ref, "type", oneway, tunnel, bridge, layer, geom FROM oepnv_ways UNION ALL
         SELECT name,'' as ref, "type", oneway, tunnel, bridge, layer, geom FROM oepnv_minorways)
         as w ORDER BY layer ASC, tunnel DESC, bridge ASC, "order" DESC) AS ways
-      key_field: ''
-      geometry_field: geom
-      srid: '900913'
-      extent_cache: custom
-      extent: -20037508,-19929239,20037508,19929239
-      dbname: gis
     properties:
       minzoom: 14
       maxzoom: 22
@@ -357,15 +327,9 @@ Layer:
   - geometry: linestring
     <<: *extents
     Datasource:
-      type: postgis
+      <<: *osm2pgsql
       table: (SELECT type::text, geom, tunnel::text FROM oepnv_rails WHERE usage IN
         ('highspeed','main', 'branch') ORDER BY layer ASC) AS rail
-      key_field: ''
-      geometry_field: geom
-      srid: '900913'
-      extent_cache: custom
-      extent: -20037508,-19929239,20037508,19929239
-      dbname: gis
     properties:
       minzoom: 6
       maxzoom: 12
@@ -377,15 +341,9 @@ Layer:
   - geometry: linestring
     <<: *extents
     Datasource:
-      type: postgis
+      <<: *osm2pgsql
       table: (SELECT type::text, geom, tunnel::text FROM oepnv_rails WHERE usage NOT
         IN ('service') ORDER BY layer ASC) AS rail
-      key_field: ''
-      geometry_field: geom
-      srid: '900913'
-      extent_cache: custom
-      extent: -20037508,-19929239,20037508,19929239
-      dbname: gis
     properties:
       minzoom: 13
       maxzoom: 14
@@ -397,15 +355,9 @@ Layer:
   - geometry: linestring
     <<: *extents
     Datasource:
-      type: postgis
+      <<: *osm2pgsql
       table: (SELECT type::text, geom, tunnel::text FROM oepnv_rails ORDER BY layer
         ASC) AS rail
-      key_field: ''
-      geometry_field: geom
-      srid: '900913'
-      extent_cache: custom
-      extent: -20037508,-19929239,20037508,19929239
-      dbname: gis
     properties:
       minzoom: 15
       maxzoom: 22
@@ -417,7 +369,7 @@ Layer:
   - geometry: linestring
     <<: *extents
     Datasource:
-      type: postgis
+      <<: *osm2pgsql
       table: (SELECT geom, type::text, "type" as "order", name, tunnel::text, bridge::text,
         oneway::text, CHAR_LENGTH(ref) AS ref_length, (CASE WHEN CHAR_LENGTH(ref)
         BETWEEN 2 AND 9 THEN ref ELSE NULL END) AS ref_content FROM (SELECT name,
@@ -425,12 +377,6 @@ Layer:
         UNION ALL SELECT name,'' as ref, "type", oneway, tunnel, bridge, layer, geom
         FROM oepnv_minorways WHERE bridge) as w ORDER BY layer ASC, tunnel DESC, bridge
         ASC, "order" DESC) AS ways
-      key_field: ''
-      geometry_field: geom
-      srid: '900913'
-      extent_cache: custom
-      extent: -20037508,-19929239,20037508,19929239
-      dbname: gis
     properties:
       minzoom: 15
       maxzoom: 22
@@ -484,15 +430,9 @@ Layer:
   - geometry: linestring
     <<: *extents
     Datasource:
-      type: postgis
+      <<: *osm2pgsql
       table: (SELECT type::text, geom, level FROM oepnv_largeboundary_ways ORDER BY
         level ASC) AS borders
-      key_field: ''
-      geometry_field: geom
-      srid: '900913'
-      extent_cache: custom
-      extent: -20037508,-19929239,20037508,19929239
-      dbname: gis
     properties:
       minzoom: 8
       maxzoom: 10
@@ -503,15 +443,9 @@ Layer:
   - geometry: linestring
     <<: *extents
     Datasource:
-      type: postgis
+      <<: *osm2pgsql
       table: (SELECT type::text, geom, level FROM oepnv_boundary_ways ORDER BY level
         ASC) AS borders
-      key_field: ''
-      geometry_field: geom
-      srid: '900913'
-      extent_cache: custom
-      extent: -20037508,-19929239,20037508,19929239
-      dbname: gis
     properties:
       minzoom: 11
       maxzoom: 22
@@ -522,15 +456,9 @@ Layer:
   - geometry: polygon
     <<: *extents
     Datasource:
-      type: postgis
-      table: (SELECT name, area, type::text,"type" as "order" FROM oepnv_stations
+      <<: *osm2pgsql
+      table: (SELECT name, area as geom, type::text,"type" as "order" FROM oepnv_stations
         ORDER BY "order" ASC) AS areas
-      key_field: ''
-      geometry_field: area
-      srid: '900913'
-      extent_cache: custom
-      extent: -20037508,-19929239,20037508,19929239
-      dbname: gis
     properties:
       minzoom: 17
       maxzoom: 22
@@ -541,15 +469,9 @@ Layer:
   - geometry: linestring
     <<: *extents
     Datasource:
-      type: postgis
+      <<: *osm2pgsql
       table: (SELECT refs,"type"::text, type as "order",geom,role FROM oepnv_line_parts
         WHERE type IN ('rail') ORDER BY "order" DESC) AS transport
-      key_field: ''
-      geometry_field: geom
-      srid: '900913'
-      extent_cache: custom
-      extent: -20037508,-19929239,20037508,19929239
-      dbname: gis
     properties:
       minzoom: 6
       maxzoom: 8
@@ -560,15 +482,9 @@ Layer:
   - geometry: linestring
     <<: *extents
     Datasource:
-      type: postgis
+      <<: *osm2pgsql
       table: (SELECT refs,"type"::text, type as "order",geom,role FROM oepnv_line_parts
         ORDER BY "order" DESC) AS transport
-      key_field: ''
-      geometry_field: geom
-      srid: '900913'
-      extent_cache: custom
-      extent: -20037508,-19929239,20037508,19929239
-      dbname: gis
     properties:
       minzoom: 9
       maxzoom: 22
@@ -581,15 +497,9 @@ Layer:
   - extent:
     <<: *extents
     Datasource:
-      type: postgis
+      <<: *osm2pgsql
       table: (SELECT name, ref, geom, "type"::text FROM oepnv_stops WHERE platform)
         AS platforms
-      key_field: ''
-      geometry_field: geom
-      srid: '900913'
-      extent_cache: custom
-      extent: -20037508,-19929239,20037508,19929239
-      dbname: gis
     properties:
       minzoom: 17
       maxzoom: 22
@@ -601,15 +511,9 @@ Layer:
   - geometry: point
     <<: *extents
     Datasource:
-      type: postgis
+      <<: *osm2pgsql
       table: (SELECT name, geom, type::text,"type" as "order" FROM oepnv_airports
         ORDER BY "order" ASC, passengers DESC) AS airports
-      key_field: ''
-      geometry_field: geom
-      srid: '900913'
-      extent_cache: custom
-      extent: -20037508,-19929239,20037508,19929239
-      dbname: gis
     properties:
       minzoom: 5
       maxzoom: 22
@@ -620,16 +524,10 @@ Layer:
   - geometry: point
     <<: *extents
     Datasource:
-      type: postgis
+      <<: *osm2pgsql
       table: (SELECT name, geom, type::text,"type" as "order" FROM oepnv_places WHERE
         type IN ('continent','country') ORDER BY "order" ASC, population DESC) AS
         places
-      key_field: ''
-      geometry_field: geom
-      srid: '900913'
-      extent_cache: custom
-      extent: -20037508,-19929239,20037508,19929239
-      dbname: gis
     properties:
       minzoom: 0
       maxzoom: 3
@@ -641,16 +539,10 @@ Layer:
   - geometry: point
     <<: *extents
     Datasource:
-      type: postgis
+      <<: *osm2pgsql
       table: (SELECT name, geom, type::text,"type" as "order" FROM oepnv_places WHERE
         type IN ('continent','country','city') ORDER BY "order" ASC, population DESC)
         AS places
-      key_field: ''
-      geometry_field: geom
-      srid: '900913'
-      extent_cache: custom
-      extent: -20037508,-19929239,20037508,19929239
-      dbname: gis
     properties:
       minzoom: 4
       maxzoom: 8
@@ -662,15 +554,9 @@ Layer:
   - geometry: point
     <<: *extents
     Datasource:
-      type: postgis
+      <<: *osm2pgsql
       table: (SELECT name, geom, type::text,"type" as "order" FROM oepnv_places ORDER
         BY "order" ASC, population DESC) AS places
-      key_field: ''
-      geometry_field: geom
-      srid: '900913'
-      extent_cache: custom
-      extent: -20037508,-19929239,20037508,19929239
-      dbname: gis
     properties:
       minzoom: 9
       maxzoom: 22
@@ -683,15 +569,9 @@ Layer:
   - geometry: point
     <<: *extents
     Datasource:
-      type: postgis
-      table: (SELECT name, point, type::text,"type" as "order" FROM oepnv_stations
+      <<: *osm2pgsql
+      table: (SELECT name, point as geom, type::text,"type" as "order" FROM oepnv_stations
         ORDER BY "order" ASC) AS stations
-      key_field: ''
-      geometry_field: point
-      srid: '900913'
-      extent_cache: custom
-      extent: -20037508,-19929239,20037508,19929239
-      dbname: gis
     properties:
       minzoom: 12
       maxzoom: 22
@@ -702,15 +582,9 @@ Layer:
   - geometry: point
     <<: *extents
     Datasource:
-      type: postgis
+      <<: *osm2pgsql
       table: (SELECT name, geom, type::text,"type" as "order" FROM oepnv_oepnvpois
         ORDER BY "order" ASC) AS oepnvpois
-      key_field: ''
-      geometry_field: geom
-      srid: '900913'
-      extent_cache: custom
-      extent: -20037508,-19929239,20037508,19929239
-      dbname: gis
     properties:
       minzoom: 14
       maxzoom: 22
@@ -721,17 +595,11 @@ Layer:
   - geometry: point
     <<: *extents
     Datasource:
-      type: postgis
+      <<: *osm2pgsql
       table: (SELECT name, ref, CASE ST_GeometryType(geom) WHEN 'ST_Point' THEN geom
         WHEN 'ST_Linestring' THEN ST_LineInterpolatePoint(geom, 0.5) ELSE st_pointonsurface(geom)
         END as geom, type::text,"type" as "order" FROM oepnv_stops WHERE geom && !bbox!
         ORDER BY "order" ASC) AS stations
-      key_field: ''
-      geometry_field: geom
-      srid: '900913'
-      extent_cache: custom
-      extent: -20037508,-19929239,20037508,19929239
-      dbname: gis
     properties:
       minzoom: 17
       maxzoom: 22
@@ -743,15 +611,9 @@ Layer:
   - geometry: linestring
     <<: *extents
     Datasource:
-      type: postgis
+      <<: *osm2pgsql
       table: (SELECT refs,"type"::text, type as "order",geom,role FROM oepnv_line_parts
         WHERE type IN ('rail') ORDER BY "order" DESC) AS transport
-      key_field: ''
-      geometry_field: geom
-      srid: '900913'
-      extent_cache: custom
-      extent: -20037508,-19929239,20037508,19929239
-      dbname: gis
     properties:
       minzoom: 6
       maxzoom: 8
@@ -762,15 +624,9 @@ Layer:
   - geometry: linestring
     <<: *extents
     Datasource:
-      type: postgis
+      <<: *osm2pgsql
       table: (SELECT refs,"type"::text, type as "order",geom,role FROM oepnv_line_parts
         ORDER BY "order" DESC) AS transport
-      key_field: ''
-      geometry_field: geom
-      srid: '900913'
-      extent_cache: custom
-      extent: -20037508,-19929239,20037508,19929239
-      dbname: gis
     properties:
       minzoom: 9
       maxzoom: 22
@@ -781,17 +637,11 @@ Layer:
   - geometry: linestring
     <<: *extents
     Datasource:
-      type: postgis
+      <<: *osm2pgsql
       table: (SELECT geom, type::text, "type" as "order", name, tunnel::text, bridge::text,
         oneway::text, CHAR_LENGTH(ref) AS ref_length, (CASE WHEN CHAR_LENGTH(ref)
         BETWEEN 2 AND 9 THEN ref ELSE NULL END) AS ref_content FROM oepnv_ways ORDER
         BY layer ASC,  "order" DESC) AS ways
-      key_field: ''
-      geometry_field: geom
-      srid: '900913'
-      extent_cache: custom
-      extent: -20037508,-19929239,20037508,19929239
-      dbname: gis
     properties:
       minzoom: 10
       maxzoom: 13
@@ -802,17 +652,13 @@ Layer:
   - geometry: linestring
     <<: *extents
     Datasource:
-      type: postgis
+      <<: *osm2pgsql
       table: (SELECT geom, type::text, "type" as "order", name, tunnel::text, bridge::text,
         oneway::text, CHAR_LENGTH(ref) AS ref_length, (CASE WHEN CHAR_LENGTH(ref)
         BETWEEN 2 AND 9 THEN ref ELSE NULL END) AS ref_content FROM (SELECT name,
         ref, "type", oneway, tunnel, bridge, layer, geom FROM oepnv_ways UNION ALL
         SELECT name,'' as ref, "type", oneway, tunnel, bridge, layer, geom FROM oepnv_minorways)
         as w ORDER BY layer ASC,  "order" DESC) AS ways
-      key_field: ''
-      geometry_field: geom
-      srid: '900913'
-      dbname: gis
     properties:
       minzoom: 14
       maxzoom: 22
