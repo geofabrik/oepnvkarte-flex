@@ -1,18 +1,44 @@
-bounds:
-  - -180
-  - -85.05112877980659
-  - 180
-  - 85.05112877980659
-center:
-  - 0
-  - 0
-  - 2
+# Various parts to be included later on
+_parts:
+  srid: &srid "3857"
+  srs: &srs "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
+  srs_wsg84: &srs_wsg84 "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
+  world: &world
+    - -180
+    - -85.05112877980659
+    - 180
+    - 85.05112877980659
+  extents: &extents
+    extent: *world
+    srs-name: *srid
+    srs: *srs
+  extents_wsg84: &extents_wsg84
+    extent: *world
+    srs-name: autodetect
+    srs: *srs_wsg84
+  osm2pgsql: &osm2pgsql
+    type: "postgis"
+    dbname: "gis"
+    key_field: ""
+    geometry_field: "way"
+    srid: *srid
+    extent: "-20037508,-20037508,20037508,20037508"
+
+
+name: oepnvkarte
+description: ''
+bounds: *world
+srs: *srs
+center: [0, 0, 2]
 format: png
 interactivity: false
 minzoom: 0
 maxzoom: 22
-srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0
-  +units=m +nadgrids=@null +wktext +no_defs +over
+scale: 1
+metatile: 2
+
+
+
 Stylesheet:
   - style.mms
   - ground.mms
@@ -21,13 +47,10 @@ Stylesheet:
   - places.mms
   - transport.mms
   - rail.mms
+
 Layer:
   - geometry: polygon
-    extent:
-      - -180
-      - -85.051
-      - 180
-      - 83.64512726514185
+    <<: *extents_wsg84
     properties:
       minzoom: 0
       maxzoom: 1
@@ -37,16 +60,10 @@ Layer:
       file: data/110m_physical/ne_110m_land.shp
       type: shape
     layer: null
-    srs-name: autodetect
-    srs: +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs
     advanced: {}
     name: land0
   - geometry: polygon
-    extent:
-      - -180
-      - -85.051
-      - 180
-      - 83.59960032829271
+    <<: *extents_wsg84
     properties:
       minzoom: 2
       maxzoom: 4
@@ -56,16 +73,10 @@ Layer:
       file: data/50m_physical/ne_50m_land.shp
       type: shape
     layer: null
-    srs-name: autodetect
-    srs: +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs
     advanced: {}
     name: land1
   - geometry: polygon
-    extent:
-      - -180
-      - -85.051
-      - 180
-      - 83.63412018506368
+    <<: *extents_wsg84
     properties:
       minzoom: 5
       maxzoom: 7
@@ -75,16 +86,10 @@ Layer:
       file: data/10m_physical/ne_10m_land.shp
       type: shape
     layer: null
-    srs-name: autodetect
-    srs: +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs
     advanced: {}
     name: land2
   - geometry: polygon
-    extent:
-      - -179.99999692067183
-      - -85.051
-      - 179.99999692067183
-      - 83.669333
+    <<: *extents
     properties:
       minzoom: 8
       maxzoom: 22
@@ -94,17 +99,10 @@ Layer:
       file: data/land-polygons-split-3857/land_polygons.shp
       type: shape
     layer: null
-    srs-name: custom
-    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
-      +units=m +no_defs +over
     advanced: {}
     name: land3
   - geometry: polygon
-    extent:
-      - -124.95363440005697
-      - -16.536406345284952
-      - 109.92980716353523
-      - 66.96929759385118
+    <<: *extents_wsg84
     properties:
       minzoom: 0
       maxzoom: 1
@@ -114,16 +112,10 @@ Layer:
       file: data/110m_physical/ne_110m_lakes.shp
       type: shape
     layer: null
-    srs-name: autodetect
-    srs: +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs
     advanced: {}
     name: lakes0
   - geometry: polygon
-    extent:
-      - -165.89847286686506
-      - -50.62001067484838
-      - 176.08272016835718
-      - 81.94032176383296
+    <<: *extents_wsg84
     properties:
       minzoom: 2
       maxzoom: 4
@@ -133,16 +125,10 @@ Layer:
       file: data/50m_physical/ne_50m_lakes.shp
       type: shape
     layer: null
-    srs-name: autodetect
-    srs: +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs
     advanced: {}
     name: lakes1
   - geometry: polygon
-    extent:
-      - -165.96562639062836
-      - -50.669671726280875
-      - 176.09388227773223
-      - 81.9552562527653
+    <<: *extents_wsg84
     properties:
       minzoom: 5
       maxzoom: 7
@@ -152,16 +138,10 @@ Layer:
       file: data/10m_physical/ne_10m_lakes.shp
       type: shape
     layer: null
-    srs-name: autodetect
-    srs: +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs
     advanced: {}
     name: lakes2
   - geometry: polygon
-    extent:
-      - -157.98399471741934
-      - -46.26844166441431
-      - 174.97002322824852
-      - 69.35127106391279
+    <<: *extents_wsg84
     properties:
       minzoom: 2
       maxzoom: 4
@@ -171,16 +151,10 @@ Layer:
       file: data/50m_cultural/ne_50m_urban_areas.shp
       type: shape
     layer: null
-    srs-name: autodetect
-    srs: +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs
     advanced: {}
     name: citylike0
   - geometry: polygon
-    extent:
-      - -157.9807132639688
-      - -51.052955824589695
-      - 178.03340213451082
-      - 69.76979848904467
+    <<: *extents_wsg84
     properties:
       minzoom: 5
       maxzoom: 7
@@ -190,16 +164,10 @@ Layer:
       file: data/10m_cultural/ne_10m_urban_areas.shp
       type: shape
     layer: null
-    srs-name: autodetect
-    srs: +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs
     advanced: {}
     name: citylike1
   - geometry: linestring
-    extent:
-      - -140.99776974812326
-      - -54.89680469520037
-      - 141.03385176001382
-      - 70.16419302029625
+    <<: *extents_wsg84
     properties:
       minzoom: 1
       maxzoom: 2
@@ -209,16 +177,10 @@ Layer:
       file: data/110m_cultural/ne_110m_admin_0_boundary_lines_land.shp
       type: shape
     layer: null
-    srs-name: autodetect
-    srs: +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs
     advanced: {}
     name: border0
   - geometry: polygon
-    extent:
-      - -180
-      - -85.0269338178989
-      - 180
-      - 83.50260056645996
+    <<: *extents
     Datasource:
       type: postgis
       table: (SELECT geom, type::text, type as "order" FROM oepnv_verylargeareas WHERE
@@ -234,9 +196,6 @@ Layer:
       maxzoom: 7
     id: area00
     class: area
-    srs-name: '900913'
-    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0
-      +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
     advanced: {}
     name: area00
   - geometry: polygon
@@ -266,6 +225,7 @@ Layer:
     advanced: {}
     name: area0
   - geometry: polygon
+    <<: *extents
     extent:
       - -179.9999999749438
       - -85.0269329978313
@@ -292,6 +252,7 @@ Layer:
     advanced: {}
     name: area1
   - geometry: polygon
+    <<: *extents
     extent:
       - -179.9999999749438
       - -85.0269329978313
@@ -318,6 +279,7 @@ Layer:
     advanced: {}
     name: area2
   - geometry: polygon
+    <<: *extents
     extent:
       - -179.99999692067183
       - -84.96651228427098
@@ -345,6 +307,7 @@ Layer:
     advanced: {}
     name: area3
   - geometry: linestring
+    <<: *extents
     extent:
       - -179.99999692067183
       - -84.96651228427098
@@ -371,6 +334,7 @@ Layer:
     advanced: {}
     name: waterway0
   - geometry: linestring
+    <<: *extents
     extent:
       - -179.99999692067183
       - -84.96651228427098
@@ -398,6 +362,7 @@ Layer:
     advanced: {}
     name: waterway1
   - geometry: linestring
+    <<: *extents
     extent:
       - -179.99999692067183
       - -84.96651228427098
@@ -425,6 +390,7 @@ Layer:
     advanced: {}
     name: way0
   - geometry: linestring
+    <<: *extents
     extent:
       - -179.99999692067183
       - -84.96651228427098
@@ -453,6 +419,7 @@ Layer:
     advanced: {}
     name: way1
   - geometry: linestring
+    <<: *extents
     extent:
       - -179.99999692067183
       - -84.96651228427098
@@ -483,6 +450,7 @@ Layer:
     advanced: {}
     name: way2
   - geometry: linestring
+    <<: *extents
     extent:
       - -179.99999692067183
       - -84.96651228427098
@@ -510,6 +478,7 @@ Layer:
     name: rail0
     layerId: rail0
   - geometry: linestring
+    <<: *extents
     extent:
       - -179.99999692067183
       - -84.96651228427098
@@ -537,6 +506,7 @@ Layer:
     name: rail1
     layerId: rail1
   - geometry: linestring
+    <<: *extents
     extent:
       - -179.99999692067183
       - -84.96651228427098
@@ -564,6 +534,7 @@ Layer:
     name: rail2
     layerId: rail2
   - geometry: linestring
+    <<: *extents
     extent:
       - -179.99999692067183
       - -84.96651228427098
@@ -595,6 +566,7 @@ Layer:
     advanced: {}
     name: waybridges0
   - geometry: linestring
+    <<: *extents
     extent:
       - -179.99999692067183
       - -85.051
@@ -614,6 +586,7 @@ Layer:
     advanced: {}
     name: stateborder0
   - geometry: linestring
+    <<: *extents
     extent:
       - -179.99999692067183
       - -85.051
@@ -633,6 +606,7 @@ Layer:
     advanced: {}
     name: stateborder1
   - geometry: linestring
+    <<: *extents
     extent:
       - -179.99999692067183
       - -85.051
@@ -652,6 +626,7 @@ Layer:
     advanced: {}
     name: stateborder2
   - geometry: linestring
+    <<: *extents
     extent:
       - -179.99999692067183
       - -84.96651228427098
@@ -678,6 +653,7 @@ Layer:
     advanced: {}
     name: border0
   - geometry: linestring
+    <<: *extents
     extent:
       - -179.99999692067183
       - -84.96651228427098
@@ -704,6 +680,7 @@ Layer:
     advanced: {}
     name: border1
   - geometry: polygon
+    <<: *extents
     extent:
       - -179.99999692067183
       - -84.96651228427098
@@ -730,6 +707,7 @@ Layer:
     advanced: {}
     name: stationarea0
   - geometry: linestring
+    <<: *extents
     extent:
       - -179.99999692067183
       - -84.96651228427098
@@ -756,6 +734,7 @@ Layer:
     advanced: {}
     name: transport0
   - geometry: linestring
+    <<: *extents
     extent:
       - -179.99999692067183
       - -84.96651228427098
@@ -783,10 +762,7 @@ Layer:
     name: transport1
     layerId: transport1
   - extent:
-      - -179.99999692067183
-      - -84.96651228427098
-      - 179.99999692067183
-      - 84.96651228427099
+    <<: *extents
     Datasource:
       type: postgis
       table: (SELECT name, ref, geom, "type"::text FROM oepnv_stops WHERE platform)
@@ -802,18 +778,11 @@ Layer:
       maxzoom: 22
     id: platform0
     class: platform geom
-    srs-name: '900913'
-    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
-      +units=m +nadgrids=@null +no_defs +over
     advanced: {}
     name: platform0
     layerId: platform0
   - geometry: point
-    extent:
-      - -179.99999692067183
-      - -84.96651228427098
-      - 179.99999692067183
-      - 84.96651228427099
+    <<: *extents
     Datasource:
       type: postgis
       table: (SELECT name, geom, type::text,"type" as "order" FROM oepnv_airports
@@ -829,17 +798,10 @@ Layer:
       maxzoom: 22
     id: airport
     class: airport
-    srs-name: '900913'
-    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
-      +units=m +nadgrids=@null +no_defs +over
     advanced: {}
     name: airport
   - geometry: point
-    extent:
-      - -179.99999692067183
-      - -84.96651228427098
-      - 179.99999692067183
-      - 84.96651228427099
+    <<: *extents
     Datasource:
       type: postgis
       table: (SELECT name, geom, type::text,"type" as "order" FROM oepnv_places WHERE
@@ -856,18 +818,11 @@ Layer:
       maxzoom: 3
     id: place0
     class: place
-    srs-name: custom
-    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
-      +units=m +nadgrids=@null +no_defs +over
     advanced:
       srid: '900913'
     name: place0
   - geometry: point
-    extent:
-      - -179.99999692067183
-      - -84.96651228427098
-      - 179.99999692067183
-      - 84.96651228427099
+    <<: *extents
     Datasource:
       type: postgis
       table: (SELECT name, geom, type::text,"type" as "order" FROM oepnv_places WHERE
@@ -884,18 +839,11 @@ Layer:
       maxzoom: 8
     id: place1
     class: place
-    srs-name: custom
-    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
-      +units=m +nadgrids=@null +no_defs +over
     advanced:
       srid: '900913'
     name: place1
   - geometry: point
-    extent:
-      - -179.99999692067183
-      - -84.96651228427098
-      - 179.99999692067183
-      - 84.96651228427099
+    <<: *extents
     Datasource:
       type: postgis
       table: (SELECT name, geom, type::text,"type" as "order" FROM oepnv_places ORDER
@@ -911,19 +859,12 @@ Layer:
       maxzoom: 22
     id: place2
     class: place
-    srs-name: custom
-    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
-      +units=m +nadgrids=@null +no_defs +over
     advanced:
       srid: '900913'
     name: place2
     layerId: place2
   - geometry: point
-    extent:
-      - -179.99999692067183
-      - -84.96651228427098
-      - 179.99999692067183
-      - 84.96651228427099
+    <<: *extents
     Datasource:
       type: postgis
       table: (SELECT name, point, type::text,"type" as "order" FROM oepnv_stations
@@ -939,17 +880,10 @@ Layer:
       maxzoom: 22
     id: stationpoint
     class: station point
-    srs-name: '900913'
-    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
-      +units=m +nadgrids=@null +no_defs +over
     advanced: {}
     name: stationpoint
   - geometry: point
-    extent:
-      - -179.99999692067183
-      - -84.96651228427098
-      - 179.99999692067183
-      - 84.96651228427099
+    <<: *extents
     Datasource:
       type: postgis
       table: (SELECT name, geom, type::text,"type" as "order" FROM oepnv_oepnvpois
@@ -965,17 +899,10 @@ Layer:
       maxzoom: 22
     id: oepnvpoipoint
     class: oepnvpoi point
-    srs-name: '900913'
-    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
-      +units=m +nadgrids=@null +no_defs +over
     advanced: {}
     name: oepnvpoipoint
   - geometry: point
-    extent:
-      - -179.99999692067183
-      - -84.96651228427098
-      - 179.99999692067183
-      - 84.96651228427099
+    <<: *extents
     Datasource:
       type: postgis
       table: (SELECT name, ref, CASE ST_GeometryType(geom) WHEN 'ST_Point' THEN geom
@@ -993,18 +920,11 @@ Layer:
       maxzoom: 22
     id: platformlabel
     class: platform label
-    srs-name: '900913'
-    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
-      +units=m +nadgrids=@null +no_defs +over
     advanced: {}
     name: platformlabel
     layerId: platformlabel
   - geometry: linestring
-    extent:
-      - -179.99999692067183
-      - -84.96651228427098
-      - 179.99999692067183
-      - 84.96651228427099
+    <<: *extents
     Datasource:
       type: postgis
       table: (SELECT refs,"type"::text, type as "order",geom,role FROM oepnv_line_parts
@@ -1020,17 +940,10 @@ Layer:
       maxzoom: 8
     id: transportlabel0
     class: transport label
-    srs-name: '900913'
-    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
-      +units=m +nadgrids=@null +no_defs +over
     advanced: {}
     name: transportlabel0
   - geometry: linestring
-    extent:
-      - -179.99999692067183
-      - -84.96651228427098
-      - 179.99999692067183
-      - 84.96651228427099
+    <<: *extents
     Datasource:
       type: postgis
       table: (SELECT refs,"type"::text, type as "order",geom,role FROM oepnv_line_parts
@@ -1046,17 +959,10 @@ Layer:
       maxzoom: 22
     id: transportlabel1
     class: transport label
-    srs-name: '900913'
-    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
-      +units=m +nadgrids=@null +no_defs +over
     advanced: {}
     name: transportlabel1
   - geometry: linestring
-    extent:
-      - -179.99999692067183
-      - -84.96651228427098
-      - 179.99999692067183
-      - 84.96651228427099
+    <<: *extents
     Datasource:
       type: postgis
       table: (SELECT geom, type::text, "type" as "order", name, tunnel::text, bridge::text,
@@ -1074,17 +980,10 @@ Layer:
       maxzoom: 13
     id: waylabel1
     class: waylabel
-    srs-name: '900913'
-    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
-      +units=m +nadgrids=@null +no_defs +over
     advanced: {}
     name: waylabel1
   - geometry: linestring
-    extent:
-      - -179.99999692067183
-      - -84.96651228427098
-      - 179.99999692067183
-      - 84.96651228427099
+    <<: *extents
     Datasource:
       type: postgis
       table: (SELECT geom, type::text, "type" as "order", name, tunnel::text, bridge::text,
@@ -1096,20 +995,13 @@ Layer:
       key_field: ''
       geometry_field: geom
       srid: '900913'
-      extent_cache: custom
-      extent: -20037508,-19929239,20037508,19929239
       dbname: gis
     properties:
       minzoom: 14
       maxzoom: 22
     id: waylabel2
     class: waylabel
-    srs-name: '900913'
-    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
-      +units=m +nadgrids=@null +no_defs +over
     advanced: {}
     name: waylabel2
-scale: 1
-metatile: 2
-name: oepnvkarte
-description: ''
+
+# vim: ft=yaml
