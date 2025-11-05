@@ -20,7 +20,7 @@ _parts:
     type: "postgis"
     dbname: "gis"
     key_field: ""
-    geometry_field: "way"
+    geometry_field: "geom"
     srid: *srid
     extent: "-20037508,-20037508,20037508,20037508"
 
@@ -182,15 +182,9 @@ Layer:
   - geometry: polygon
     <<: *extents
     Datasource:
-      type: postgis
+      <<: *osm2pgsql
       table: (SELECT geom, type::text, type as "order" FROM oepnv_verylargeareas WHERE
         type IN('forest') ORDER BY "order" ASC) AS area
-      key_field: ''
-      geometry_field: geom
-      srid: '900913'
-      extent_cache: custom
-      extent: -20037508,-19929239,20037508,19929239
-      dbname: gis
     properties:
       minzoom: 4
       maxzoom: 7
@@ -199,48 +193,24 @@ Layer:
     advanced: {}
     name: area00
   - geometry: polygon
-    extent:
-      - -180
-      - -85.0269338178989
-      - 180
-      - 83.50260056645996
+    <<: *extents
     Datasource:
-      type: postgis
+      <<: *osm2pgsql
       table: (SELECT geom, type::text, type as "order" FROM oepnv_verylargeareas ORDER
         BY "order" ASC) AS area
-      key_field: ''
-      geometry_field: geom
-      srid: '900913'
-      extent_cache: custom
-      extent: -20037508,-19929239,20037508,19929239
-      dbname: gis
     properties:
       minzoom: 8
       maxzoom: 9
     id: area0
     class: area
-    srs-name: '900913'
-    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0
-      +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
     advanced: {}
     name: area0
   - geometry: polygon
     <<: *extents
-    extent:
-      - -179.9999999749438
-      - -85.0269329978313
-      - 179.9999999749438
-      - 83.50259949741076
     Datasource:
-      type: postgis
+      <<: *osm2pgsql
       table: (SELECT geom, type::text, type as "order" FROM oepnv_largeareas ORDER
         BY "order" ASC) AS area
-      key_field: ''
-      geometry_field: geom
-      srid: '900913'
-      extent_cache: custom
-      extent: -20037508,-19929239,20037508,19929239
-      dbname: gis
     properties:
       minzoom: 10
       maxzoom: 11
@@ -253,66 +223,33 @@ Layer:
     name: area1
   - geometry: polygon
     <<: *extents
-    extent:
-      - -179.9999999749438
-      - -85.0269329978313
-      - 179.9999999749438
-      - 83.50259949741076
     Datasource:
-      type: postgis
+      <<: *osm2pgsql
       table: (SELECT geom, type::text FROM (SELECT geom,type::text FROM oepnv_areas
         ORDER BY type) as oepnv_areas) AS area
-      key_field: ''
-      geometry_field: geom
-      srid: '900913'
-      extent_cache: custom
-      extent: -20037508,-19929239,20037508,19929239
-      dbname: gis
     properties:
       minzoom: 12
       maxzoom: 15
     id: area2
     class: area
-    srs-name: '900913'
-    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0
-      +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
     advanced: {}
     name: area2
   - geometry: polygon
     <<: *extents
-    extent:
-      - -179.99999692067183
-      - -84.96651228427098
-      - 179.99999692067183
-      - 84.96651228427099
     Datasource:
-      type: postgis
+      <<: *osm2pgsql
       table: (SELECT geom, type::text FROM (SELECT geom,type::text FROM (SELECT type,
         geom FROM oepnv_areas ORDER BY type) as aa UNION ALL SELECT geom, 'building'
         as type FROM oepnv_buildings) as oepnv_areas) AS area
-      key_field: ''
-      geometry_field: geom
-      srid: '900913'
-      extent_cache: custom
-      extent: -20037508,-19929239,20037508,19929239
-      dbname: gis
     properties:
       minzoom: 16
       maxzoom: 22
     id: area3
     class: area
-    srs-name: '900913'
-    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0
-      +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
     advanced: {}
     name: area3
   - geometry: linestring
     <<: *extents
-    extent:
-      - -179.99999692067183
-      - -84.96651228427098
-      - 179.99999692067183
-      - 84.96651228427099
     Datasource:
       type: postgis
       table: (SELECT geom, type::text, "type" as "order", name FROM oepnv_waterways
@@ -328,18 +265,11 @@ Layer:
       maxzoom: 12
     id: waterway0
     class: waterway
-    srs-name: '900913'
-    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0
       +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
     advanced: {}
     name: waterway0
   - geometry: linestring
     <<: *extents
-    extent:
-      - -179.99999692067183
-      - -84.96651228427098
-      - 179.99999692067183
-      - 84.96651228427099
     Datasource:
       type: postgis
       table: (SELECT geom, type::text, "type" as "order", name FROM oepnv_waterways
@@ -356,18 +286,11 @@ Layer:
       maxzoom: 22
     id: waterway1
     class: waterway
-    srs-name: '900913'
-    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
       +units=m +nadgrids=@null +no_defs +over
     advanced: {}
     name: waterway1
   - geometry: linestring
     <<: *extents
-    extent:
-      - -179.99999692067183
-      - -84.96651228427098
-      - 179.99999692067183
-      - 84.96651228427099
     Datasource:
       type: postgis
       table: (SELECT geom, type::text, "type" as "order", '' as name, 'false' as tunnel,
@@ -384,18 +307,11 @@ Layer:
       maxzoom: 9
     id: way0
     class: way
-    srs-name: '900913'
-    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
       +units=m +nadgrids=@null +no_defs +over
     advanced: {}
     name: way0
   - geometry: linestring
     <<: *extents
-    extent:
-      - -179.99999692067183
-      - -84.96651228427098
-      - 179.99999692067183
-      - 84.96651228427099
     Datasource:
       type: postgis
       table: (SELECT geom, type::text, "type" as "order", name, tunnel::text, bridge::text,
@@ -413,18 +329,10 @@ Layer:
       maxzoom: 13
     id: way1
     class: way
-    srs-name: '900913'
-    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
-      +units=m +nadgrids=@null +no_defs +over
     advanced: {}
     name: way1
   - geometry: linestring
     <<: *extents
-    extent:
-      - -179.99999692067183
-      - -84.96651228427098
-      - 179.99999692067183
-      - 84.96651228427099
     Datasource:
       type: postgis
       table: (SELECT geom, type::text, "type" as "order", name, tunnel::text, bridge::text,
@@ -444,18 +352,10 @@ Layer:
       maxzoom: 22
     id: way2
     class: way
-    srs-name: '900913'
-    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
-      +units=m +nadgrids=@null +no_defs +over
     advanced: {}
     name: way2
   - geometry: linestring
     <<: *extents
-    extent:
-      - -179.99999692067183
-      - -84.96651228427098
-      - 179.99999692067183
-      - 84.96651228427099
     Datasource:
       type: postgis
       table: (SELECT type::text, geom, tunnel::text FROM oepnv_rails WHERE usage IN
@@ -471,19 +371,11 @@ Layer:
       maxzoom: 12
     id: rail0
     class: rail line
-    srs-name: '900913'
-    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
-      +units=m +nadgrids=@null +no_defs +over
     advanced: {}
     name: rail0
     layerId: rail0
   - geometry: linestring
     <<: *extents
-    extent:
-      - -179.99999692067183
-      - -84.96651228427098
-      - 179.99999692067183
-      - 84.96651228427099
     Datasource:
       type: postgis
       table: (SELECT type::text, geom, tunnel::text FROM oepnv_rails WHERE usage NOT
@@ -499,19 +391,11 @@ Layer:
       maxzoom: 14
     id: rail1
     class: rail line
-    srs-name: '900913'
-    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
-      +units=m +nadgrids=@null +no_defs +over
     advanced: {}
     name: rail1
     layerId: rail1
   - geometry: linestring
     <<: *extents
-    extent:
-      - -179.99999692067183
-      - -84.96651228427098
-      - 179.99999692067183
-      - 84.96651228427099
     Datasource:
       type: postgis
       table: (SELECT type::text, geom, tunnel::text FROM oepnv_rails ORDER BY layer
@@ -527,19 +411,11 @@ Layer:
       maxzoom: 22
     id: rail2
     class: rail line
-    srs-name: '900913'
-    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
-      +units=m +nadgrids=@null +no_defs +over
     advanced: {}
     name: rail2
     layerId: rail2
   - geometry: linestring
     <<: *extents
-    extent:
-      - -179.99999692067183
-      - -84.96651228427098
-      - 179.99999692067183
-      - 84.96651228427099
     Datasource:
       type: postgis
       table: (SELECT geom, type::text, "type" as "order", name, tunnel::text, bridge::text,
@@ -560,18 +436,10 @@ Layer:
       maxzoom: 22
     id: waybridges0
     class: way bridge
-    srs-name: '900913'
-    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
-      +units=m +nadgrids=@null +no_defs +over
     advanced: {}
     name: waybridges0
   - geometry: linestring
-    <<: *extents
-    extent:
-      - -179.99999692067183
-      - -85.051
-      - 179.99999692067183
-      - 83.669333
+    <<: *extents_wsg84
     properties:
       minzoom: 0
       maxzoom: 2
@@ -581,17 +449,10 @@ Layer:
       file: data/110m_cultural/ne_110m_admin_0_countries.shp
       type: shape
     layer: null
-    srs-name: autodetect
-    srs: +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs
     advanced: {}
     name: stateborder0
   - geometry: linestring
-    <<: *extents
-    extent:
-      - -179.99999692067183
-      - -85.051
-      - 179.99999692067183
-      - 83.669333
+    <<: *extents_wsg84
     properties:
       minzoom: 3
       maxzoom: 4
@@ -606,12 +467,7 @@ Layer:
     advanced: {}
     name: stateborder1
   - geometry: linestring
-    <<: *extents
-    extent:
-      - -179.99999692067183
-      - -85.051
-      - 179.99999692067183
-      - 83.669333
+    <<: *extents_wsg84
     properties:
       minzoom: 5
       maxzoom: 7
@@ -627,11 +483,6 @@ Layer:
     name: stateborder2
   - geometry: linestring
     <<: *extents
-    extent:
-      - -179.99999692067183
-      - -84.96651228427098
-      - 179.99999692067183
-      - 84.96651228427099
     Datasource:
       type: postgis
       table: (SELECT type::text, geom, level FROM oepnv_largeboundary_ways ORDER BY
@@ -647,18 +498,10 @@ Layer:
       maxzoom: 10
     id: border0
     class: border line
-    srs-name: '900913'
-    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
-      +units=m +nadgrids=@null +no_defs +over
     advanced: {}
     name: border0
   - geometry: linestring
     <<: *extents
-    extent:
-      - -179.99999692067183
-      - -84.96651228427098
-      - 179.99999692067183
-      - 84.96651228427099
     Datasource:
       type: postgis
       table: (SELECT type::text, geom, level FROM oepnv_boundary_ways ORDER BY level
@@ -674,18 +517,10 @@ Layer:
       maxzoom: 22
     id: border1
     class: border line
-    srs-name: '900913'
-    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
-      +units=m +nadgrids=@null +no_defs +over
     advanced: {}
     name: border1
   - geometry: polygon
     <<: *extents
-    extent:
-      - -179.99999692067183
-      - -84.96651228427098
-      - 179.99999692067183
-      - 84.96651228427099
     Datasource:
       type: postgis
       table: (SELECT name, area, type::text,"type" as "order" FROM oepnv_stations
@@ -701,18 +536,10 @@ Layer:
       maxzoom: 22
     id: stationarea0
     class: stationarea all
-    srs-name: '900913'
-    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
-      +units=m +nadgrids=@null +no_defs +over
     advanced: {}
     name: stationarea0
   - geometry: linestring
     <<: *extents
-    extent:
-      - -179.99999692067183
-      - -84.96651228427098
-      - 179.99999692067183
-      - 84.96651228427099
     Datasource:
       type: postgis
       table: (SELECT refs,"type"::text, type as "order",geom,role FROM oepnv_line_parts
@@ -728,18 +555,10 @@ Layer:
       maxzoom: 8
     id: transport0
     class: transport line
-    srs-name: '900913'
-    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
-      +units=m +nadgrids=@null +no_defs +over
     advanced: {}
     name: transport0
   - geometry: linestring
     <<: *extents
-    extent:
-      - -179.99999692067183
-      - -84.96651228427098
-      - 179.99999692067183
-      - 84.96651228427099
     Datasource:
       type: postgis
       table: (SELECT refs,"type"::text, type as "order",geom,role FROM oepnv_line_parts
@@ -755,8 +574,6 @@ Layer:
       maxzoom: 22
     id: transport1
     class: transport line
-    srs-name: '900913'
-    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
       +units=m +nadgrids=@null +no_defs +over
     advanced: {}
     name: transport1
