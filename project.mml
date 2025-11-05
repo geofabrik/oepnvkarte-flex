@@ -1,1256 +1,1115 @@
-{
-  "bounds": [
-    -180,
-    -85.05112877980659,
-    180,
-    85.05112877980659
-  ],
-  "center": [
-    0,
-    0,
-    2
-  ],
-  "format": "png",
-  "interactivity": false,
-  "minzoom": 0,
-  "maxzoom": 22,
-  "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-  "Stylesheet": [
-    "style.mms",
-    "ground.mms",
-    "road.mms",
-    "poi.mms",
-    "places.mms",
-    "transport.mms",
-    "rail.mms"
-  ],
-  "Layer": [
-    {
-      "geometry": "polygon",
-      "extent": [
-        -180,
-        -85.051,
-        180,
-        83.64512726514185
-      ],
-      "properties": {
-        "minzoom": 0,
-        "maxzoom": 1
-      },
-      "id": "land0",
-      "class": "land",
-      "Datasource": {
-        "file": "data/110m_physical/ne_110m_land.shp",
-        "type": "shape"      
-      },
-      "layer": null,
-      "srs-name": "autodetect",
-      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
-      "advanced": {},
-      "name": "land0"
-    },
-    {
-      "geometry": "polygon",
-      "extent": [
-        -180,
-        -85.051,
-        180,
-        83.59960032829271
-      ],
-      "properties": {
-        "minzoom": 2,
-        "maxzoom": 4
-      },
-      "id": "land1",
-      "class": "land",
-      "Datasource": {
-        "file": "data/50m_physical/ne_50m_land.shp",
-        "type": "shape"
-      },
-      "layer": null,
-      "srs-name": "autodetect",
-      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
-      "advanced": {},
-      "name": "land1"
-    },
-    {
-      "geometry": "polygon",
-      "extent": [
-        -180,
-        -85.051,
-        180,
-        83.63412018506368
-      ],
-      "properties": {
-        "minzoom": 5,
-        "maxzoom": 7
-      },
-      "id": "land2",
-      "class": "land",
-      "Datasource": {
-        "file": "data/10m_physical/ne_10m_land.shp",
-        "type": "shape"
-      },
-      "layer": null,
-      "srs-name": "autodetect",
-      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
-      "advanced": {},
-      "name": "land2"
-    },
-    {
-      "geometry": "polygon",
-      "extent": [
-        -179.99999692067183,
-        -85.051,
-        179.99999692067183,
-        83.669333
-      ],
-      "properties": {
-        "minzoom": 8,
-        "maxzoom": 22
-      },
-      "id": "land3",
-      "class": "land",
-      "Datasource": {
-        "file": "data/land-polygons-split-3857/land_polygons.shp",
-        "type": "shape"
-      },
-      "layer": null,
-      "srs-name": "custom",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +no_defs +over",
-      "advanced": {},
-      "name": "land3"
-    },
-    {
-      "geometry": "polygon",
-      "extent": [
-        -124.95363440005697,
-        -16.536406345284952,
-        109.92980716353523,
-        66.96929759385118
-      ],
-      "properties": {
-        "minzoom": 0,
-        "maxzoom": 1
-      },
-      "id": "lakes0",
-      "class": "lakes",
-      "Datasource": {
-        "file": "data/110m_physical/ne_110m_lakes.shp",
-        "type": "shape"
-      },
-      "layer": null,
-      "srs-name": "autodetect",
-      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
-      "advanced": {},
-      "name": "lakes0"
-    },
-    {
-      "geometry": "polygon",
-      "extent": [
-        -165.89847286686506,
-        -50.62001067484838,
-        176.08272016835718,
-        81.94032176383296
-      ],
-      "properties": {
-        "minzoom": 2,
-        "maxzoom": 4
-      },
-      "id": "lakes1",
-      "class": "lakes",
-      "Datasource": {
-        "file": "data/50m_physical/ne_50m_lakes.shp",
-        "type": "shape"
-      },
-      "layer": null,
-      "srs-name": "autodetect",
-      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
-      "advanced": {},
-      "name": "lakes1"
-    },
-    {
-      "geometry": "polygon",
-      "extent": [
-        -165.96562639062836,
-        -50.669671726280875,
-        176.09388227773223,
-        81.9552562527653
-      ],
-      "properties": {
-        "minzoom": 5,
-        "maxzoom": 7
-      },
-      "id": "lakes2",
-      "class": "lakes",
-      "Datasource": {
-        "file": "data/10m_physical/ne_10m_lakes.shp",
-        "type": "shape"
-      },
-      "layer": null,
-      "srs-name": "autodetect",
-      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
-      "advanced": {},
-      "name": "lakes2"
-    },
-    {
-      "geometry": "polygon",
-      "extent": [
-        -157.98399471741934,
-        -46.26844166441431,
-        174.97002322824852,
-        69.35127106391279
-      ],
-      "properties": {
-        "minzoom": 2,
-        "maxzoom": 4
-      },
-      "id": "citylike0",
-      "class": "citylike",
-      "Datasource": {
-        "file": "data/50m_cultural/ne_50m_urban_areas.shp",
-        "type": "shape"
-      },
-      "layer": null,
-      "srs-name": "autodetect",
-      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
-      "advanced": {},
-      "name": "citylike0"
-    },
-    {
-      "geometry": "polygon",
-      "extent": [
-        -157.9807132639688,
-        -51.052955824589695,
-        178.03340213451082,
-        69.76979848904467
-      ],
-      "properties": {
-        "minzoom": 5,
-        "maxzoom": 7
-      },
-      "id": "citylike1",
-      "class": "citylike",
-      "Datasource": {
-        "file": "data/10m_cultural/ne_10m_urban_areas.shp",
-        "type": "shape"
-      },
-      "layer": null,
-      "srs-name": "autodetect",
-      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
-      "advanced": {},
-      "name": "citylike1"
-    },
-    {
-      "geometry": "linestring",
-      "extent": [
-        -140.99776974812326,
-        -54.89680469520037,
-        141.03385176001382,
-        70.16419302029625
-      ],
-      "properties": {
-        "minzoom": 1,
-        "maxzoom": 2
-      },
-      "id": "border0",
-      "class": "border",
-      "Datasource": {
-        "file": "data/110m_cultural/ne_110m_admin_0_boundary_lines_land.shp",
-        "type": "shape"
-      },
-      "layer": null,
-      "srs-name": "autodetect",
-      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
-      "advanced": {},
-      "name": "border0"
-    },
-    {
-      "geometry": "polygon",
-      "extent": [
-        -180,
-        -85.0269338178989,
-        180,
-        83.50260056645996
-      ],
-      "Datasource": {
-        "type": "postgis",
-        "table": "(SELECT geom, type::text, type as \"order\" FROM oepnv_verylargeareas WHERE type IN('forest') ORDER BY \"order\" ASC) AS area",
-        "key_field": "",
-        "geometry_field": "geom",
-        "srid": "900913",
-        "extent_cache": "custom",
-        "extent": "-20037508,-19929239,20037508,19929239",
-        "dbname": "gis",
-      },
-      "properties": {
-        "minzoom": 4,
-        "maxzoom": 7
-      },
-      "id": "area00",
-      "class": "area",
-      "srs-name": "900913",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-      "advanced": {},
-      "name": "area00"
-    },
-    {
-      "geometry": "polygon",
-      "extent": [
-        -180,
-        -85.0269338178989,
-        180,
-        83.50260056645996
-      ],
-      "Datasource": {
-        "type": "postgis",
-        "table": "(SELECT geom, type::text, type as \"order\" FROM oepnv_verylargeareas ORDER BY \"order\" ASC) AS area",
-        "key_field": "",
-        "geometry_field": "geom",
-        "srid": "900913",
-        "extent_cache": "custom",
-        "extent": "-20037508,-19929239,20037508,19929239",
-        "dbname": "gis",
-      },
-      "properties": {
-        "minzoom": 8,
-        "maxzoom": 9
-      },
-      "id": "area0",
-      "class": "area",
-      "srs-name": "900913",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-      "advanced": {},
-      "name": "area0"
-    },
-    {
-      "geometry": "polygon",
-      "extent": [
-        -179.9999999749438,
-        -85.0269329978313,
-        179.9999999749438,
-        83.50259949741076
-      ],
-      "Datasource": {
-        "type": "postgis",
-        "table": "(SELECT geom, type::text, type as \"order\" FROM oepnv_largeareas ORDER BY \"order\" ASC) AS area",
-        "key_field": "",
-        "geometry_field": "geom",
-        "srid": "900913",
-        "extent_cache": "custom",
-        "extent": "-20037508,-19929239,20037508,19929239",
-        "dbname": "gis",
-      },
-      "properties": {
-        "minzoom": 10,
-        "maxzoom": 11
-      },
-      "id": "area1",
-      "class": "area",
-      "srs-name": "900913",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-      "advanced": {},
-      "name": "area1"
-    },
-    {
-      "geometry": "polygon",
-      "extent": [
-        -179.9999999749438,
-        -85.0269329978313,
-        179.9999999749438,
-        83.50259949741076
-      ],
-      "Datasource": {
-        "type": "postgis",
-        "table": "(SELECT geom, type::text FROM (SELECT geom,type::text FROM oepnv_areas ORDER BY type) as oepnv_areas) AS area",
-        "key_field": "",
-        "geometry_field": "geom",
-        "srid": "900913",
-        "extent_cache": "custom",
-        "extent": "-20037508,-19929239,20037508,19929239",
-        "dbname": "gis",
-      },
-      "properties": {
-        "minzoom": 12,
-        "maxzoom": 15
-      },
-      "id": "area2",
-      "class": "area",
-      "srs-name": "900913",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-      "advanced": {},
-      "name": "area2"
-    },
-    {
-      "geometry": "polygon",
-      "extent": [
-        -179.99999692067183,
-        -84.96651228427098,
-        179.99999692067183,
-        84.96651228427099
-      ],
-      "Datasource": {
-        "type": "postgis",
-        "table": "(SELECT geom, type::text FROM (SELECT geom,type::text FROM (SELECT type, geom FROM oepnv_areas ORDER BY type) as aa UNION ALL SELECT geom, 'building' as type FROM oepnv_buildings) as oepnv_areas) AS area",
-        "key_field": "",
-        "geometry_field": "geom",
-        "srid": "900913",
-        "extent_cache": "custom",
-        "extent": "-20037508,-19929239,20037508,19929239",
-        "dbname": "gis",
-      },
-      "properties": {
-        "minzoom": 16,
-        "maxzoom": 22
-      },
-      "id": "area3",
-      "class": "area",
-      "srs-name": "900913",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-      "advanced": {},
-      "name": "area3"
-    },
-    {
-      "geometry": "linestring",
-      "extent": [
-        -179.99999692067183,
-        -84.96651228427098,
-        179.99999692067183,
-        84.96651228427099
-      ],
-      "Datasource": {
-        "type": "postgis",
-        "table": "(SELECT geom, type::text, \"type\" as \"order\", name FROM oepnv_waterways ORDER BY \"order\" DESC) AS waterways",
-        "key_field": "",
-        "geometry_field": "geom",
-        "srid": "900913",
-        "extent_cache": "custom",
-        "extent": "-20037508,-19929239,20037508,19929239",
-        "dbname": "gis",
-      },
-      "properties": {
-        "minzoom": 8,
-        "maxzoom": 12
-      },
-      "id": "waterway0",
-      "class": "waterway",
-      "srs-name": "900913",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-      "advanced": {},
-      "name": "waterway0"
-    },
-    {
-      "geometry": "linestring",
-      "extent": [
-        -179.99999692067183,
-        -84.96651228427098,
-        179.99999692067183,
-        84.96651228427099
-      ],
-      "Datasource": {
-        "type": "postgis",
-        "table": "(SELECT geom, type::text, \"type\" as \"order\", name FROM oepnv_waterways UNION ALL SELECT geom, type::text, \"type\" as \"order\", name FROM oepnv_minorwaterways ORDER BY \"order\" DESC) AS waterways",
-        "key_field": "",
-        "geometry_field": "geom",
-        "srid": "900913",
-        "extent_cache": "custom",
-        "extent": "-20037508,-19929239,20037508,19929239",
-        "dbname": "gis",
-      },
-      "properties": {
-        "minzoom": 13,
-        "maxzoom": 22
-      },
-      "id": "waterway1",
-      "class": "waterway",
-      "srs-name": "900913",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over",
-      "advanced": {},
-      "name": "waterway1"
-    },
-    {
-      "geometry": "linestring",
-      "extent": [
-        -179.99999692067183,
-        -84.96651228427098,
-        179.99999692067183,
-        84.96651228427099
-      ],
-      "Datasource": {
-        "type": "postgis",
-        "table": "(SELECT geom, type::text, \"type\" as \"order\", '' as name, 'false' as tunnel, 'false' as bridge, 'false' as oneway, 0 AS ref_length, '' AS ref_content FROM oepnv_largeways ORDER BY \"order\" DESC) AS ways",
-        "key_field": "",
-        "geometry_field": "geom",
-        "srid": "900913",
-        "extent_cache": "custom",
-        "extent": "-20037508,-19929239,20037508,19929239",
-        "dbname": "gis",
-      },
-      "properties": {
-        "minzoom": 8,
-        "maxzoom": 9
-      },
-      "id": "way0",
-      "class": "way",
-      "srs-name": "900913",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over",
-      "advanced": {},
-      "name": "way0"
-    },
-    {
-      "geometry": "linestring",
-      "extent": [
-        -179.99999692067183,
-        -84.96651228427098,
-        179.99999692067183,
-        84.96651228427099
-      ],
-      "Datasource": {
-        "type": "postgis",
-        "table": "(SELECT geom, type::text, \"type\" as \"order\", name, tunnel::text, bridge::text, oneway::text, CHAR_LENGTH(ref) AS ref_length, (CASE WHEN CHAR_LENGTH(ref) BETWEEN 2 AND 9 THEN ref ELSE NULL END) AS ref_content FROM oepnv_ways ORDER BY layer ASC, tunnel DESC, bridge ASC, \"order\" DESC) AS ways",
-        "key_field": "",
-        "geometry_field": "geom",
-        "srid": "900913",
-        "extent_cache": "custom",
-        "extent": "-20037508,-19929239,20037508,19929239",
-        "dbname": "gis",
-      },
-      "properties": {
-        "minzoom": 10,
-        "maxzoom": 13
-      },
-      "id": "way1",
-      "class": "way",
-      "srs-name": "900913",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over",
-      "advanced": {},
-      "name": "way1"
-    },
-    {
-      "geometry": "linestring",
-      "extent": [
-        -179.99999692067183,
-        -84.96651228427098,
-        179.99999692067183,
-        84.96651228427099
-      ],
-      "Datasource": {
-        "type": "postgis",
-        "table": "(SELECT geom, type::text, \"type\" as \"order\", name, tunnel::text, bridge::text, oneway::text, CHAR_LENGTH(ref) AS ref_length, (CASE WHEN CHAR_LENGTH(ref) BETWEEN 2 AND 9 THEN ref ELSE NULL END) AS ref_content FROM (SELECT name, ref, \"type\", oneway, tunnel, bridge, layer, geom FROM oepnv_ways UNION ALL SELECT name,'' as ref, \"type\", oneway, tunnel, bridge, layer, geom FROM oepnv_minorways) as w ORDER BY layer ASC, tunnel DESC, bridge ASC, \"order\" DESC) AS ways",
-        "key_field": "",
-        "geometry_field": "geom",
-        "srid": "900913",
-        "extent_cache": "custom",
-        "extent": "-20037508,-19929239,20037508,19929239",
-        "dbname": "gis",
-      },
-      "properties": {
-        "minzoom": 14,
-        "maxzoom": 22
-      },
-      "id": "way2",
-      "class": "way",
-      "srs-name": "900913",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over",
-      "advanced": {},
-      "name": "way2"
-    },
-    {
-      "geometry": "linestring",
-      "extent": [
-        -179.99999692067183,
-        -84.96651228427098,
-        179.99999692067183,
-        84.96651228427099
-      ],
-      "Datasource": {
-        "type": "postgis",
-        "table": "(SELECT type::text, geom, tunnel::text FROM oepnv_rails WHERE usage IN ('highspeed','main', 'branch') ORDER BY layer ASC) AS rail",
-        "key_field": "",
-        "geometry_field": "geom",
-        "srid": "900913",
-        "extent_cache": "custom",
-        "extent": "-20037508,-19929239,20037508,19929239",
-        "dbname": "gis",
-      },
-      "properties": {
-        "minzoom": 6,
-        "maxzoom": 12
-      },
-      "id": "rail0",
-      "class": "rail line",
-      "srs-name": "900913",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over",
-      "advanced": {},
-      "name": "rail0",
-      "layerId": "rail0"
-    },
-    {
-      "geometry": "linestring",
-      "extent": [
-        -179.99999692067183,
-        -84.96651228427098,
-        179.99999692067183,
-        84.96651228427099
-      ],
-      "Datasource": {
-        "type": "postgis",
-        "table": "(SELECT type::text, geom, tunnel::text FROM oepnv_rails WHERE usage NOT IN ('service') ORDER BY layer ASC) AS rail",
-        "key_field": "",
-        "geometry_field": "geom",
-        "srid": "900913",
-        "extent_cache": "custom",
-        "extent": "-20037508,-19929239,20037508,19929239",
-        "dbname": "gis",
-      },
-      "properties": {
-        "minzoom": 13,
-        "maxzoom": 14
-      },
-      "id": "rail1",
-      "class": "rail line",
-      "srs-name": "900913",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over",
-      "advanced": {},
-      "name": "rail1",
-      "layerId": "rail1"
-    },
-    {
-      "geometry": "linestring",
-      "extent": [
-        -179.99999692067183,
-        -84.96651228427098,
-        179.99999692067183,
-        84.96651228427099
-      ],
-      "Datasource": {
-        "type": "postgis",
-        "table": "(SELECT type::text, geom, tunnel::text FROM oepnv_rails ORDER BY layer ASC) AS rail",
-        "key_field": "",
-        "geometry_field": "geom",
-        "srid": "900913",
-        "extent_cache": "custom",
-        "extent": "-20037508,-19929239,20037508,19929239",
-        "dbname": "gis",
-      },
-      "properties": {
-        "minzoom": 15,
-        "maxzoom": 22
-      },
-      "id": "rail2",
-      "class": "rail line",
-      "srs-name": "900913",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over",
-      "advanced": {},
-      "name": "rail2",
-      "layerId": "rail2"
-    },
-    {
-      "geometry": "linestring",
-      "extent": [
-        -179.99999692067183,
-        -84.96651228427098,
-        179.99999692067183,
-        84.96651228427099
-      ],
-      "Datasource": {
-        "type": "postgis",
-        "table": "(SELECT geom, type::text, \"type\" as \"order\", name, tunnel::text, bridge::text, oneway::text, CHAR_LENGTH(ref) AS ref_length, (CASE WHEN CHAR_LENGTH(ref) BETWEEN 2 AND 9 THEN ref ELSE NULL END) AS ref_content FROM (SELECT name, ref, \"type\", oneway, tunnel, bridge, layer, geom FROM oepnv_ways WHERE bridge UNION ALL SELECT name,'' as ref, \"type\", oneway, tunnel, bridge, layer, geom FROM oepnv_minorways WHERE bridge) as w ORDER BY layer ASC, tunnel DESC, bridge ASC, \"order\" DESC) AS ways",
-        "key_field": "",
-        "geometry_field": "geom",
-        "srid": "900913",
-        "extent_cache": "custom",
-        "extent": "-20037508,-19929239,20037508,19929239",
-        "dbname": "gis",
-      },
-      "properties": {
-        "minzoom": 15,
-        "maxzoom": 22
-      },
-      "id": "waybridges0",
-      "class": "way bridge",
-      "srs-name": "900913",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over",
-      "advanced": {},
-      "name": "waybridges0"
-    },
-    {
-      "geometry": "linestring",
-      "extent": [
-        -179.99999692067183,
-        -85.051,
-        179.99999692067183,
-        83.669333
-      ],
-      "properties": {
-        "minzoom": 0,
-        "maxzoom": 2
-      },
-      "id": "stateborder0",
-      "class": "stateborder line",
-      "Datasource": {
-        "file": "data/110m_cultural/ne_110m_admin_0_countries.shp",
-        "type": "shape"
-      },
-      "layer": null,
-      "srs-name": "autodetect",
-      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
-      "advanced": {},
-      "name": "stateborder0"
-    },
-    {
-      "geometry": "linestring",
-      "extent": [
-        -179.99999692067183,
-        -85.051,
-        179.99999692067183,
-        83.669333
-      ],
-      "properties": {
-        "minzoom": 3,
-        "maxzoom": 4
-      },
-      "id": "stateborder1",
-      "class": "stateborder line",
-      "Datasource": {
-        "file": "data/50m_cultural/ne_50m_admin_0_boundary_lines_land.shp",
-        "type": "shape"
-      },
-      "layer": null,
-      "srs-name": "autodetect",
-      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
-      "advanced": {},
-      "name": "stateborder1"
-    },
-    {
-      "geometry": "linestring",
-      "extent": [
-        -179.99999692067183,
-        -85.051,
-        179.99999692067183,
-        83.669333
-      ],
-      "properties": {
-        "minzoom": 5,
-        "maxzoom": 7
-      },
-      "id": "stateborder2",
-      "class": "stateborder line",
-      "Datasource": {
-        "file": "data/10m_cultural/ne_10m_admin_0_boundary_lines_land.shp",
-        "type": "shape"
-      },
-      "layer": null,
-      "srs-name": "autodetect",
-      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
-      "advanced": {},
-      "name": "stateborder2"
-    },
-    {
-      "geometry": "linestring",
-      "extent": [
-        -179.99999692067183,
-        -84.96651228427098,
-        179.99999692067183,
-        84.96651228427099
-      ],
-      "Datasource": {
-        "type": "postgis",
-        "table": "(SELECT type::text, geom, level FROM oepnv_largeboundary_ways ORDER BY level ASC) AS borders",
-        "key_field": "",
-        "geometry_field": "geom",
-        "srid": "900913",
-        "extent_cache": "custom",
-        "extent": "-20037508,-19929239,20037508,19929239",
-        "dbname": "gis",
-      },
-      "properties": {
-        "minzoom": 8,
-        "maxzoom": 10
-      },
-      "id": "border0",
-      "class": "border line",
-      "srs-name": "900913",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over",
-      "advanced": {},
-      "name": "border0"
-    },
-    {
-      "geometry": "linestring",
-      "extent": [
-        -179.99999692067183,
-        -84.96651228427098,
-        179.99999692067183,
-        84.96651228427099
-      ],
-      "Datasource": {
-        "type": "postgis",
-        "table": "(SELECT type::text, geom, level FROM oepnv_boundary_ways ORDER BY level ASC) AS borders",
-        "key_field": "",
-        "geometry_field": "geom",
-        "srid": "900913",
-        "extent_cache": "custom",
-        "extent": "-20037508,-19929239,20037508,19929239",
-        "dbname": "gis",
-      },
-      "properties": {
-        "minzoom": 11,
-        "maxzoom": 22
-      },
-      "id": "border1",
-      "class": "border line",
-      "srs-name": "900913",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over",
-      "advanced": {},
-      "name": "border1"
-    },
-    {
-      "geometry": "polygon",
-      "extent": [
-        -179.99999692067183,
-        -84.96651228427098,
-        179.99999692067183,
-        84.96651228427099
-      ],
-      "Datasource": {
-        "type": "postgis",
-        "table": "(SELECT name, area, type::text,\"type\" as \"order\" FROM oepnv_stations ORDER BY \"order\" ASC) AS areas",
-        "key_field": "",
-        "geometry_field": "area",
-        "srid": "900913",
-        "extent_cache": "custom",
-        "extent": "-20037508,-19929239,20037508,19929239",
-        "dbname": "gis",
-      },
-      "properties": {
-        "minzoom": 17,
-        "maxzoom": 22
-      },
-      "id": "stationarea0",
-      "class": "stationarea all",
-      "srs-name": "900913",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over",
-      "advanced": {},
-      "name": "stationarea0"
-    },
-    {
-      "geometry": "linestring",
-      "extent": [
-        -179.99999692067183,
-        -84.96651228427098,
-        179.99999692067183,
-        84.96651228427099
-      ],
-      "Datasource": {
-        "type": "postgis",
-        "table": "(SELECT refs,\"type\"::text, type as \"order\",geom,role FROM oepnv_line_parts WHERE type IN ('rail') ORDER BY \"order\" DESC) AS transport",
-        "key_field": "",
-        "geometry_field": "geom",
-        "srid": "900913",
-        "extent_cache": "custom",
-        "extent": "-20037508,-19929239,20037508,19929239",
-        "dbname": "gis",
-      },
-      "properties": {
-        "minzoom": 6,
-        "maxzoom": 8
-      },
-      "id": "transport0",
-      "class": "transport line",
-      "srs-name": "900913",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over",
-      "advanced": {},
-      "name": "transport0"
-    },
-    {
-      "geometry": "linestring",
-      "extent": [
-        -179.99999692067183,
-        -84.96651228427098,
-        179.99999692067183,
-        84.96651228427099
-      ],
-      "Datasource": {
-        "type": "postgis",
-        "table": "(SELECT refs,\"type\"::text, type as \"order\",geom,role FROM oepnv_line_parts ORDER BY \"order\" DESC) AS transport",
-        "key_field": "",
-        "geometry_field": "geom",
-        "srid": "900913",
-        "extent_cache": "custom",
-        "extent": "-20037508,-19929239,20037508,19929239",
-        "dbname": "gis",
-      },
-      "properties": {
-        "minzoom": 9,
-        "maxzoom": 22
-      },
-      "id": "transport1",
-      "class": "transport line",
-      "srs-name": "900913",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over",
-      "advanced": {},
-      "name": "transport1",
-      "layerId": "transport1"
-    },
-    {
-      "extent": [
-        -179.99999692067183,
-        -84.96651228427098,
-        179.99999692067183,
-        84.96651228427099
-      ],
-      "Datasource": {
-        "type": "postgis",
-        "table": "(SELECT name, ref, geom, \"type\"::text FROM oepnv_stops WHERE platform) AS platforms",
-        "key_field": "",
-        "geometry_field": "geom",
-        "srid": "900913",
-        "extent_cache": "custom",
-        "extent": "-20037508,-19929239,20037508,19929239",
-        "dbname": "gis",
-      },
-      "properties": {
-        "minzoom": 17,
-        "maxzoom": 22
-      },
-      "id": "platform0",
-      "class": "platform geom",
-      "srs-name": "900913",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over",
-      "advanced": {},
-      "name": "platform0",
-      "layerId": "platform0"
-    },
-    {
-      "geometry": "point",
-      "extent": [
-        -179.99999692067183,
-        -84.96651228427098,
-        179.99999692067183,
-        84.96651228427099
-      ],
-      "Datasource": {
-        "type": "postgis",
-        "table": "(SELECT name, geom, type::text,\"type\" as \"order\" FROM oepnv_airports ORDER BY \"order\" ASC, passengers DESC) AS airports",
-        "key_field": "",
-        "geometry_field": "geom",
-        "srid": "900913",
-        "extent_cache": "custom",
-        "extent": "-20037508,-19929239,20037508,19929239",
-        "dbname": "gis",
-      },
-      "properties": {
-        "minzoom": 5,
-        "maxzoom": 22
-      },
-      "id": "airport",
-      "class": "airport",
-      "srs-name": "900913",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over",
-      "advanced": {},
-      "name": "airport"
-    },
-    {
-      "geometry": "point",
-      "extent": [
-        -179.99999692067183,
-        -84.96651228427098,
-        179.99999692067183,
-        84.96651228427099
-      ],
-      "Datasource": {
-        "type": "postgis",
-        "table": "(SELECT name, geom, type::text,\"type\" as \"order\" FROM oepnv_places WHERE type IN ('continent','country') ORDER BY \"order\" ASC, population DESC) AS places",
-        "key_field": "",
-        "geometry_field": "geom",
-        "srid": "900913",
-        "extent_cache": "custom",
-        "extent": "-20037508,-19929239,20037508,19929239",
-        "dbname": "gis",
-      },
-      "properties": {
-        "minzoom": 0,
-        "maxzoom": 3
-      },
-      "id": "place0",
-      "class": "place",
-      "srs-name": "custom",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over",
-      "advanced": {
-        "srid": "900913"
-      },
-      "name": "place0"
-    },
-    {
-      "geometry": "point",
-      "extent": [
-        -179.99999692067183,
-        -84.96651228427098,
-        179.99999692067183,
-        84.96651228427099
-      ],
-      "Datasource": {
-        "type": "postgis",
-        "table": "(SELECT name, geom, type::text,\"type\" as \"order\" FROM oepnv_places WHERE type IN ('continent','country','city') ORDER BY \"order\" ASC, population DESC) AS places",
-        "key_field": "",
-        "geometry_field": "geom",
-        "srid": "900913",
-        "extent_cache": "custom",
-        "extent": "-20037508,-19929239,20037508,19929239",
-        "dbname": "gis",
-      },
-      "properties": {
-        "minzoom": 4,
-        "maxzoom": 8
-      },
-      "id": "place1",
-      "class": "place",
-      "srs-name": "custom",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over",
-      "advanced": {
-        "srid": "900913"
-      },
-      "name": "place1"
-    },
-    {
-      "geometry": "point",
-      "extent": [
-        -179.99999692067183,
-        -84.96651228427098,
-        179.99999692067183,
-        84.96651228427099
-      ],
-      "Datasource": {
-        "type": "postgis",
-        "table": "(SELECT name, geom, type::text,\"type\" as \"order\" FROM oepnv_places ORDER BY \"order\" ASC, population DESC) AS places",
-        "key_field": "",
-        "geometry_field": "geom",
-        "srid": "900913",
-        "extent_cache": "custom",
-        "extent": "-20037508,-19929239,20037508,19929239",
-        "dbname": "gis",
-      },
-      "properties": {
-        "minzoom": 9,
-        "maxzoom": 22
-      },
-      "id": "place2",
-      "class": "place",
-      "srs-name": "custom",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over",
-      "advanced": {
-        "srid": "900913"
-      },
-      "name": "place2",
-      "layerId": "place2"
-    },
-    {
-      "geometry": "point",
-      "extent": [
-        -179.99999692067183,
-        -84.96651228427098,
-        179.99999692067183,
-        84.96651228427099
-      ],
-      "Datasource": {
-        "type": "postgis",
-        "table": "(SELECT name, point, type::text,\"type\" as \"order\" FROM oepnv_stations ORDER BY \"order\" ASC) AS stations",
-        "key_field": "",
-        "geometry_field": "point",
-        "srid": "900913",
-        "extent_cache": "custom",
-        "extent": "-20037508,-19929239,20037508,19929239",
-        "dbname": "gis",
-      },
-      "properties": {
-        "minzoom": 12,
-        "maxzoom": 22
-      },
-      "id": "stationpoint",
-      "class": "station point",
-      "srs-name": "900913",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over",
-      "advanced": {},
-      "name": "stationpoint"
-    },
-    {
-      "geometry": "point",
-      "extent": [
-        -179.99999692067183,
-        -84.96651228427098,
-        179.99999692067183,
-        84.96651228427099
-      ],
-      "Datasource": {
-        "type": "postgis",
-        "table": "(SELECT name, geom, type::text,\"type\" as \"order\" FROM oepnv_oepnvpois ORDER BY \"order\" ASC) AS oepnvpois",
-        "key_field": "",
-        "geometry_field": "geom",
-        "srid": "900913",
-        "extent_cache": "custom",
-        "extent": "-20037508,-19929239,20037508,19929239",
-        "dbname": "gis",
-      },
-      "properties": {
-        "minzoom": 14,
-        "maxzoom": 22
-      },
-      "id": "oepnvpoipoint",
-      "class": "oepnvpoi point",
-      "srs-name": "900913",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over",
-      "advanced": {},
-      "name": "oepnvpoipoint"
-    },
-    {
-      "geometry": "point",
-      "extent": [
-        -179.99999692067183,
-        -84.96651228427098,
-        179.99999692067183,
-        84.96651228427099
-      ],
-      "Datasource": {
-        "type": "postgis",
-        "table": "(SELECT name, ref, CASE ST_GeometryType(geom) WHEN 'ST_Point' THEN geom WHEN 'ST_Linestring' THEN ST_LineInterpolatePoint(geom, 0.5) ELSE st_pointonsurface(geom) END as geom, type::text,\"type\" as \"order\" FROM oepnv_stops WHERE geom && !bbox! ORDER BY \"order\" ASC) AS stations",
-        "key_field": "",
-        "geometry_field": "geom",
-        "srid": "900913",
-        "extent_cache": "custom",
-        "extent": "-20037508,-19929239,20037508,19929239",
-        "dbname": "gis",
-      },
-      "properties": {
-        "minzoom": 17,
-        "maxzoom": 22
-      },
-      "id": "platformlabel",
-      "class": "platform label",
-      "srs-name": "900913",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over",
-      "advanced": {},
-      "name": "platformlabel",
-      "layerId": "platformlabel"
-    },
-    {
-      "geometry": "linestring",
-      "extent": [
-        -179.99999692067183,
-        -84.96651228427098,
-        179.99999692067183,
-        84.96651228427099
-      ],
-      "Datasource": {
-        "type": "postgis",
-        "table": "(SELECT refs,\"type\"::text, type as \"order\",geom,role FROM oepnv_line_parts WHERE type IN ('rail') ORDER BY \"order\" DESC) AS transport",
-        "key_field": "",
-        "geometry_field": "geom",
-        "srid": "900913",
-        "extent_cache": "custom",
-        "extent": "-20037508,-19929239,20037508,19929239",
-        "dbname": "gis",
-      },
-      "properties": {
-        "minzoom": 6,
-        "maxzoom": 8
-      },
-      "id": "transportlabel0",
-      "class": "transport label",
-      "srs-name": "900913",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over",
-      "advanced": {},
-      "name": "transportlabel0"
-    },
-    {
-      "geometry": "linestring",
-      "extent": [
-        -179.99999692067183,
-        -84.96651228427098,
-        179.99999692067183,
-        84.96651228427099
-      ],
-      "Datasource": {
-        "type": "postgis",
-        "table": "(SELECT refs,\"type\"::text, type as \"order\",geom,role FROM oepnv_line_parts ORDER BY \"order\" DESC) AS transport",
-        "key_field": "",
-        "geometry_field": "geom",
-        "srid": "900913",
-        "extent_cache": "custom",
-        "extent": "-20037508,-19929239,20037508,19929239",
-        "dbname": "gis",
-      },
-      "properties": {
-        "minzoom": 9,
-        "maxzoom": 22
-      },
-      "id": "transportlabel1",
-      "class": "transport label",
-      "srs-name": "900913",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over",
-      "advanced": {},
-      "name": "transportlabel1"
-    },
-    {
-      "geometry": "linestring",
-      "extent": [
-        -179.99999692067183,
-        -84.96651228427098,
-        179.99999692067183,
-        84.96651228427099
-      ],
-      "Datasource": {
-        "type": "postgis",
-        "table": "(SELECT geom, type::text, \"type\" as \"order\", name, tunnel::text, bridge::text, oneway::text, CHAR_LENGTH(ref) AS ref_length, (CASE WHEN CHAR_LENGTH(ref) BETWEEN 2 AND 9 THEN ref ELSE NULL END) AS ref_content FROM oepnv_ways ORDER BY layer ASC,  \"order\" DESC) AS ways",
-        "key_field": "",
-        "geometry_field": "geom",
-        "srid": "900913",
-        "extent_cache": "custom",
-        "extent": "-20037508,-19929239,20037508,19929239",
-        "dbname": "gis",
-      },
-      "properties": {
-        "minzoom": 10,
-        "maxzoom": 13
-      },
-      "id": "waylabel1",
-      "class": "waylabel",
-      "srs-name": "900913",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over",
-      "advanced": {},
-      "name": "waylabel1"
-    },
-    {
-      "geometry": "linestring",
-      "extent": [
-        -179.99999692067183,
-        -84.96651228427098,
-        179.99999692067183,
-        84.96651228427099
-      ],
-      "Datasource": {
-        "type": "postgis",
-        "table": "(SELECT geom, type::text, \"type\" as \"order\", name, tunnel::text, bridge::text, oneway::text, CHAR_LENGTH(ref) AS ref_length, (CASE WHEN CHAR_LENGTH(ref) BETWEEN 2 AND 9 THEN ref ELSE NULL END) AS ref_content FROM (SELECT name, ref, \"type\", oneway, tunnel, bridge, layer, geom FROM oepnv_ways UNION ALL SELECT name,'' as ref, \"type\", oneway, tunnel, bridge, layer, geom FROM oepnv_minorways) as w ORDER BY layer ASC,  \"order\" DESC) AS ways",
-        "key_field": "",
-        "geometry_field": "geom",
-        "srid": "900913",
-        "extent_cache": "custom",
-        "extent": "-20037508,-19929239,20037508,19929239",
-        "dbname": "gis",
-      },
-      "properties": {
-        "minzoom": 14,
-        "maxzoom": 22
-      },
-      "id": "waylabel2",
-      "class": "waylabel",
-      "srs-name": "900913",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over",
-      "advanced": {},
-      "name": "waylabel2"
-    }
-  ],
-  "scale": 1,
-  "metatile": 2,
-  "name": "oepnvkarte",
-  "description": ""
-}
+bounds:
+  - -180
+  - -85.05112877980659
+  - 180
+  - 85.05112877980659
+center:
+  - 0
+  - 0
+  - 2
+format: png
+interactivity: false
+minzoom: 0
+maxzoom: 22
+srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0
+  +units=m +nadgrids=@null +wktext +no_defs +over
+Stylesheet:
+  - style.mms
+  - ground.mms
+  - road.mms
+  - poi.mms
+  - places.mms
+  - transport.mms
+  - rail.mms
+Layer:
+  - geometry: polygon
+    extent:
+      - -180
+      - -85.051
+      - 180
+      - 83.64512726514185
+    properties:
+      minzoom: 0
+      maxzoom: 1
+    id: land0
+    class: land
+    Datasource:
+      file: data/110m_physical/ne_110m_land.shp
+      type: shape
+    layer: null
+    srs-name: autodetect
+    srs: +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs
+    advanced: {}
+    name: land0
+  - geometry: polygon
+    extent:
+      - -180
+      - -85.051
+      - 180
+      - 83.59960032829271
+    properties:
+      minzoom: 2
+      maxzoom: 4
+    id: land1
+    class: land
+    Datasource:
+      file: data/50m_physical/ne_50m_land.shp
+      type: shape
+    layer: null
+    srs-name: autodetect
+    srs: +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs
+    advanced: {}
+    name: land1
+  - geometry: polygon
+    extent:
+      - -180
+      - -85.051
+      - 180
+      - 83.63412018506368
+    properties:
+      minzoom: 5
+      maxzoom: 7
+    id: land2
+    class: land
+    Datasource:
+      file: data/10m_physical/ne_10m_land.shp
+      type: shape
+    layer: null
+    srs-name: autodetect
+    srs: +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs
+    advanced: {}
+    name: land2
+  - geometry: polygon
+    extent:
+      - -179.99999692067183
+      - -85.051
+      - 179.99999692067183
+      - 83.669333
+    properties:
+      minzoom: 8
+      maxzoom: 22
+    id: land3
+    class: land
+    Datasource:
+      file: data/land-polygons-split-3857/land_polygons.shp
+      type: shape
+    layer: null
+    srs-name: custom
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
+      +units=m +no_defs +over
+    advanced: {}
+    name: land3
+  - geometry: polygon
+    extent:
+      - -124.95363440005697
+      - -16.536406345284952
+      - 109.92980716353523
+      - 66.96929759385118
+    properties:
+      minzoom: 0
+      maxzoom: 1
+    id: lakes0
+    class: lakes
+    Datasource:
+      file: data/110m_physical/ne_110m_lakes.shp
+      type: shape
+    layer: null
+    srs-name: autodetect
+    srs: +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs
+    advanced: {}
+    name: lakes0
+  - geometry: polygon
+    extent:
+      - -165.89847286686506
+      - -50.62001067484838
+      - 176.08272016835718
+      - 81.94032176383296
+    properties:
+      minzoom: 2
+      maxzoom: 4
+    id: lakes1
+    class: lakes
+    Datasource:
+      file: data/50m_physical/ne_50m_lakes.shp
+      type: shape
+    layer: null
+    srs-name: autodetect
+    srs: +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs
+    advanced: {}
+    name: lakes1
+  - geometry: polygon
+    extent:
+      - -165.96562639062836
+      - -50.669671726280875
+      - 176.09388227773223
+      - 81.9552562527653
+    properties:
+      minzoom: 5
+      maxzoom: 7
+    id: lakes2
+    class: lakes
+    Datasource:
+      file: data/10m_physical/ne_10m_lakes.shp
+      type: shape
+    layer: null
+    srs-name: autodetect
+    srs: +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs
+    advanced: {}
+    name: lakes2
+  - geometry: polygon
+    extent:
+      - -157.98399471741934
+      - -46.26844166441431
+      - 174.97002322824852
+      - 69.35127106391279
+    properties:
+      minzoom: 2
+      maxzoom: 4
+    id: citylike0
+    class: citylike
+    Datasource:
+      file: data/50m_cultural/ne_50m_urban_areas.shp
+      type: shape
+    layer: null
+    srs-name: autodetect
+    srs: +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs
+    advanced: {}
+    name: citylike0
+  - geometry: polygon
+    extent:
+      - -157.9807132639688
+      - -51.052955824589695
+      - 178.03340213451082
+      - 69.76979848904467
+    properties:
+      minzoom: 5
+      maxzoom: 7
+    id: citylike1
+    class: citylike
+    Datasource:
+      file: data/10m_cultural/ne_10m_urban_areas.shp
+      type: shape
+    layer: null
+    srs-name: autodetect
+    srs: +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs
+    advanced: {}
+    name: citylike1
+  - geometry: linestring
+    extent:
+      - -140.99776974812326
+      - -54.89680469520037
+      - 141.03385176001382
+      - 70.16419302029625
+    properties:
+      minzoom: 1
+      maxzoom: 2
+    id: border0
+    class: border
+    Datasource:
+      file: data/110m_cultural/ne_110m_admin_0_boundary_lines_land.shp
+      type: shape
+    layer: null
+    srs-name: autodetect
+    srs: +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs
+    advanced: {}
+    name: border0
+  - geometry: polygon
+    extent:
+      - -180
+      - -85.0269338178989
+      - 180
+      - 83.50260056645996
+    Datasource:
+      type: postgis
+      table: (SELECT geom, type::text, type as "order" FROM oepnv_verylargeareas WHERE
+        type IN('forest') ORDER BY "order" ASC) AS area
+      key_field: ''
+      geometry_field: geom
+      srid: '900913'
+      extent_cache: custom
+      extent: -20037508,-19929239,20037508,19929239
+      dbname: gis
+    properties:
+      minzoom: 4
+      maxzoom: 7
+    id: area00
+    class: area
+    srs-name: '900913'
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0
+      +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
+    advanced: {}
+    name: area00
+  - geometry: polygon
+    extent:
+      - -180
+      - -85.0269338178989
+      - 180
+      - 83.50260056645996
+    Datasource:
+      type: postgis
+      table: (SELECT geom, type::text, type as "order" FROM oepnv_verylargeareas ORDER
+        BY "order" ASC) AS area
+      key_field: ''
+      geometry_field: geom
+      srid: '900913'
+      extent_cache: custom
+      extent: -20037508,-19929239,20037508,19929239
+      dbname: gis
+    properties:
+      minzoom: 8
+      maxzoom: 9
+    id: area0
+    class: area
+    srs-name: '900913'
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0
+      +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
+    advanced: {}
+    name: area0
+  - geometry: polygon
+    extent:
+      - -179.9999999749438
+      - -85.0269329978313
+      - 179.9999999749438
+      - 83.50259949741076
+    Datasource:
+      type: postgis
+      table: (SELECT geom, type::text, type as "order" FROM oepnv_largeareas ORDER
+        BY "order" ASC) AS area
+      key_field: ''
+      geometry_field: geom
+      srid: '900913'
+      extent_cache: custom
+      extent: -20037508,-19929239,20037508,19929239
+      dbname: gis
+    properties:
+      minzoom: 10
+      maxzoom: 11
+    id: area1
+    class: area
+    srs-name: '900913'
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0
+      +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
+    advanced: {}
+    name: area1
+  - geometry: polygon
+    extent:
+      - -179.9999999749438
+      - -85.0269329978313
+      - 179.9999999749438
+      - 83.50259949741076
+    Datasource:
+      type: postgis
+      table: (SELECT geom, type::text FROM (SELECT geom,type::text FROM oepnv_areas
+        ORDER BY type) as oepnv_areas) AS area
+      key_field: ''
+      geometry_field: geom
+      srid: '900913'
+      extent_cache: custom
+      extent: -20037508,-19929239,20037508,19929239
+      dbname: gis
+    properties:
+      minzoom: 12
+      maxzoom: 15
+    id: area2
+    class: area
+    srs-name: '900913'
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0
+      +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
+    advanced: {}
+    name: area2
+  - geometry: polygon
+    extent:
+      - -179.99999692067183
+      - -84.96651228427098
+      - 179.99999692067183
+      - 84.96651228427099
+    Datasource:
+      type: postgis
+      table: (SELECT geom, type::text FROM (SELECT geom,type::text FROM (SELECT type,
+        geom FROM oepnv_areas ORDER BY type) as aa UNION ALL SELECT geom, 'building'
+        as type FROM oepnv_buildings) as oepnv_areas) AS area
+      key_field: ''
+      geometry_field: geom
+      srid: '900913'
+      extent_cache: custom
+      extent: -20037508,-19929239,20037508,19929239
+      dbname: gis
+    properties:
+      minzoom: 16
+      maxzoom: 22
+    id: area3
+    class: area
+    srs-name: '900913'
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0
+      +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
+    advanced: {}
+    name: area3
+  - geometry: linestring
+    extent:
+      - -179.99999692067183
+      - -84.96651228427098
+      - 179.99999692067183
+      - 84.96651228427099
+    Datasource:
+      type: postgis
+      table: (SELECT geom, type::text, "type" as "order", name FROM oepnv_waterways
+        ORDER BY "order" DESC) AS waterways
+      key_field: ''
+      geometry_field: geom
+      srid: '900913'
+      extent_cache: custom
+      extent: -20037508,-19929239,20037508,19929239
+      dbname: gis
+    properties:
+      minzoom: 8
+      maxzoom: 12
+    id: waterway0
+    class: waterway
+    srs-name: '900913'
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0
+      +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
+    advanced: {}
+    name: waterway0
+  - geometry: linestring
+    extent:
+      - -179.99999692067183
+      - -84.96651228427098
+      - 179.99999692067183
+      - 84.96651228427099
+    Datasource:
+      type: postgis
+      table: (SELECT geom, type::text, "type" as "order", name FROM oepnv_waterways
+        UNION ALL SELECT geom, type::text, "type" as "order", name FROM oepnv_minorwaterways
+        ORDER BY "order" DESC) AS waterways
+      key_field: ''
+      geometry_field: geom
+      srid: '900913'
+      extent_cache: custom
+      extent: -20037508,-19929239,20037508,19929239
+      dbname: gis
+    properties:
+      minzoom: 13
+      maxzoom: 22
+    id: waterway1
+    class: waterway
+    srs-name: '900913'
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
+      +units=m +nadgrids=@null +no_defs +over
+    advanced: {}
+    name: waterway1
+  - geometry: linestring
+    extent:
+      - -179.99999692067183
+      - -84.96651228427098
+      - 179.99999692067183
+      - 84.96651228427099
+    Datasource:
+      type: postgis
+      table: (SELECT geom, type::text, "type" as "order", '' as name, 'false' as tunnel,
+        'false' as bridge, 'false' as oneway, 0 AS ref_length, '' AS ref_content FROM
+        oepnv_largeways ORDER BY "order" DESC) AS ways
+      key_field: ''
+      geometry_field: geom
+      srid: '900913'
+      extent_cache: custom
+      extent: -20037508,-19929239,20037508,19929239
+      dbname: gis
+    properties:
+      minzoom: 8
+      maxzoom: 9
+    id: way0
+    class: way
+    srs-name: '900913'
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
+      +units=m +nadgrids=@null +no_defs +over
+    advanced: {}
+    name: way0
+  - geometry: linestring
+    extent:
+      - -179.99999692067183
+      - -84.96651228427098
+      - 179.99999692067183
+      - 84.96651228427099
+    Datasource:
+      type: postgis
+      table: (SELECT geom, type::text, "type" as "order", name, tunnel::text, bridge::text,
+        oneway::text, CHAR_LENGTH(ref) AS ref_length, (CASE WHEN CHAR_LENGTH(ref)
+        BETWEEN 2 AND 9 THEN ref ELSE NULL END) AS ref_content FROM oepnv_ways ORDER
+        BY layer ASC, tunnel DESC, bridge ASC, "order" DESC) AS ways
+      key_field: ''
+      geometry_field: geom
+      srid: '900913'
+      extent_cache: custom
+      extent: -20037508,-19929239,20037508,19929239
+      dbname: gis
+    properties:
+      minzoom: 10
+      maxzoom: 13
+    id: way1
+    class: way
+    srs-name: '900913'
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
+      +units=m +nadgrids=@null +no_defs +over
+    advanced: {}
+    name: way1
+  - geometry: linestring
+    extent:
+      - -179.99999692067183
+      - -84.96651228427098
+      - 179.99999692067183
+      - 84.96651228427099
+    Datasource:
+      type: postgis
+      table: (SELECT geom, type::text, "type" as "order", name, tunnel::text, bridge::text,
+        oneway::text, CHAR_LENGTH(ref) AS ref_length, (CASE WHEN CHAR_LENGTH(ref)
+        BETWEEN 2 AND 9 THEN ref ELSE NULL END) AS ref_content FROM (SELECT name,
+        ref, "type", oneway, tunnel, bridge, layer, geom FROM oepnv_ways UNION ALL
+        SELECT name,'' as ref, "type", oneway, tunnel, bridge, layer, geom FROM oepnv_minorways)
+        as w ORDER BY layer ASC, tunnel DESC, bridge ASC, "order" DESC) AS ways
+      key_field: ''
+      geometry_field: geom
+      srid: '900913'
+      extent_cache: custom
+      extent: -20037508,-19929239,20037508,19929239
+      dbname: gis
+    properties:
+      minzoom: 14
+      maxzoom: 22
+    id: way2
+    class: way
+    srs-name: '900913'
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
+      +units=m +nadgrids=@null +no_defs +over
+    advanced: {}
+    name: way2
+  - geometry: linestring
+    extent:
+      - -179.99999692067183
+      - -84.96651228427098
+      - 179.99999692067183
+      - 84.96651228427099
+    Datasource:
+      type: postgis
+      table: (SELECT type::text, geom, tunnel::text FROM oepnv_rails WHERE usage IN
+        ('highspeed','main', 'branch') ORDER BY layer ASC) AS rail
+      key_field: ''
+      geometry_field: geom
+      srid: '900913'
+      extent_cache: custom
+      extent: -20037508,-19929239,20037508,19929239
+      dbname: gis
+    properties:
+      minzoom: 6
+      maxzoom: 12
+    id: rail0
+    class: rail line
+    srs-name: '900913'
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
+      +units=m +nadgrids=@null +no_defs +over
+    advanced: {}
+    name: rail0
+    layerId: rail0
+  - geometry: linestring
+    extent:
+      - -179.99999692067183
+      - -84.96651228427098
+      - 179.99999692067183
+      - 84.96651228427099
+    Datasource:
+      type: postgis
+      table: (SELECT type::text, geom, tunnel::text FROM oepnv_rails WHERE usage NOT
+        IN ('service') ORDER BY layer ASC) AS rail
+      key_field: ''
+      geometry_field: geom
+      srid: '900913'
+      extent_cache: custom
+      extent: -20037508,-19929239,20037508,19929239
+      dbname: gis
+    properties:
+      minzoom: 13
+      maxzoom: 14
+    id: rail1
+    class: rail line
+    srs-name: '900913'
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
+      +units=m +nadgrids=@null +no_defs +over
+    advanced: {}
+    name: rail1
+    layerId: rail1
+  - geometry: linestring
+    extent:
+      - -179.99999692067183
+      - -84.96651228427098
+      - 179.99999692067183
+      - 84.96651228427099
+    Datasource:
+      type: postgis
+      table: (SELECT type::text, geom, tunnel::text FROM oepnv_rails ORDER BY layer
+        ASC) AS rail
+      key_field: ''
+      geometry_field: geom
+      srid: '900913'
+      extent_cache: custom
+      extent: -20037508,-19929239,20037508,19929239
+      dbname: gis
+    properties:
+      minzoom: 15
+      maxzoom: 22
+    id: rail2
+    class: rail line
+    srs-name: '900913'
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
+      +units=m +nadgrids=@null +no_defs +over
+    advanced: {}
+    name: rail2
+    layerId: rail2
+  - geometry: linestring
+    extent:
+      - -179.99999692067183
+      - -84.96651228427098
+      - 179.99999692067183
+      - 84.96651228427099
+    Datasource:
+      type: postgis
+      table: (SELECT geom, type::text, "type" as "order", name, tunnel::text, bridge::text,
+        oneway::text, CHAR_LENGTH(ref) AS ref_length, (CASE WHEN CHAR_LENGTH(ref)
+        BETWEEN 2 AND 9 THEN ref ELSE NULL END) AS ref_content FROM (SELECT name,
+        ref, "type", oneway, tunnel, bridge, layer, geom FROM oepnv_ways WHERE bridge
+        UNION ALL SELECT name,'' as ref, "type", oneway, tunnel, bridge, layer, geom
+        FROM oepnv_minorways WHERE bridge) as w ORDER BY layer ASC, tunnel DESC, bridge
+        ASC, "order" DESC) AS ways
+      key_field: ''
+      geometry_field: geom
+      srid: '900913'
+      extent_cache: custom
+      extent: -20037508,-19929239,20037508,19929239
+      dbname: gis
+    properties:
+      minzoom: 15
+      maxzoom: 22
+    id: waybridges0
+    class: way bridge
+    srs-name: '900913'
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
+      +units=m +nadgrids=@null +no_defs +over
+    advanced: {}
+    name: waybridges0
+  - geometry: linestring
+    extent:
+      - -179.99999692067183
+      - -85.051
+      - 179.99999692067183
+      - 83.669333
+    properties:
+      minzoom: 0
+      maxzoom: 2
+    id: stateborder0
+    class: stateborder line
+    Datasource:
+      file: data/110m_cultural/ne_110m_admin_0_countries.shp
+      type: shape
+    layer: null
+    srs-name: autodetect
+    srs: +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs
+    advanced: {}
+    name: stateborder0
+  - geometry: linestring
+    extent:
+      - -179.99999692067183
+      - -85.051
+      - 179.99999692067183
+      - 83.669333
+    properties:
+      minzoom: 3
+      maxzoom: 4
+    id: stateborder1
+    class: stateborder line
+    Datasource:
+      file: data/50m_cultural/ne_50m_admin_0_boundary_lines_land.shp
+      type: shape
+    layer: null
+    srs-name: autodetect
+    srs: +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs
+    advanced: {}
+    name: stateborder1
+  - geometry: linestring
+    extent:
+      - -179.99999692067183
+      - -85.051
+      - 179.99999692067183
+      - 83.669333
+    properties:
+      minzoom: 5
+      maxzoom: 7
+    id: stateborder2
+    class: stateborder line
+    Datasource:
+      file: data/10m_cultural/ne_10m_admin_0_boundary_lines_land.shp
+      type: shape
+    layer: null
+    srs-name: autodetect
+    srs: +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs
+    advanced: {}
+    name: stateborder2
+  - geometry: linestring
+    extent:
+      - -179.99999692067183
+      - -84.96651228427098
+      - 179.99999692067183
+      - 84.96651228427099
+    Datasource:
+      type: postgis
+      table: (SELECT type::text, geom, level FROM oepnv_largeboundary_ways ORDER BY
+        level ASC) AS borders
+      key_field: ''
+      geometry_field: geom
+      srid: '900913'
+      extent_cache: custom
+      extent: -20037508,-19929239,20037508,19929239
+      dbname: gis
+    properties:
+      minzoom: 8
+      maxzoom: 10
+    id: border0
+    class: border line
+    srs-name: '900913'
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
+      +units=m +nadgrids=@null +no_defs +over
+    advanced: {}
+    name: border0
+  - geometry: linestring
+    extent:
+      - -179.99999692067183
+      - -84.96651228427098
+      - 179.99999692067183
+      - 84.96651228427099
+    Datasource:
+      type: postgis
+      table: (SELECT type::text, geom, level FROM oepnv_boundary_ways ORDER BY level
+        ASC) AS borders
+      key_field: ''
+      geometry_field: geom
+      srid: '900913'
+      extent_cache: custom
+      extent: -20037508,-19929239,20037508,19929239
+      dbname: gis
+    properties:
+      minzoom: 11
+      maxzoom: 22
+    id: border1
+    class: border line
+    srs-name: '900913'
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
+      +units=m +nadgrids=@null +no_defs +over
+    advanced: {}
+    name: border1
+  - geometry: polygon
+    extent:
+      - -179.99999692067183
+      - -84.96651228427098
+      - 179.99999692067183
+      - 84.96651228427099
+    Datasource:
+      type: postgis
+      table: (SELECT name, area, type::text,"type" as "order" FROM oepnv_stations
+        ORDER BY "order" ASC) AS areas
+      key_field: ''
+      geometry_field: area
+      srid: '900913'
+      extent_cache: custom
+      extent: -20037508,-19929239,20037508,19929239
+      dbname: gis
+    properties:
+      minzoom: 17
+      maxzoom: 22
+    id: stationarea0
+    class: stationarea all
+    srs-name: '900913'
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
+      +units=m +nadgrids=@null +no_defs +over
+    advanced: {}
+    name: stationarea0
+  - geometry: linestring
+    extent:
+      - -179.99999692067183
+      - -84.96651228427098
+      - 179.99999692067183
+      - 84.96651228427099
+    Datasource:
+      type: postgis
+      table: (SELECT refs,"type"::text, type as "order",geom,role FROM oepnv_line_parts
+        WHERE type IN ('rail') ORDER BY "order" DESC) AS transport
+      key_field: ''
+      geometry_field: geom
+      srid: '900913'
+      extent_cache: custom
+      extent: -20037508,-19929239,20037508,19929239
+      dbname: gis
+    properties:
+      minzoom: 6
+      maxzoom: 8
+    id: transport0
+    class: transport line
+    srs-name: '900913'
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
+      +units=m +nadgrids=@null +no_defs +over
+    advanced: {}
+    name: transport0
+  - geometry: linestring
+    extent:
+      - -179.99999692067183
+      - -84.96651228427098
+      - 179.99999692067183
+      - 84.96651228427099
+    Datasource:
+      type: postgis
+      table: (SELECT refs,"type"::text, type as "order",geom,role FROM oepnv_line_parts
+        ORDER BY "order" DESC) AS transport
+      key_field: ''
+      geometry_field: geom
+      srid: '900913'
+      extent_cache: custom
+      extent: -20037508,-19929239,20037508,19929239
+      dbname: gis
+    properties:
+      minzoom: 9
+      maxzoom: 22
+    id: transport1
+    class: transport line
+    srs-name: '900913'
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
+      +units=m +nadgrids=@null +no_defs +over
+    advanced: {}
+    name: transport1
+    layerId: transport1
+  - extent:
+      - -179.99999692067183
+      - -84.96651228427098
+      - 179.99999692067183
+      - 84.96651228427099
+    Datasource:
+      type: postgis
+      table: (SELECT name, ref, geom, "type"::text FROM oepnv_stops WHERE platform)
+        AS platforms
+      key_field: ''
+      geometry_field: geom
+      srid: '900913'
+      extent_cache: custom
+      extent: -20037508,-19929239,20037508,19929239
+      dbname: gis
+    properties:
+      minzoom: 17
+      maxzoom: 22
+    id: platform0
+    class: platform geom
+    srs-name: '900913'
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
+      +units=m +nadgrids=@null +no_defs +over
+    advanced: {}
+    name: platform0
+    layerId: platform0
+  - geometry: point
+    extent:
+      - -179.99999692067183
+      - -84.96651228427098
+      - 179.99999692067183
+      - 84.96651228427099
+    Datasource:
+      type: postgis
+      table: (SELECT name, geom, type::text,"type" as "order" FROM oepnv_airports
+        ORDER BY "order" ASC, passengers DESC) AS airports
+      key_field: ''
+      geometry_field: geom
+      srid: '900913'
+      extent_cache: custom
+      extent: -20037508,-19929239,20037508,19929239
+      dbname: gis
+    properties:
+      minzoom: 5
+      maxzoom: 22
+    id: airport
+    class: airport
+    srs-name: '900913'
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
+      +units=m +nadgrids=@null +no_defs +over
+    advanced: {}
+    name: airport
+  - geometry: point
+    extent:
+      - -179.99999692067183
+      - -84.96651228427098
+      - 179.99999692067183
+      - 84.96651228427099
+    Datasource:
+      type: postgis
+      table: (SELECT name, geom, type::text,"type" as "order" FROM oepnv_places WHERE
+        type IN ('continent','country') ORDER BY "order" ASC, population DESC) AS
+        places
+      key_field: ''
+      geometry_field: geom
+      srid: '900913'
+      extent_cache: custom
+      extent: -20037508,-19929239,20037508,19929239
+      dbname: gis
+    properties:
+      minzoom: 0
+      maxzoom: 3
+    id: place0
+    class: place
+    srs-name: custom
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
+      +units=m +nadgrids=@null +no_defs +over
+    advanced:
+      srid: '900913'
+    name: place0
+  - geometry: point
+    extent:
+      - -179.99999692067183
+      - -84.96651228427098
+      - 179.99999692067183
+      - 84.96651228427099
+    Datasource:
+      type: postgis
+      table: (SELECT name, geom, type::text,"type" as "order" FROM oepnv_places WHERE
+        type IN ('continent','country','city') ORDER BY "order" ASC, population DESC)
+        AS places
+      key_field: ''
+      geometry_field: geom
+      srid: '900913'
+      extent_cache: custom
+      extent: -20037508,-19929239,20037508,19929239
+      dbname: gis
+    properties:
+      minzoom: 4
+      maxzoom: 8
+    id: place1
+    class: place
+    srs-name: custom
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
+      +units=m +nadgrids=@null +no_defs +over
+    advanced:
+      srid: '900913'
+    name: place1
+  - geometry: point
+    extent:
+      - -179.99999692067183
+      - -84.96651228427098
+      - 179.99999692067183
+      - 84.96651228427099
+    Datasource:
+      type: postgis
+      table: (SELECT name, geom, type::text,"type" as "order" FROM oepnv_places ORDER
+        BY "order" ASC, population DESC) AS places
+      key_field: ''
+      geometry_field: geom
+      srid: '900913'
+      extent_cache: custom
+      extent: -20037508,-19929239,20037508,19929239
+      dbname: gis
+    properties:
+      minzoom: 9
+      maxzoom: 22
+    id: place2
+    class: place
+    srs-name: custom
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
+      +units=m +nadgrids=@null +no_defs +over
+    advanced:
+      srid: '900913'
+    name: place2
+    layerId: place2
+  - geometry: point
+    extent:
+      - -179.99999692067183
+      - -84.96651228427098
+      - 179.99999692067183
+      - 84.96651228427099
+    Datasource:
+      type: postgis
+      table: (SELECT name, point, type::text,"type" as "order" FROM oepnv_stations
+        ORDER BY "order" ASC) AS stations
+      key_field: ''
+      geometry_field: point
+      srid: '900913'
+      extent_cache: custom
+      extent: -20037508,-19929239,20037508,19929239
+      dbname: gis
+    properties:
+      minzoom: 12
+      maxzoom: 22
+    id: stationpoint
+    class: station point
+    srs-name: '900913'
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
+      +units=m +nadgrids=@null +no_defs +over
+    advanced: {}
+    name: stationpoint
+  - geometry: point
+    extent:
+      - -179.99999692067183
+      - -84.96651228427098
+      - 179.99999692067183
+      - 84.96651228427099
+    Datasource:
+      type: postgis
+      table: (SELECT name, geom, type::text,"type" as "order" FROM oepnv_oepnvpois
+        ORDER BY "order" ASC) AS oepnvpois
+      key_field: ''
+      geometry_field: geom
+      srid: '900913'
+      extent_cache: custom
+      extent: -20037508,-19929239,20037508,19929239
+      dbname: gis
+    properties:
+      minzoom: 14
+      maxzoom: 22
+    id: oepnvpoipoint
+    class: oepnvpoi point
+    srs-name: '900913'
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
+      +units=m +nadgrids=@null +no_defs +over
+    advanced: {}
+    name: oepnvpoipoint
+  - geometry: point
+    extent:
+      - -179.99999692067183
+      - -84.96651228427098
+      - 179.99999692067183
+      - 84.96651228427099
+    Datasource:
+      type: postgis
+      table: (SELECT name, ref, CASE ST_GeometryType(geom) WHEN 'ST_Point' THEN geom
+        WHEN 'ST_Linestring' THEN ST_LineInterpolatePoint(geom, 0.5) ELSE st_pointonsurface(geom)
+        END as geom, type::text,"type" as "order" FROM oepnv_stops WHERE geom && !bbox!
+        ORDER BY "order" ASC) AS stations
+      key_field: ''
+      geometry_field: geom
+      srid: '900913'
+      extent_cache: custom
+      extent: -20037508,-19929239,20037508,19929239
+      dbname: gis
+    properties:
+      minzoom: 17
+      maxzoom: 22
+    id: platformlabel
+    class: platform label
+    srs-name: '900913'
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
+      +units=m +nadgrids=@null +no_defs +over
+    advanced: {}
+    name: platformlabel
+    layerId: platformlabel
+  - geometry: linestring
+    extent:
+      - -179.99999692067183
+      - -84.96651228427098
+      - 179.99999692067183
+      - 84.96651228427099
+    Datasource:
+      type: postgis
+      table: (SELECT refs,"type"::text, type as "order",geom,role FROM oepnv_line_parts
+        WHERE type IN ('rail') ORDER BY "order" DESC) AS transport
+      key_field: ''
+      geometry_field: geom
+      srid: '900913'
+      extent_cache: custom
+      extent: -20037508,-19929239,20037508,19929239
+      dbname: gis
+    properties:
+      minzoom: 6
+      maxzoom: 8
+    id: transportlabel0
+    class: transport label
+    srs-name: '900913'
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
+      +units=m +nadgrids=@null +no_defs +over
+    advanced: {}
+    name: transportlabel0
+  - geometry: linestring
+    extent:
+      - -179.99999692067183
+      - -84.96651228427098
+      - 179.99999692067183
+      - 84.96651228427099
+    Datasource:
+      type: postgis
+      table: (SELECT refs,"type"::text, type as "order",geom,role FROM oepnv_line_parts
+        ORDER BY "order" DESC) AS transport
+      key_field: ''
+      geometry_field: geom
+      srid: '900913'
+      extent_cache: custom
+      extent: -20037508,-19929239,20037508,19929239
+      dbname: gis
+    properties:
+      minzoom: 9
+      maxzoom: 22
+    id: transportlabel1
+    class: transport label
+    srs-name: '900913'
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
+      +units=m +nadgrids=@null +no_defs +over
+    advanced: {}
+    name: transportlabel1
+  - geometry: linestring
+    extent:
+      - -179.99999692067183
+      - -84.96651228427098
+      - 179.99999692067183
+      - 84.96651228427099
+    Datasource:
+      type: postgis
+      table: (SELECT geom, type::text, "type" as "order", name, tunnel::text, bridge::text,
+        oneway::text, CHAR_LENGTH(ref) AS ref_length, (CASE WHEN CHAR_LENGTH(ref)
+        BETWEEN 2 AND 9 THEN ref ELSE NULL END) AS ref_content FROM oepnv_ways ORDER
+        BY layer ASC,  "order" DESC) AS ways
+      key_field: ''
+      geometry_field: geom
+      srid: '900913'
+      extent_cache: custom
+      extent: -20037508,-19929239,20037508,19929239
+      dbname: gis
+    properties:
+      minzoom: 10
+      maxzoom: 13
+    id: waylabel1
+    class: waylabel
+    srs-name: '900913'
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
+      +units=m +nadgrids=@null +no_defs +over
+    advanced: {}
+    name: waylabel1
+  - geometry: linestring
+    extent:
+      - -179.99999692067183
+      - -84.96651228427098
+      - 179.99999692067183
+      - 84.96651228427099
+    Datasource:
+      type: postgis
+      table: (SELECT geom, type::text, "type" as "order", name, tunnel::text, bridge::text,
+        oneway::text, CHAR_LENGTH(ref) AS ref_length, (CASE WHEN CHAR_LENGTH(ref)
+        BETWEEN 2 AND 9 THEN ref ELSE NULL END) AS ref_content FROM (SELECT name,
+        ref, "type", oneway, tunnel, bridge, layer, geom FROM oepnv_ways UNION ALL
+        SELECT name,'' as ref, "type", oneway, tunnel, bridge, layer, geom FROM oepnv_minorways)
+        as w ORDER BY layer ASC,  "order" DESC) AS ways
+      key_field: ''
+      geometry_field: geom
+      srid: '900913'
+      extent_cache: custom
+      extent: -20037508,-19929239,20037508,19929239
+      dbname: gis
+    properties:
+      minzoom: 14
+      maxzoom: 22
+    id: waylabel2
+    class: waylabel
+    srs-name: '900913'
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0
+      +units=m +nadgrids=@null +no_defs +over
+    advanced: {}
+    name: waylabel2
+scale: 1
+metatile: 2
+name: oepnvkarte
+description: ''
