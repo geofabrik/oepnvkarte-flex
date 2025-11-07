@@ -217,6 +217,10 @@ themepark:add_proc('gen', function(data)
          UPDATE {schema}.{prefix}oepnv_stations set area = st_buffer(st_convexhull(geom),20) where area is null and type='x' ]]
         ),
         themepark.expand_template([[
+	 UPDATE {schema}.{prefix}oepnv_stations set point = (ST_MaximumInscribedCircle(area)).center where osm_type = 'X' and (point is null or ST_IsEmpty(point));
+	 ]]
+        ),
+        themepark.expand_template([[
          delete from {prefix}oepnv_stations where osm_type='X']]
         ),
 
