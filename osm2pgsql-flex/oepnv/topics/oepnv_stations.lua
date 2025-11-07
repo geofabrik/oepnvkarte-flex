@@ -203,6 +203,17 @@ themepark:add_proc('gen', function(data)
         transaction = true,
         sql = {
         themepark.expand_template([[
+         insert into {prefix}oepnv_stations
+		(osm_type, osm_id, name, geom, type, lines_count, stops, point, area)
+		select 'X' as osm_type, 0 as osm_id, name,
+		'GEOMETRYCOLLECTION EMPTY'::geometry as geom,
+		0 as type, 0 as lines_count,
+		null as stops,
+		'POINT EMPTY'::geometry as point,
+		st_buffer(st_convexhull(unnest(ST_ClusterWithin(geom, 150))),20) as area
+		FROM {prefix}oepnv_stops s left join {prefix}oepnv_nodecontrolstations c on s.osm_id=c.member_id and s.osm_type=c.member_type where name is not null and c.member_id is null GROUP BY name
+	 ]]),
+        themepark.expand_template([[
          UPDATE {schema}.{prefix}oepnv_stations set area = st_buffer(st_convexhull(geom),20) where area is null and type='x' ]]
         ),
         themepark.expand_template([[
@@ -215,17 +226,7 @@ themepark:add_proc('gen', function(data)
         themepark.expand_template([[
          create index if not exists {prefix}oepnv_stops_name_idx on {prefix}oepnv_stops using btree(name)]]
         ),
-        themepark.expand_template([[
-         insert into {prefix}oepnv_stations
-		(osm_type, osm_id, name, geom, type, lines_count, stops, point, area)
-		select 'X' as osm_type, 0 as osm_id, name,
-		'GEOMETRYCOLLECTION EMPTY'::geometry as geom,
-		0 as type, 0 as lines_count,
-		null as stops,
-		'POINT EMPTY'::geometry as point,
-		st_buffer(st_convexhull(unnest(ST_ClusterWithin(geom, 150))),20) as area
-		FROM {prefix}oepnv_stops s left join {prefix}oepnv_nodecontrolstations c on s.osm_id=c.member_id and s.osm_type=c.member_type where name is not null and c.member_id is null GROUP BY name
-	 ]])}
+	}
     })
 end)
 
