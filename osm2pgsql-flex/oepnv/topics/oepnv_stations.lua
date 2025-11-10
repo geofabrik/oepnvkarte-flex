@@ -209,6 +209,7 @@ themepark:add_proc('gen', function(data)
         description = 'Create a buffer around points',
         transaction = true,
         sql = {
+	-- First every thing that's in a relation
         themepark.expand_template([[
 		WITH clustered_points as (
 		select
