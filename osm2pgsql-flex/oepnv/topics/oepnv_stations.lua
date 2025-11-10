@@ -30,8 +30,8 @@ themepark:add_table{
     name = 'oepnv_nodecontrolstations', 
     ids_type = 'any',
     columns = themepark:columns({
-        { column = 'member_type', type = 'text'},
-        { column = 'member_id', type = 'bigint'},
+        { column = 'member_type', type = 'text', sql_type = 'character(1)', not_null = true},
+        { column = 'member_id', type = 'bigint', not_null = true},
     }),
     tiles = {
         minzoom = 8,
