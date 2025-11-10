@@ -207,21 +207,25 @@ themepark:add_proc('gen', function(data)
         transaction = true,
         sql = {
         themepark.expand_template([[
-         insert into {prefix}oepnv_stations
-		(osm_type, osm_id, name, geom, type, lines_count, stops, point, area)
-		select 'X' as osm_type, 0 as osm_id, name,
-		'GEOMETRYCOLLECTION EMPTY'::geometry as geom,
-		0 as type, 0 as lines_count,
-		null as stops,
-		'POINT EMPTY'::geometry as point,
-		st_buffer(st_convexhull(unnest(ST_ClusterWithin(geom, 150))),20) as area
-		FROM {prefix}oepnv_stops s left join {prefix}oepnv_nodecontrolstations c on s.osm_id=c.member_id and s.osm_type=c.member_type where name is not null and c.member_id is null GROUP BY name
-	 ]]),
-        themepark.expand_template([[
-         UPDATE {schema}.{prefix}oepnv_stations set area = st_buffer(st_convexhull(geom),20) where area is null and type='x' ]]
-        ),
-        themepark.expand_template([[
-	 UPDATE {schema}.{prefix}oepnv_stations set point = (ST_MaximumInscribedCircle(area)).center where osm_type = 'X' and (point is null or ST_IsEmpty(point));
+		WITH clustered_points as (
+		select
+			stn.osm_id as osm_id, stn.osm_type as osm_type,
+			unnest(ST_ClusterWithin(stp.geom, 150)) as geom
+		FROM
+			{prefix}oepnv_stops stp
+			JOIN {prefix}oepnv_nodecontrolstations c ON stp.osm_id=c.member_id AND stp.osm_type=c.member_type
+			JOIN {prefix}oepnv_stations stn ON stn.osm_id = c.osm_id AND stn.osm_type=c.osm_type
+		WHERE stn.name is not null
+		GROUP BY stn.osm_id, stn.osm_type
+		)
+
+	update {prefix}oepnv_stations
+		SET
+			point = ST_Centroid(clustered_points.geom),
+			area = st_buffer(st_convexhull(clustered_points.geom),20)
+		FROM clustered_points
+		WHERE {prefix}oepnv_stations.osm_id = clustered_points.osm_id
+			AND {prefix}oepnv_stations.osm_type = clustered_points.osm_type
 	 ]]
         ),
         themepark.expand_template([[
