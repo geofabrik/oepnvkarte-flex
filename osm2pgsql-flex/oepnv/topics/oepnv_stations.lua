@@ -33,6 +33,9 @@ themepark:add_table{
         { column = 'member_type', type = 'text', sql_type = 'character(1)', not_null = true},
         { column = 'member_id', type = 'bigint', not_null = true},
     }),
+    indexes = {
+	    { method='btree', column = {'member_type', 'member_id'} }
+    },
     tiles = {
         minzoom = 8,
     },
