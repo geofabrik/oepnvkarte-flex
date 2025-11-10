@@ -179,10 +179,12 @@ themepark:add_proc('relation', function(object)
 
         if object.tags.public_transport=='stop_area' then
                 for _, member in ipairs(object.members) do
-                        themepark:insert('oepnv_nodecontrolstations', {
-                            member_type = string.upper(member.type),
-                            member_id = member.ref
-                        })
+			if member.role == 'platform' then
+				themepark:insert('oepnv_nodecontrolstations', {
+				    member_type = string.upper(member.type),
+				    member_id = member.ref
+				})
+			end
                 end
         end
     end
