@@ -189,7 +189,7 @@ themepark:add_proc('node', function(object)
     local platform, stop_position, transptype = get_transptypestation(object)
     if transptype then
 
-        themepark:insert('oepnv_stations', {
+        themepark:insert('oepnv_stops', {
             geom = object:as_point(),
             name = object.tags['name'],
             stops = stop_position,
