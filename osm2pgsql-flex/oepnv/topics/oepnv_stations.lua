@@ -216,8 +216,11 @@ themepark:add_proc('gen', function(data)
 			unnest(ST_ClusterWithin(stp.geom, 150)) as geom
 		FROM
 			{prefix}oepnv_stops stp
-			JOIN {prefix}oepnv_nodecontrolstations c ON stp.osm_id=c.member_id AND stp.osm_type=c.member_type
-			JOIN {prefix}oepnv_stations stn ON stn.osm_id = c.osm_id AND stn.osm_type=c.osm_type
+			JOIN (
+				{prefix}oepnv_nodecontrolstations c
+				JOIN {prefix}oepnv_stations stn ON stn.osm_id = c.osm_id AND stn.osm_type=c.osm_type
+				)
+				ON stp.osm_id=c.member_id AND stp.osm_type=c.member_type
 		WHERE stn.name is not null
 		GROUP BY stn.osm_id, stn.osm_type
 		)
