@@ -228,16 +228,7 @@ themepark:add_proc('gen', function(data)
 			AND {prefix}oepnv_stations.osm_type = clustered_points.osm_type
 	 ]]
         ),
-        themepark.expand_template([[
-         delete from {prefix}oepnv_stations where osm_type='X']]
-        ),
 
-        themepark.expand_template([[
-         create index if not exists {prefix}oepnv_nodecontrolstations_member_type_member_id_idx on {prefix}oepnv_nodecontrolstations using btree(member_type,member_id)]]
-        ),
-        themepark.expand_template([[
-         create index if not exists {prefix}oepnv_stops_name_idx on {prefix}oepnv_stops using btree(name)]]
-        ),
 	}
     })
 end)
