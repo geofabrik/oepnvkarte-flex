@@ -188,20 +188,20 @@ themepark:add_proc('relation', function(object)
     end
 end)
 
-themepark:add_proc('node', function(object)
-    local platform, stop_position, transptype = get_transptypestation(object)
-    if transptype then
-
-        themepark:insert('oepnv_stops', {
-            geom = object:as_point(),
-            name = object.tags['name'],
-            stops = stop_position,
-            type = transptype,
-            point = object:as_point()
-
-        })     
-    end
-end) 
+--themepark:add_proc('node', function(object)
+--    local platform, stop_position, transptype = get_transptypestation(object)
+--    if transptype then
+--
+--        themepark:insert('oepnv_stops', {
+--            geom = object:as_point(),
+--            name = object.tags['name'],
+--            stops = stop_position,
+--            type = transptype,
+--            point = object:as_point()
+--
+--        })     
+--    end
+--end) 
 
 -- Creating a buffer around the stations and stops
 themepark:add_proc('gen', function(data)
