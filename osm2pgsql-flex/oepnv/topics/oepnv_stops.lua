@@ -23,10 +23,6 @@ themepark:add_table{
         { column = 'polygon', type = 'geometry' }
 
 
-
-
-
-
     }),
     tiles = {
         minzoom = 8,
@@ -117,33 +113,11 @@ function get_transptype(object)
 end
 
 
--- derive the ref
-function get_ref(object)
-
-    local reff = object.tags.local_ref
-    local refff = object.tags.ref
-
-    if reff then
-        refe = reff
-    
-    elseif refff then 
-            refe = refff
-    end
-    return refe
-end 
-
-
-
-    
-    
-
-
 -----------------------------------------------------------------------------
 
 themepark:add_proc('way', function(object)
    
     local platform, stop_position, transptype = get_transptype(object)
-    local refe = get_ref(object)
     local way_or_area;
 
     if transptype then
@@ -162,7 +136,7 @@ themepark:add_proc('way', function(object)
             type = transptype,
             platform = platform,
             stop_position = stop_position,
-            ref = refe
+            ref = object.tags.local_ref or object.tags.ref,
         })
     end
 end)
@@ -180,7 +154,7 @@ themepark:add_proc('relation', function(object)
                 platform = platform,
                 type = transptype,
                 stop_position = stop_position,
-                ref = get_ref(object)
+                ref = object.tags.local_ref or object.tags.ref,
                 
         })
     end
@@ -196,7 +170,7 @@ themepark:add_proc('node', function(object)
                 platform = platform,
                 type = transptype,
                 stop_position = stop_position,
-                ref = get_ref(object)
+                ref = object.tags.local_ref or object.tags.ref,
 
             })
     end
