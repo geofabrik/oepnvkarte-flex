@@ -151,7 +151,7 @@ function get_transptypestation(object)
 
 
 
-return  platform, stop_position, transptype 
+	return  platform, stop_position, transptype 
 
 end
 
