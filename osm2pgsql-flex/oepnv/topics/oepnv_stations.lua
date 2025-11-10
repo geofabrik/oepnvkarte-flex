@@ -235,6 +235,32 @@ themepark:add_proc('gen', function(data)
 			AND {prefix}oepnv_stations.osm_type = clustered_points.osm_type
 	 ]]
         ),
+	-- Then things that aren't in a relation, but grouped by name & location
+        themepark.expand_template([[
+		WITH clustered_points as (
+		select
+			stp.name as name, stp.type as type,
+			unnest(ST_ClusterWithin(stp.geom, 150)) as geom
+		FROM
+			{prefix}oepnv_stops stp
+			LEFT JOIN {prefix}oepnv_nodecontrolstations c
+			ON stp.osm_id=c.member_id AND stp.osm_type=c.member_type
+		WHERE c.osm_id IS NULL
+		GROUP BY stp.name, stp.type
+		)
+
+	INSERT INTO {prefix}oepnv_stations
+		(osm_type, osm_id, name, type, point, area, geom)
+	select
+		'X' as osm_type, 0 as osm_id,
+		name, type,
+		ST_Centroid(clustered_points.geom) as point,
+		st_buffer(st_convexhull(clustered_points.geom),20) as area,
+		'GEOMETRYCOLLECTION EMPTY'::geometry as geom
+	from clustered_points
+
+	 ]]
+        ),
 
 	}
     })
