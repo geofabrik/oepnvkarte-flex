@@ -16,7 +16,6 @@ themepark.debug = false
 themepark:add_topic('oepnv/oepnv_buildings')
 themepark:add_topic('oepnv/oepnv_airports')
 themepark:add_topic('oepnv/oepnv_places')
-themepark:add_topic('oepnv/oepnv_stops')
 themepark:add_topic('oepnv/oepnv_rails')
 themepark:add_topic('oepnv/oepnv_areas')
 themepark:add_topic('oepnv/oepnv_ways')
@@ -34,6 +33,7 @@ themepark:add_topic('oepnv/oepnv_largeways')
 themepark:add_topic('oepnv/oepnv_minorways')
 themepark:add_topic('oepnv/oepnv_oepnvpois')
 themepark:add_topic('oepnv/oepnv_stations')
+themepark:add_topic('oepnv/oepnv_stops')
 
 --themepark:add_topic('oepnv/oepnv_majorrails') Didn't need it, just changed the style color and it works just fine
 
