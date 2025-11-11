@@ -68,27 +68,23 @@ end
 
 -- Derive value and combine rail and train into rail for get_transptypestation
 function get_type(object)
-    if object.tags.rail=='yes' or object.tags.train=='yes' then
-        return "rail"
-    elseif object.tags.light_rail =='yes' then
-        return "light_rail"
-    elseif object.tags.subway=='yes' then
-        return "subway"
-    elseif object.tags.tram=='yes' then
-        return "tram"
-    elseif object.tags.ferry=='yes' then
-        return "ferry"
-    elseif object.tags.monorail=='yes' then
-        return "monorail"
-    elseif object.tags.funicular=='yes' then
-        return "funicular"
-    elseif object.tags.bus=='yes' then
-        return "bus"
-    elseif object.tags.railway == 'facility' then
-	    -- example of this r4084063
-	return "rail"
-    end
-    return "undefined"
+	-- T=yes
+	simple_yes_types = {"rail", "light_rail", "subway",
+		"tram", "ferry", "monorail", "funicular", "bus"}
+
+	for _, type in ipairs(simple_yes_types) do
+		if object.tags[type] == "yes" then
+			return type
+		end
+	end
+
+	if object.tags["train"] == "yes" then
+		return "rail"
+	elseif object.tags["railway"] == "facility"  then
+		-- example of this r4084063
+		return "rail"
+	end
+	return "undefined"
 
 end
 
