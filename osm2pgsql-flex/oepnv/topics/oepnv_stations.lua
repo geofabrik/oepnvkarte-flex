@@ -165,16 +165,16 @@ end
 
 
 themepark:add_proc('relation', function(object)
-    local my_collection = object:as_geometrycollection()
+    local geom = object:as_geometrycollection()
     local platform, stop_position, transptype = get_transptypestation(object)
     if transptype then
         themepark:insert('oepnv_stations', {
 
-            geom = my_collection,
+            geom = geom,
             name = object.tags['name'],
             type = transptype,
             stops = stop_position,
-            point = my_collection:centroid(),
+            point = geom:centroid(),
             area = nil})
 
 	if object.tags.public_transport=='stop_area' then
