@@ -84,6 +84,9 @@ function get_type(object)
         return "funicular"
     elseif object.tags.bus=='yes' then
         return "bus"
+    elseif object.tags.railway == 'facility' then
+	    -- example of this r4084063
+	return "rail"
     end
     return "undefined"
 
