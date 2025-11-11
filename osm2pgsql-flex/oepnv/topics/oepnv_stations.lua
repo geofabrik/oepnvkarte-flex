@@ -4,7 +4,6 @@
 -- Date created: 20-01-25
 -- Author: Max
 -----------------------------------------------------------------------------
------------------------------------------------------------------------------
 
 local themepark, theme, cfg = ...
 
@@ -15,14 +14,30 @@ themepark:add_table({
     columns = themepark:columns({
         { column = "name", type = "text" },
         { column = "type", type = "text" },
-        { column = "lines_count", type = "smallint" },
-        { column = "stops", type = "bigint" },
         { column = "point", type = "point" },
         { column = "area", type = "geometry" },
     }),
     tiles = {
         minzoom = 8,
     },
+})
+
+themepark:add_table({
+    name = "stations",
+    ids_type = "any",
+    columns = themepark:columns({
+        { column = "name", type = "text" },
+        { column = "type", type = "text" },
+        { column = "public_transport", type = "text" },
+        { column = "point", type = "point" },
+    }),
+    tiles = false,
+})
+
+themepark:add_table({
+    name = "stations_changed_interim",
+    ids_type = "any",
+    tiles = false,
 })
 
 themepark:add_table({
@@ -39,6 +54,15 @@ themepark:add_table({
         minzoom = 8,
     },
 })
+
+function kvs(object, key, values)
+    for _, value in ipairs(values) do
+        if object.tags[key] == value then
+            return true
+        end
+    end
+    return false
+end
 
 -- Get the type of railway
 function railtype(object)
@@ -132,18 +156,35 @@ end
 
 -----------------------------------------------------------------------------
 
-themepark:add_proc("relation", function(object)
-    local geom = object:as_geometrycollection()
+themepark:add_proc("node", function(object)
+    if object.tags["name"] == nil then
+        return
+    end
     local platform, stop_position, transptype = get_transptypestation(object)
-    if transptype then
-        themepark:insert("oepnv_stations", {
 
-            geom = geom,
+    if object.tags["public_transport"] == "station" then
+        themepark:insert("stations_changed_interim", {})
+        themepark:insert("stations", {
+            name = object.tags["name"],
+            public_transport = object.tags["public_transport"],
+            type = transptype,
+            point = object:as_point(),
+        })
+    end
+end)
+
+themepark:add_proc("relation", function(object)
+    if object.tags["name"] == nil then
+        return
+    end
+    local platform, stop_position, transptype = get_transptypestation(object)
+    if transptype or kvs(object, "public_transport", { "stop_area" }) then
+        themepark:insert("stations_changed_interim", {})
+        themepark:insert("stations", {
             name = object.tags["name"],
             type = transptype,
-            stops = stop_position,
-            point = geom:centroid(),
-            area = nil,
+            public_transport = object.tags["public_transport"],
+            point = nil,
         })
 
         if object.tags.public_transport == "stop_area" then
