@@ -145,11 +145,7 @@ function get_transptypestation(object)
 
     -- this is a hack and needs to be fixed later!
     if pttag == 'stop_area' then
-	    if object.tags.bus == 'yes' then
-		    transptype = 'bus'
-	else
-		transptype = 'x'
-	end
+	    transptype=get_type(object)
     end
 
 
