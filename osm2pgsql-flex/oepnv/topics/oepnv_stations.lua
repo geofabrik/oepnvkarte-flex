@@ -15,6 +15,7 @@ themepark:add_table({
         { column = "name", type = "text" },
         { column = "type", type = "text" },
         { column = "point", type = "point" },
+        { column = "component_points", type = "multipoint" },
         { column = "area", type = "geometry" },
     }),
     tiles = {
