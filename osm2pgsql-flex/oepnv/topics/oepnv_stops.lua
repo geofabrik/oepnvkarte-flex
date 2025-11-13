@@ -25,6 +25,13 @@ themepark:add_table({
         minzoom = 8,
     },
 })
+
+themepark:add_table({
+    name = "stops_changed_interim",
+    ids_type = "any",
+    tiles = false,
+})
+
 -- Derive value and combine rail and train into rail for get_transptype
 function get_type(object)
     if object.tags.rail == "yes" or object.tags.train == "yes" then
@@ -107,6 +114,7 @@ themepark:add_proc("way", function(object)
             way_or_area = object:as_multilinestring()
         end
 
+        themepark:insert("stops_changed_interim", {})
         themepark:insert("oepnv_stops", {
 
             geom = way_or_area,
@@ -124,6 +132,7 @@ themepark:add_proc("relation", function(object)
     local platform, stop_position, transptype = get_transptype(object)
     if transptype then
         local my_polygon = object:as_multipolygon()
+        themepark:insert("stops_changed_interim", {})
         themepark:insert("oepnv_stops", {
 
             geom = object:as_multipolygon(),
@@ -140,6 +149,7 @@ end)
 themepark:add_proc("node", function(object)
     local platform, stop_position, transptype = get_transptype(object)
     if transptype then
+        themepark:insert("stops_changed_interim", {})
         themepark:insert("oepnv_stops", {
             geom = object:as_point(),
             name = object.tags["name"],
