@@ -41,7 +41,7 @@ themepark:add_table({
 })
 
 themepark:add_table({
-    name = "oepnv_stop_area_platforms",
+    name = "oepnv_stop_area_members",
     ids_type = "any",
     columns = themepark:columns({
         { column = "member_type", type = "text", sql_type = "character(1)", not_null = true },
@@ -189,12 +189,11 @@ themepark:add_proc("relation", function(object)
 
         if object.tags.public_transport == "stop_area" then
             for _, member in ipairs(object.members) do
-                if member.role == "platform" then
-                    themepark:insert("oepnv_stop_area_platforms", {
-                        member_type = string.upper(member.type),
-                        member_id = member.ref,
-                    })
-                end
+                themepark:insert("oepnv_stop_area_members", {
+                    member_role = member.role,
+                    member_type = string.upper(member.type),
+                    member_id = member.ref,
+                })
             end
         end
     end
