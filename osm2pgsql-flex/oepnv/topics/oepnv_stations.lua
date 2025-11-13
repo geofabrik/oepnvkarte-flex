@@ -44,6 +44,7 @@ themepark:add_table({
     name = "oepnv_stop_area_members",
     ids_type = "any",
     columns = themepark:columns({
+        { column = "member_role", type = "text" },
         { column = "member_type", type = "text", sql_type = "character(1)", not_null = true },
         { column = "member_id", type = "bigint", not_null = true },
     }),
@@ -226,7 +227,7 @@ themepark:add_proc("gen", function(data)
 		FROM
 			{prefix}oepnv_stops stp
 			JOIN (
-				{prefix}oepnv_stop_area_platforms c
+				{prefix}oepnv_stop_area_members c
 				JOIN {prefix}oepnv_stations stn ON stn.osm_id = c.osm_id AND stn.osm_type=c.osm_type
 				)
 				ON stp.osm_id=c.member_id AND stp.osm_type=c.member_type
@@ -250,7 +251,7 @@ themepark:add_proc("gen", function(data)
 			unnest(ST_ClusterWithin(stp.geom, 150)) as geom
 		FROM
 			{prefix}oepnv_stops stp
-			LEFT JOIN {prefix}oepnv_stop_area_platforms c
+			LEFT JOIN {prefix}oepnv_stop_area_members c
 			ON stp.osm_id=c.member_id AND stp.osm_type=c.member_type
 		WHERE c.osm_id IS NULL
 		GROUP BY stp.name, stp.type
