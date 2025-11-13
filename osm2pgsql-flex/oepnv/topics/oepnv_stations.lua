@@ -199,6 +199,18 @@ themepark:add_proc("relation", function(object)
     end
 end)
 
+themepark:add_proc("gen", function(data)
+    osm2pgsql.run_sql({
+        description = "Assemble all the stops to make a station",
+        transaction = true,
+        sql = {
+            -- First every thing that's in a relation
+            themepark.expand_template([[
+            ]]),
+        },
+    })
+end)
+
 -- Creating a buffer around the stations and stops
 themepark:add_proc("gen", function(data)
     osm2pgsql.run_sql({
