@@ -29,6 +29,8 @@ themepark:add_table({
     },
 })
 
+-- TODO split this and put a separate stop areas for the relations like that
+--
 themepark:add_table({
     name = "stations",
     ids_type = "any",
@@ -234,7 +236,7 @@ themepark:add_proc("gen", function(data)
             themepark.expand_template([[
 WITH
   -- These are the objects we need
-  unalloc_stations AS ( select osm_type, osm_id, name as name_rel from stations left join oepnv_stations_source_obj USING (osm_type, osm_id) where public_transport  = 'stop_area' and station_id IS NULL)
+  unalloc_stations AS ( select osm_type, osm_id, name as name_rel, type from stations left join oepnv_stations_source_obj USING (osm_type, osm_id) where public_transport  = 'stop_area' and station_id IS NULL)
 
   ,station_name_point AS (
     select
@@ -256,6 +258,7 @@ WITH
     select
       osm_type, osm_id,
       coalesce(unalloc_stations.name_rel, station_name_point.name) as name,
+      type,
       coalesce(station_name_point.point, ST_Centroid(geom)) as point,
       ST_Buffer(ST_ConvexHull(geom), 20) as area
       from
@@ -266,7 +269,7 @@ WITH
 
 
   -- Here we actualy insert into oepnv_stations and get our new station_id
-  ,new_station_id AS ( insert into oepnv_stations (osm_type, osm_id, name, point, area) select * from new_data returning id as station_id, osm_type, osm_id )
+  ,new_station_id AS ( insert into oepnv_stations (osm_type, osm_id, name, type, point, area) select * from new_data returning id as station_id, osm_type, osm_id )
 
   -- We need to insert a few more dependant 
   ,insert0 AS ( insert into oepnv_stations_source_obj select * from new_station_id )
