@@ -10,8 +10,7 @@ local themepark, theme, cfg = ...
 themepark:add_table({
     name = "oepnv_stations",
 
-    -- bit of a hack, weG
-    ids_type = "any",
+    ids_type = false,
 
     columns = themepark:columns({
         { column = "id", sql_type = "serial", create_only = true },
@@ -21,9 +20,11 @@ themepark:add_table({
         { column = "area", type = "geometry" },
     }),
     indexes = {
-        { method = "btree", column = { "osm_type", "osm_id" }, unique = true },
+        { method = "btree", column = { "type", "name" } },
         { method = "btree", column = { "id" }, unique = true },
-},
+        { method = "gist", column = { "point" } },
+        { method = "gist", column = { "area" } },
+    },
     tiles = {
         minzoom = 8,
     },
@@ -43,30 +44,26 @@ themepark:add_table({
     tiles = false,
 })
 
---themepark:add_table({
---    name = "stations_changed_interim",
---    ids_type = "any",
---    tiles = false,
---})
-
 themepark:add_table({
-	name = "oepnv_stations_source_obj",
-    ids_type = false,
-    columns = themepark:columns({
-        { column = "station_id", type = "bigint" },
-        { column = "osm_type", type = "text", sql_type = "character(1)", not_null = true },
-        { column = "osm_id", type = "bigint", not_null = true },
-    }),
-    indexes = {
-        --{ method = "btree", column = { "osm_type", "osm_id" }, unique = true },
-        { method = "btree", column = { "station_id" } },
-    },
+    name = "stations_changed_interim",
+    ids_type = "any",
+    tiles = false,
 })
 
+themepark:add_table({
+    name = "stations_rels",
+    ids_type = "relation",
+    columns = themepark:columns({
+        { column = "name", type = "text" },
+        { column = "type", type = "text" },
+        { column = "public_transport", type = "text" },
+    }),
+    tiles = false,
+})
 
 themepark:add_table({
-    name = "oepnv_stop_area_members",
-    ids_type = "any",
+    name = "stop_area_members",
+    ids_type = "relation",
     columns = themepark:columns({
         { column = "member_role", type = "text" },
         { column = "member_type", type = "text", sql_type = "character(1)", not_null = true },
@@ -186,7 +183,7 @@ themepark:add_proc("node", function(object)
     local platform, stop_position, transptype = get_transptypestation(object)
 
     if object.tags["public_transport"] == "station" then
-        --themepark:insert("stations_changed_interim", {})
+        themepark:insert("stations_changed_interim", {})
         themepark:insert("stations", {
             name = object.tags["name"],
             public_transport = object.tags["public_transport"],
@@ -202,17 +199,16 @@ themepark:add_proc("relation", function(object)
     end
     local platform, stop_position, transptype = get_transptypestation(object)
     if transptype or kvs(object, "public_transport", { "stop_area" }) then
-        --themepark:insert("stations_changed_interim", {})
-        themepark:insert("stations", {
+        themepark:insert("stations_changed_interim", {})
+        themepark:insert("stations_rels", {
             name = object.tags["name"],
             type = transptype,
             public_transport = object.tags["public_transport"],
-            point = nil,
         })
 
         if object.tags.public_transport == "stop_area" then
             for _, member in ipairs(object.members) do
-                themepark:insert("oepnv_stop_area_members", {
+                themepark:insert("stop_area_members", {
                     member_role = member.role,
                     member_type = string.upper(member.type),
                     member_id = member.ref,
@@ -227,107 +223,121 @@ themepark:add_proc("gen", function(data)
         description = "Assemble all the stops to make a station",
         transaction = true,
         sql = {
-	-- Hack for now, just recreate everything
-    -- Later we can just delete the _stations for changed objects and this should all work
-            themepark.expand_template([[ truncate table oepnv_stations; ]]),
-            themepark.expand_template([[ truncate table oepnv_stations_source_obj; ]]),
-
-	    -- First the public_transport=stations relations
+            -- if a relation changes, then delete all oepnv_stations which intersect one of that relation's members
             themepark.expand_template([[
-WITH
-  -- These are the objects we need
-  unalloc_stations AS ( select osm_type, osm_id, name as name_rel, type from stations left join oepnv_stations_source_obj USING (osm_type, osm_id) where public_transport  = 'stop_area' and station_id IS NULL)
+	    	delete from oepnv_stations where id in (
+			select stn.id from stations_changed_interim i JOIN stations_rels r ON (i.osm_id = r.relation_id AND i.osm_type = 'R') join stop_area_members m USING (relation_id) JOIN oepnv_stops stp ON (m.member_id = stp.osm_id AND m.member_type = stp.osm_type) JOIN oepnv_stations AS stn ON (stp.geom && stn.area AND ST_Intersects(stn.area, stp.geom)) 
+		);
+		]]),
+            -- if another stop changes, delete all oepnv_stations which intersect that stop
+            themepark.expand_template([[
+	    	delete from oepnv_stations where id in 
+		(
+		select stn.id
+		FROM (stations_changed_interim JOIN oepnv_stops USING (osm_type, osm_id)) stp JOIN oepnv_stations stn ON (stn.area && stp.geom AND ST_Intersects(stn.area, stp.geom))
+		);
+	]]),
 
-  ,station_name_point AS (
-    select
-      DISTINCT on (station_osm_type, station_osm_id)
-      unalloc_stations.osm_type as station_osm_type, unalloc_stations.osm_id as station_osm_id, 
-      stations.osm_type as label_osm_type, stations.osm_id as label_osm_id,
-      stations.name as name, stations.point as point
-      from
-        unalloc_stations JOIN
-        (oepnv_stop_area_members join stations ON (stations.osm_id = member_id and stations.osm_type = member_type AND stations.osm_type = 'N'))
-        ON (unalloc_stations.osm_type = oepnv_stop_area_members.osm_type and unalloc_stations.osm_id = oepnv_stop_area_members.osm_id)
-      )
+            -- Any stations which have zero stops inside? delete them.
+            themepark.expand_template([[
+	    	delete from oepnv_stations where id in (
+		select stn.id from oepnv_stations stn left join oepnv_stops stp ON (ST_Intersects(stn.area, stp.geom)) where stp.geom IS NULL)
+		]]),
+            -- clear our todo list
+            themepark.expand_template([[ truncate table stations_changed_interim ]]),
 
-  ,station_platforms AS ( select unalloc_stations.osm_type as station_osm_type, unalloc_stations.osm_id as station_osm_id, stp.osm_type as stop_osm_type, stp.osm_id as stop_osm_id, stp.geom as geom from (unalloc_stations join oepnv_stop_area_members USING (osm_type, osm_id)) join oepnv_stops stp ON (member_id = stp.osm_id and member_type = stp.osm_type) where member_role = 'platform')
-  ,station_platform_hull AS ( select station_osm_type, station_osm_id, ST_Collect(geom) as geom from station_platforms group by (station_osm_type, station_osm_id) )
+            -- First the public_transport=stations relations
+            themepark.expand_template([[
+		WITH
+		  relations_wo_stations AS (
+			  select DISTINCT m.relation_id
+			  from
+			  	(oepnv_stops stp join stop_area_members m ON (m.member_id = stp.osm_id and m.member_type = stp.osm_type and m.member_role = 'platform'))
+				left join oepnv_stations stn ON (ST_Intersects(stn.area, stp.geom))
+			where stn.area IS NULL
+		  )
+		  ,unalloc_stations AS ( select 'R' AS osm_type, relation_id AS osm_id, name as name_rel, type from relations_wo_stations JOIN stations_rels USING (relation_id) )
 
-  -- This is where we prepare the new row for oepnv_stations
-  ,new_data AS (
-    select
-      osm_type, osm_id,
-      coalesce(unalloc_stations.name_rel, station_name_point.name) as name,
-      type,
-      coalesce(station_name_point.point, ST_Centroid(geom)) as point,
-      ST_Buffer(ST_ConvexHull(geom), 20) as area
-      from
-        unalloc_stations
-          left join station_name_point ON (unalloc_stations.osm_type = station_osm_type and unalloc_stations.osm_id = station_osm_id)
-          left join station_platform_hull h ON (unalloc_stations.osm_type = h.station_osm_type and unalloc_stations.osm_id = h.station_osm_id)
-  )
+		  ,station_name_point AS (
+		    select
+		      DISTINCT on (station_osm_type, station_osm_id)	-- we only want one entry
+		      u.osm_type as station_osm_type, u.osm_id as station_osm_id, 
+		      stn.osm_type as label_osm_type, stn.osm_id as label_osm_id,
+		      stn.name as name, stn.point as point
+		      from
+			unalloc_stations u
+				JOIN stop_area_members m ON (u.osm_type = 'R' AND u.osm_id = m.relation_id)
+				join stations stn ON (stn.osm_id = m.member_id and stn.osm_type = m.member_type AND stn.osm_type = 'N')
+			
+		      )
+
+		  ,station_platforms AS (
+		  select
+			  u.osm_type as station_osm_type,
+			  u.osm_id as station_osm_id,
+			  stp.osm_type as stop_osm_type, stp.osm_id as stop_osm_id,
+			  stp.geom as geom
+		from 
+			unalloc_stations u
+				join stop_area_members m ON (u.osm_type = 'R' AND u.osm_id = m.relation_id)
+				join oepnv_stops stp ON (m.member_id = stp.osm_id and m.member_type = stp.osm_type AND m.member_role = 'platform')
+		)
+		  ,station_platform_hull AS ( select station_osm_type, station_osm_id, ST_Collect(geom) as geom from station_platforms group by (station_osm_type, station_osm_id) )
+
+		  -- This is where we prepare the new row for oepnv_stations
+		  ,new_data AS (
+		    select
+		      coalesce(unalloc_stations.name_rel, station_name_point.name) as name,
+		      type,
+		      coalesce(station_name_point.point, ST_Centroid(geom)) as point,
+		      ST_Buffer(ST_ConvexHull(geom), 20) as area
+		      from
+			unalloc_stations 
+			  left join station_name_point ON (unalloc_stations.osm_type = station_osm_type and unalloc_stations.osm_id = station_osm_id)
+			  left join station_platform_hull h ON (unalloc_stations.osm_type = h.station_osm_type and unalloc_stations.osm_id = h.station_osm_id)
+		  )
 
 
-  -- Here we actualy insert into oepnv_stations and get our new station_id
-  ,new_station_id AS ( insert into oepnv_stations (osm_type, osm_id, name, type, point, area) select * from new_data returning id as station_id, osm_type, osm_id )
-
-  -- We need to insert a few more dependant 
-  ,insert0 AS ( insert into oepnv_stations_source_obj select * from new_station_id )
-  
-  ,insert1 AS ( insert into oepnv_stations_source_obj select station_id, s.label_osm_type as osm_type, s.label_osm_id as osm_id from new_station_id n join station_name_point s ON (n.osm_type = s.station_osm_type AND n.osm_id = s.station_osm_id) )
-  ,insert2 AS ( insert into oepnv_stations_source_obj select station_id, p.stop_osm_type as osm_type, p.stop_osm_id as osm_id from new_station_id n join station_platforms p ON (n.osm_type = p.station_osm_type AND n.osm_id = p.station_osm_id) )
-
-  select 1
-
-  ;
+		  insert into oepnv_stations (name, type, point, area) select * from new_data
+		  ;
 
 	     ]]),
 
-	     -- Now those oepnv_stops's not in a relation. We group by nearby name
+            -- Now those oepnv_stops's not in a relation. We group by nearby name
             themepark.expand_template([[
-WITH
-  -- These are the objects we need
-  unalloc_stops AS (
-	select
-		osm_type, osm_id, gid, name, type,
-		geom,
-		ST_ClusterWithinWin(geom, 150) OVER (partition by name, type) as cluster_id
-	from oepnv_stops
-		left join oepnv_stations_source_obj USING (osm_type, osm_id)
-	where station_id IS NULL
-),
+		WITH
+		  stops_wo_stations AS (
+			  select osm_type, osm_id
+			  from
+			  	oepnv_stops stp
+					left join oepnv_stations stn ON (ST_Intersects(stn.area, stp.geom))
+			where stn.area IS NULL
+		  )
 
+		  ,clustered_stations AS (
+			  select
+				name, type,
+				unnest(ST_ClusterWithin(geom, 150)) as points
+			  from 
+			  	oepnv_stops stp JOIN stops_wo_stations USING (osm_type, osm_id)
+			group by name, type
+		  )
 
-  ,new_data AS (
-    select
-      first_value(osm_type) OVER (order by gid) as osm_type, first_value(osm_id) OVER (order by gid) as osm_id,
-      name
-      type,
-      ST_Centroid(geom) as point,
-      ST_Buffer(ST_ConvexHull(geom), 20) as area
-      from
-        unalloc_stations
-      group by name, type, cluster_id
-  )
+		  ,new_data AS (
+		    select
+		      name,
+		      type,
+		      ST_Centroid(points) as point,
+		      ST_Buffer(ST_ConvexHull(points), 20) as area
+		      from
+			      clustered_stations
+		      
+		  )
 
-
-  -- Here we actualy insert into oepnv_stations and get our new station_id
-  ,new_station_id AS ( insert into oepnv_stations (osm_type, osm_id, name, type, point, area) select * from new_data returning id as station_id, osm_type, osm_id )
-
-  -- We need to insert a few more dependant objects
-  --
-  ,insert0 AS ( insert into oepnv_stations_source_obj select * from new_station_id )
-
-  select osm_type, osm_id from unalloc_stations group by name, type, cluster_id
-  
---- aaaaaah let's do this in python instead!
-
-
-
+		  insert into oepnv_stations (name, type, point, area) select * from new_data
             -- themepark.expand_template([[
-	    -- ]]),gg
-
-        }
+	    -- ]]),
+        },
     })
 end)
 
