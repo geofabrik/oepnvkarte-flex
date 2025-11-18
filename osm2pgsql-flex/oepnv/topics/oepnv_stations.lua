@@ -283,6 +283,46 @@ WITH
 
 	     ]]),
 
+	     -- Now those oepnv_stops's not in a relation. We group by nearby name
+            themepark.expand_template([[
+WITH
+  -- These are the objects we need
+  unalloc_stops AS (
+	select
+		osm_type, osm_id, gid, name, type,
+		geom,
+		ST_ClusterWithinWin(geom, 150) OVER (partition by name, type) as cluster_id
+	from oepnv_stops
+		left join oepnv_stations_source_obj USING (osm_type, osm_id)
+	where station_id IS NULL
+),
+
+
+  ,new_data AS (
+    select
+      first_value(osm_type) OVER (order by gid) as osm_type, first_value(osm_id) OVER (order by gid) as osm_id,
+      name
+      type,
+      ST_Centroid(geom) as point,
+      ST_Buffer(ST_ConvexHull(geom), 20) as area
+      from
+        unalloc_stations
+      group by name, type, cluster_id
+  )
+
+
+  -- Here we actualy insert into oepnv_stations and get our new station_id
+  ,new_station_id AS ( insert into oepnv_stations (osm_type, osm_id, name, type, point, area) select * from new_data returning id as station_id, osm_type, osm_id )
+
+  -- We need to insert a few more dependant objects
+  --
+  ,insert0 AS ( insert into oepnv_stations_source_obj select * from new_station_id )
+
+  select osm_type, osm_id from unalloc_stations group by name, type, cluster_id
+  
+--- aaaaaah let's do this in python instead!
+
+
 
             -- themepark.expand_template([[
 	    -- ]]),gg
