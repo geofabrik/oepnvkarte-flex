@@ -7,6 +7,7 @@
 
 local themepark, theme, cfg = ...
 
+-- ÖPNV stations. incl. the point for high zoom, and a buffer area for low zoom.
 themepark:add_table({
     name = "oepnv_stations",
 
@@ -30,8 +31,7 @@ themepark:add_table({
     },
 })
 
--- TODO split this and put a separate stop areas for the relations like that
---
+-- nodes & ways which are stations
 themepark:add_table({
     name = "stations",
     ids_type = "any",
@@ -44,12 +44,8 @@ themepark:add_table({
     tiles = false,
 })
 
-themepark:add_table({
-    name = "stations_changed_interim",
-    ids_type = "any",
-    tiles = false,
-})
 
+-- Store relations which are stations
 themepark:add_table({
     name = "stations_rels",
     ids_type = "relation",
@@ -61,6 +57,7 @@ themepark:add_table({
     tiles = false,
 })
 
+-- The memebers of all the stop area relations in the stations_rels table
 themepark:add_table({
     name = "stop_area_members",
     ids_type = "relation",
@@ -75,6 +72,15 @@ themepark:add_table({
     tiles = false,
 })
 
+-- When doing a data update, this table will be filled with objects that have
+-- changed, so we know what to update later.
+themepark:add_table({
+    name = "stations_changed_interim",
+    ids_type = "any",
+    tiles = false,
+})
+
+-- True iff object key tables
 function kvs(object, key, values)
     for _, value in ipairs(values) do
         if object.tags[key] == value then
@@ -335,68 +341,8 @@ themepark:add_proc("gen", function(data)
 		  )
 
 		  insert into oepnv_stations (name, type, point, area) select * from new_data
-            -- themepark.expand_template([[
-	    -- ]]),
+	    
+	  ]]),
         },
     })
 end)
-
----- Creating a buffer around the stations and stops
---themepark:add_proc("gen", function(data)
---    osm2pgsql.run_sql({
---        description = "Create a buffer around points",
---        transaction = true,
---        sql = {
---            -- First every thing that's in a relation
---            themepark.expand_template([[
---		WITH clustered_points as (
---		select
---			stn.osm_id as osm_id, stn.osm_type as osm_type,
---			unnest(ST_ClusterWithin(stp.geom, 150)) as geom
---		FROM
---			{prefix}oepnv_stops stp
---			JOIN (
---				{prefix}oepnv_stop_area_members c
---				JOIN {prefix}oepnv_stations stn ON stn.osm_id = c.osm_id AND stn.osm_type=c.osm_type
---				)
---				ON stp.osm_id=c.member_id AND stp.osm_type=c.member_type
---		WHERE stn.name is not null
---		GROUP BY stn.osm_id, stn.osm_type
---		)
---
---	update {prefix}oepnv_stations
---		SET
---			point = ST_Centroid(clustered_points.geom),
---			area = st_buffer(st_convexhull(clustered_points.geom),20)
---		FROM clustered_points
---		WHERE {prefix}oepnv_stations.osm_id = clustered_points.osm_id
---			AND {prefix}oepnv_stations.osm_type = clustered_points.osm_type
---	 ]]),
---            -- Then things that aren't in a relation, but grouped by name & location
---            themepark.expand_template([[
---		WITH clustered_points as (
---		select
---			stp.name as name, stp.type as type,
---			unnest(ST_ClusterWithin(stp.geom, 150)) as geom
---		FROM
---			{prefix}oepnv_stops stp
---			LEFT JOIN {prefix}oepnv_stop_area_members c
---			ON stp.osm_id=c.member_id AND stp.osm_type=c.member_type
---		WHERE c.osm_id IS NULL
---		GROUP BY stp.name, stp.type
---		)
---
---	INSERT INTO {prefix}oepnv_stations
---		(osm_type, osm_id, name, type, point, area, geom)
---	select
---		'X' as osm_type, 0 as osm_id,
---		name, type,
---		ST_Centroid(clustered_points.geom) as point,
---		st_buffer(st_convexhull(clustered_points.geom),20) as area,
---		'GEOMETRYCOLLECTION EMPTY'::geometry as geom
---	from clustered_points
---
---	 ]]),
---        },
---    })
---end)
