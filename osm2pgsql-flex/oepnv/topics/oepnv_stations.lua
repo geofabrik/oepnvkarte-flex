@@ -103,24 +103,34 @@ function first_yes(object, keys)
     end
 
     return nil
+end
 
+-- first_tag_match(object, {
+--   {{"train", "yes"}, "rail"},
+--   {{"railway", "station"}, "rail"},
+--   ...
+--   })
+function first_tag_match(object, kv_matches)
+    for _, kv_ret in ipairs(kv_matches) do
+        if object.tags[kv_ret[1][1]] == kv[1][2] then
+            return kv_ret[2]
+        end
+    end
+    return nil
 end
 
 -- Get the type of railway
 function railtype(object)
-    if object.tags.train == "yes" or object.tags.railway == "station" then
-        return "rail"
-    elseif object.tags.tram == "yes" or object.tags.railway == "tram_stop" then
-        return "tram"
-    elseif object.tags.bus == "yes" or object.tags.highway == "bus_stop" then
-        return "bus"
-    elseif object.tags.light_rail == "yes" then
-        return "light_rail"
-    elseif object.tags.ferry == "yes" then
-        return "ferry"
-    else
-        return "undefined"
-    end
+    return first_tag_match(object, {
+        { { "train", "yes" }, "rail" },
+        { { "railway", "station" }, "rail" },
+        { { "tram", "yes" }, "tram" },
+        { { "railway", "tram_stop" }, "tram" },
+        { { "bus", "yes" }, "bus" },
+        { { "highway", "bus_stop" }, "bus" },
+        { { "light_rail", "yes" }, "light_rail" },
+        { { "ferry", "yes" }, "ferry" },
+    }) or "undefined"
 end
 
 -- Derive value and combine rail and train into rail for get_transptypestation
