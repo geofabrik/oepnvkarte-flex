@@ -160,7 +160,7 @@ function get_transptypestation(object)
     elseif amenitytag == "ferry_terminal" then
         transptype = "ferry"
         polygon = true
-    elseif railwaytag == "station" or railwaytag == "halt" then
+    elseif railwaytag == "station" or railwaytag == "halt" or railwaytag == "facility" then
         transptype = "rail"
     elseif railwaytag == "tram_stop" then
         transptype = "tram"
