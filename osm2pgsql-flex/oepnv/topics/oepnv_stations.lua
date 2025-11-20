@@ -44,7 +44,6 @@ themepark:add_table({
     tiles = false,
 })
 
-
 -- Store relations which are stations
 themepark:add_table({
     name = "stations_rels",
@@ -92,15 +91,15 @@ end
 
 function first_yes(object, keys)
     for _, k in ipairs(keys) do
-	if type(k) == "string" then
-		if object.tags[k] == "yes" then
-		    return k
-		end
-	elseif type(k) == "table" then
-		if object.tags[k[1]] == "yes" then
-		    return k[2]
-		end
-	end
+        if type(k) == "string" then
+            if object.tags[k] == "yes" then
+                return k
+            end
+        elseif type(k) == "table" then
+            if object.tags[k[1]] == "yes" then
+                return k[2]
+            end
+        end
     end
 
     return nil
@@ -129,11 +128,13 @@ end
 -- is there duplicate lua names?
 function get_type2(object)
     -- T=yes
-    simple = first_yes(object, { "rail", {"train", "rail"}, "light_rail", "subway", "tram", "ferry", "monorail", "funicular", "bus" })
+    simple = first_yes(
+        object,
+        { "rail", { "train", "rail" }, "light_rail", "subway", "tram", "ferry", "monorail", "funicular", "bus" }
+    )
     if simple ~= nil then
-            return simple
+        return simple
     end
-
 
     if object.tags["railway"] == "facility" then
         -- example of this r4084063
