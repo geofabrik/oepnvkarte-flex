@@ -125,7 +125,9 @@ function railtype(object)
 end
 
 -- Derive value and combine rail and train into rail for get_transptypestation
-function get_type(object)
+-- this doesn't work if called get_type WTF.
+-- is there duplicate lua names?
+function get_type2(object)
     -- T=yes
     simple = first_yes(object, { "rail", {"train", "rail"}, "light_rail", "subway", "tram", "ferry", "monorail", "funicular", "bus" })
     if simple ~= nil then
@@ -165,9 +167,9 @@ function get_transptypestation(object)
     elseif railwaytag == "tram_stop" then
         transptype = "tram"
     elseif highwaytag == "platform" or railwaytag == "platform" or pttag == "platform" then
-        transptype = get_type(object)
+        transptype = get_type2(object)
     elseif railwaytag == "stop" then --or pttag=="stop_position" then
-        transptype = get_type(object)
+        transptype = get_type2(object)
         stop_position = true
     end
     -- This was original in there but doesn't seem necesarry anymore
@@ -188,6 +190,7 @@ function get_transptypestation(object)
     -- this is a hack and needs to be fixed later!
     if pttag == "stop_area" then
         transptype = get_type(object)
+        transptype = get_type2(object)
     end
 
     return platform, stop_position, transptype
