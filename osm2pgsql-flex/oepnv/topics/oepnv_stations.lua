@@ -90,6 +90,23 @@ function kvs(object, key, values)
     return false
 end
 
+function first_yes(object, keys)
+    for _, k in ipairs(keys) do
+	if type(k) == "string" then
+		if object.tags[k] == "yes" then
+		    return k
+		end
+	elseif type(k) == "table" then
+		if object.tags[k[1]] == "yes" then
+		    return k[2]
+		end
+	end
+    end
+
+    return nil
+
+end
+
 -- Get the type of railway
 function railtype(object)
     if object.tags.train == "yes" or object.tags.railway == "station" then
