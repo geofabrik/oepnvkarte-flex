@@ -18,7 +18,7 @@ themepark:add_table({
         { column = "name", type = "text" },
         { column = "type", type = "text" },
         { column = "point", type = "point" },
-        { column = "area", type = "geometry" },
+        { column = "area", type = "polygon" },
     }),
     indexes = {
         { method = "btree", column = { "type", "name" } },
