@@ -19,6 +19,7 @@ themepark:add_table({
         { column = "type", type = "text" },
         { column = "point", type = "point" },
         { column = "area", type = "polygon" },
+        { column = "convex_hull", type = "geometry" }, -- Just in case we want it later
     }),
     indexes = {
         { method = "btree", column = { "type", "name" } },
@@ -323,7 +324,8 @@ themepark:add_proc("gen", function(data)
 		      coalesce(unalloc_stations.name_rel, station_name_point.name) as name,
 		      type,
 		      coalesce(station_name_point.point, ST_Centroid(geom)) as point,
-		      ST_Buffer(ST_ConvexHull(geom), 20) as area
+		      ST_Buffer(ST_ConvexHull(geom), 20) as area,
+		      ST_ConvexHull(geom) as convex_hull
 		      from
 			unalloc_stations 
 			  left join station_name_point ON (unalloc_stations.osm_type = station_osm_type and unalloc_stations.osm_id = station_osm_id)
@@ -331,7 +333,7 @@ themepark:add_proc("gen", function(data)
 		  )
 
 
-		  insert into oepnv_stations (name, type, point, area) select * from new_data
+		  insert into oepnv_stations (name, type, point, area, convex_hull) select * from new_data
 		  ;
 
 	     ]]),
@@ -361,13 +363,14 @@ themepark:add_proc("gen", function(data)
 		      name,
 		      type,
 		      ST_Centroid(points) as point,
-		      ST_Buffer(ST_ConvexHull(points), 20) as area
+		      ST_Buffer(ST_ConvexHull(points), 20) as area,
+		      ST_ConvexHull(points) as convex_hull
 		      from
 			      clustered_stations
 		      
 		  )
 
-		  insert into oepnv_stations (name, type, point, area) select * from new_data
+		  insert into oepnv_stations (name, type, point, area, convex_hull) select * from new_data
 	    
 	  ]]),
         },
