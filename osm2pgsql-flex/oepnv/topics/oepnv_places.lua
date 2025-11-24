@@ -51,7 +51,7 @@ themepark:add_proc("node", function(object)
 
             name = object.tags["name"],
             geom = object:as_point(),
-            population = object.tags.population or "0",
+            population = tonumber(object.tags["population"]),
             type = object.tags["place"],
         })
     end
