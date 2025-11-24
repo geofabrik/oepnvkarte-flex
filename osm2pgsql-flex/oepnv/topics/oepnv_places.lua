@@ -14,8 +14,8 @@ themepark:add_table({
     ids_type = "any",
     columns = themepark:columns({
         { column = "name", type = "text" },
-        { column = "population", type = "smallint" },
-        { column = "type", type = "text" },
+        { column = "population", type = "integer", not_null=false },
+        { column = "type", type = "text", not_null=true },
     }),
     tiles = {
         minzoom = 8,
