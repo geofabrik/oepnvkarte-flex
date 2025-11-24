@@ -22,47 +22,37 @@ themepark:add_table({
     },
 })
 
--- Get the type of place
-function get_places(object)
-    local placestag = object.tags.place
-    local placestype = nil
-
-    if placestag == "hamlet" then
-        placestype = "hamlet"
-    elseif placestag == "village" then
-        placestype = "village"
-    elseif placestag == "city" then
-        placestype = "city"
-    elseif placestag == "town" then
-        placestype = "town"
-    elseif placestag == "region" then
-        placestype = "region"
-    elseif placestag == "suburb" then
-        placestype = "suburb"
-    elseif placestag == "state" then
-        placestype = "state"
-    elseif placestag == "country" then
-        placestype = "country"
-    elseif placestag == "continent" then
-        placestype = "continent"
-    elseif placestag == "locality" then
-        placestype = "locality"
+-- Return true iff value is contained in list
+function is_in(value, list)
+    for _, el in ipairs(list) do
+        if value == el then
+            return true
+        end
     end
-
-    return placestype
+    return false
 end
 
 -----------------------------------------------------------------------------
 
 themepark:add_proc("node", function(object)
-    local placestype = get_places(object)
-    if placestype then
+    if is_in(object.tags["place"], {
+        "hamlet",
+        "village",
+        "city",
+        "town",
+        "region",
+        "suburb",
+        "state",
+        "country",
+        "continent",
+        "locality",
+    }) then
         themepark:insert("oepnv_places", {
 
             name = object.tags["name"],
             geom = object:as_point(),
             population = object.tags.population or "0",
-            type = placestype,
+            type = object.tags["place"],
         })
     end
 end)
