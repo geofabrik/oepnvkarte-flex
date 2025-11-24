@@ -561,7 +561,7 @@ Layer:
     Datasource:
       <<: *osm2pgsql
       table: (SELECT name, geom, type::text,"type" as "order" FROM oepnv_places WHERE
-        type IN ('continent','country') ORDER BY "order" ASC, population DESC) AS
+        type IN ('continent','country') ORDER BY "order" ASC, population DESC NULLS LAST) AS
         places
     properties:
       minzoom: 0
