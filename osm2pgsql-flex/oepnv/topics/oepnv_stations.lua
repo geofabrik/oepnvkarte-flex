@@ -107,14 +107,27 @@ function first_yes(object, keys)
 end
 
 -- first_tag_match(object, {
---   {{"train", "yes"}, "rail"},
---   {{"railway", "station"}, "rail"},
+--   {{train="yes"}, "rail"},
+--   {{railway="station"}, "rail"},
 --   ...
 --   })
 function first_tag_match(object, kv_matches)
     for _, kv_ret in ipairs(kv_matches) do
-        if object.tags[kv_ret[1][1]] == kv[1][2] then
-            return kv_ret[2]
+        -- I don't know lua better
+        local count_matches = 0
+        local count_total = 0
+        local kvs = kv_ret[1]
+        local ret = kv_ret[2]
+
+        for key, value in pairs(kvs) do
+            count_total = count_total + 1
+            if object.tags[key] == value then
+                count_matches = count_matches + 1
+            end
+        end
+
+        if count_total == count_matches then
+            return ret
         end
     end
     return nil
@@ -123,14 +136,14 @@ end
 -- Get the type of railway
 function railtype(object)
     return first_tag_match(object, {
-        { { "train", "yes" }, "rail" },
-        { { "railway", "station" }, "rail" },
-        { { "tram", "yes" }, "tram" },
-        { { "railway", "tram_stop" }, "tram" },
-        { { "bus", "yes" }, "bus" },
-        { { "highway", "bus_stop" }, "bus" },
-        { { "light_rail", "yes" }, "light_rail" },
-        { { "ferry", "yes" }, "ferry" },
+        { { train = "yes" }, "rail" },
+        { { railway = "station" }, "rail" },
+        { { tram = "yes" }, "tram" },
+        { { railway = "tram_stop" }, "tram" },
+        { { bus = "yes" }, "bus" },
+        { { highway = "bus_stop" }, "bus" },
+        { { light_rail = "yes" }, "light_rail" },
+        { { ferry = "yes" }, "ferry" },
     }) or "undefined"
 end
 
