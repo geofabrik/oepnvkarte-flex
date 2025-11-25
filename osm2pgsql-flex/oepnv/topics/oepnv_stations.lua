@@ -34,7 +34,7 @@ themepark:add_table({
 
 -- nodes & ways which are stations
 themepark:add_table({
-    name = "stations",
+    name = "oepnv_station_objects",
     ids_type = "any",
     columns = themepark:columns({
         { column = "name", type = "text" },
@@ -47,7 +47,7 @@ themepark:add_table({
 
 -- Store relations which are stations
 themepark:add_table({
-    name = "stations_rels",
+    name = "oepnv_station_rels",
     ids_type = "relation",
     columns = themepark:columns({
         { column = "name", type = "text" },
@@ -57,9 +57,9 @@ themepark:add_table({
     tiles = false,
 })
 
--- The memebers of all the stop area relations in the stations_rels table
+-- The members of all the stop area relations in the station_rels table
 themepark:add_table({
-    name = "stop_area_members",
+    name = "oepnv_stop_area_members",
     ids_type = "relation",
     columns = themepark:columns({
         { column = "member_role", type = "text" },
@@ -75,7 +75,7 @@ themepark:add_table({
 -- When doing a data update, this table will be filled with objects that have
 -- changed, so we know what to update later.
 themepark:add_table({
-    name = "stations_changed_interim",
+    name = "oepnv_stations_changed_interim",
     ids_type = "any",
     tiles = false,
 })
@@ -230,8 +230,8 @@ themepark:add_proc("node", function(object)
     local platform, stop_position, transptype = get_transptypestation(object)
 
     if object.tags["public_transport"] == "station" then
-        themepark:insert("stations_changed_interim", {})
-        themepark:insert("stations", {
+        themepark:insert("oepnv_stations_changed_interim", {})
+        themepark:insert("oepnv_station_objects", {
             name = object.tags["name"],
             public_transport = object.tags["public_transport"],
             type = transptype,
@@ -246,8 +246,8 @@ themepark:add_proc("relation", function(object)
     end
     local platform, stop_position, transptype = get_transptypestation(object)
     if transptype or kvs(object, "public_transport", { "stop_area" }) then
-        themepark:insert("stations_changed_interim", {})
-        themepark:insert("stations_rels", {
+        themepark:insert("oepnv_stations_changed_interim", {})
+        themepark:insert("oepnv_station_rels", {
             name = object.tags["name"],
             type = transptype,
             public_transport = object.tags["public_transport"],
@@ -255,7 +255,7 @@ themepark:add_proc("relation", function(object)
 
         if object.tags.public_transport == "stop_area" then
             for _, member in ipairs(object.members) do
-                themepark:insert("stop_area_members", {
+                themepark:insert("oepnv_stop_area_members", {
                     member_role = member.role,
                     member_type = string.upper(member.type),
                     member_id = member.ref,
@@ -273,7 +273,7 @@ themepark:add_proc("gen", function(data)
             -- if a relation changes, then delete all oepnv_stations which intersect one of that relation's members
             themepark.expand_template([[
 	    	delete from oepnv_stations where id in (
-			select stn.id from stations_changed_interim i JOIN stations_rels r ON (i.osm_id = r.relation_id AND i.osm_type = 'R') join stop_area_members m USING (relation_id) JOIN oepnv_stops stp ON (m.member_id = stp.osm_id AND m.member_type = stp.osm_type) JOIN oepnv_stations AS stn ON (stp.geom && stn.area AND ST_Intersects(stn.area, stp.geom)) 
+			select stn.id from oepnv_stations_changed_interim i JOIN oepnv_station_rels r ON (i.osm_id = r.relation_id AND i.osm_type = 'R') join oepnv_stop_area_members m USING (relation_id) JOIN oepnv_stops stp ON (m.member_id = stp.osm_id AND m.member_type = stp.osm_type) JOIN oepnv_stations AS stn ON (stp.geom && stn.area AND ST_Intersects(stn.area, stp.geom)) 
 		);
 		]]),
             -- if another stop changes, delete all oepnv_stations which intersect that stop
@@ -281,7 +281,7 @@ themepark:add_proc("gen", function(data)
 	    	delete from oepnv_stations where id in 
 		(
 		select stn.id
-		FROM (stations_changed_interim JOIN oepnv_stops USING (osm_type, osm_id)) stp JOIN oepnv_stations stn ON (stn.area && stp.geom AND ST_Intersects(stn.area, stp.geom))
+		FROM (oepnv_stations_changed_interim JOIN oepnv_stops USING (osm_type, osm_id)) stp JOIN oepnv_stations stn ON (stn.area && stp.geom AND ST_Intersects(stn.area, stp.geom))
 		);
 	]]),
 
@@ -291,7 +291,7 @@ themepark:add_proc("gen", function(data)
 		select stn.id from oepnv_stations stn left join oepnv_stops stp ON (ST_Intersects(stn.area, stp.geom)) where stp.geom IS NULL)
 		]]),
             -- clear our todo list
-            themepark.expand_template([[ truncate table stations_changed_interim ]]),
+            themepark.expand_template([[ truncate table oepnv_stations_changed_interim ]]),
 
             -- First the public_transport=stations relations
             themepark.expand_template([[
@@ -299,11 +299,11 @@ themepark:add_proc("gen", function(data)
 		  relations_wo_stations AS (
 			  select DISTINCT m.relation_id
 			  from
-			  	(oepnv_stops stp join stop_area_members m ON (m.member_id = stp.osm_id and m.member_type = stp.osm_type and m.member_role = 'platform'))
+			  	(oepnv_stops stp join oepnv_stop_area_members m ON (m.member_id = stp.osm_id and m.member_type = stp.osm_type and m.member_role = 'platform'))
 				left join oepnv_stations stn ON (ST_Intersects(stn.area, stp.geom))
 			where stn.area IS NULL
 		  )
-		  ,unalloc_stations AS ( select 'R' AS osm_type, relation_id AS osm_id, name as name_rel, type from relations_wo_stations JOIN stations_rels USING (relation_id) )
+		  ,unalloc_stations AS ( select 'R' AS osm_type, relation_id AS osm_id, name as name_rel, type from relations_wo_stations JOIN oepnv_station_rels USING (relation_id) )
 
 		  ,station_name_point AS (
 		    select
@@ -313,8 +313,8 @@ themepark:add_proc("gen", function(data)
 		      stn.name as name, stn.point as point
 		      from
 			unalloc_stations u
-				JOIN stop_area_members m ON (u.osm_type = 'R' AND u.osm_id = m.relation_id)
-				join stations stn ON (stn.osm_id = m.member_id and stn.osm_type = m.member_type AND stn.osm_type = 'N')
+				JOIN oepnv_stop_area_members m ON (u.osm_type = 'R' AND u.osm_id = m.relation_id)
+				join oepnv_station_objects stn ON (stn.osm_id = m.member_id and stn.osm_type = m.member_type AND stn.osm_type = 'N')
 			
 		      )
 
@@ -326,7 +326,7 @@ themepark:add_proc("gen", function(data)
 			  stp.geom as geom
 		from 
 			unalloc_stations u
-				join stop_area_members m ON (u.osm_type = 'R' AND u.osm_id = m.relation_id)
+				join oepnv_stop_area_members m ON (u.osm_type = 'R' AND u.osm_id = m.relation_id)
 				join oepnv_stops stp ON (m.member_id = stp.osm_id and m.member_type = stp.osm_type AND m.member_role = 'platform')
 		)
 		  ,station_platform_hull AS ( select station_osm_type, station_osm_id, ST_Collect(geom) as geom from station_platforms group by (station_osm_type, station_osm_id) )
