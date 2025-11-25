@@ -24,61 +24,38 @@ themepark:add_table({
     },
 })
 
-function get_aerowaystype(object)
-    local aerowaytag = object.tags.aerodrome
-    local aerowaystype = nil
+function insert_airport(object, geom)
+    local type = first_tag_match(object, {
+        { { aerodrome = "public" }, "airport" },
+        { { aerodrome = "regional" }, "reg_airport" },
+        { { aerodrome = "continental" }, "cont_airport" },
+        { { aerodrome = "international" }, "int_airport" },
+    }) or "airport"
 
-    if aerowaytag == "regional" then
-        aerowaystype = "reg_airport"
-    else
-        return "airport"
-    end
-
-    return aerowaystype
+    themepark:insert("oepnv_airports", {
+        name = object.tags["name"],
+        iata = object.tags["iata"],
+        city = object.tags["addr:city"],
+        passengers = object.tags["passengers"],
+        type = type,
+        geom = geom,
+    })
 end
 
------------------------------------------------------------------------------
-
 themepark:add_proc("node", function(object)
-    if object.tags.aeroway == "aerodrome" then
-        local aerowaystype = get_aerowaystype(object)
-        themepark:insert("oepnv_airports", {
-            name = object.tags["name"],
-            iata = object.tags["iata"],
-            city = object.tags["addr:city"],
-            passengers = object.tags["passengers"],
-            geom = object:as_point(),
-            type = aerowaystype,
-        })
+    if object.tags["aeroway"] == "aerodrome" and object.tags["access"] ~= "private" then
+        insert_airport(object, object:as_point())
     end
 end)
 
 themepark:add_proc("way", function(object)
-    if object.tags.aeroway == "aerodrome" then
-        local aerowaystype = get_aerowaystype(object)
-        themepark:insert("oepnv_airports", {
-            name = object.tags["name"],
-            iata = object.tags["iata"],
-            city = object.tags["addr:city"],
-            passengers = object.tags["passengers"],
-            type = aerowaystype,
-            geom = object:as_multipolygon(),
-        })
+    if object.tags["aeroway"] == "aerodrome" and object.tags["access"] ~= "private" then
+        insert_airport(object, object:as_multipolygon())
     end
 end)
 
 themepark:add_proc("relation", function(object)
-    if object.tags.aeroway == "aerodrome" then
-        local aerowaystype = get_aerowaystype(object)
-        themepark:insert("oepnv_airports", {
-            name = object.tags["name"],
-            iata = object.tags["iata"],
-            city = object.tags["addr:city"],
-            passengers = object.tags["passengers"],
-            type = aerowaystype,
-            geom = object:as_multipolygon(),
-
-        })
+    if object.tags["aeroway"] == "aerodrome" and object.tags["access"] ~= "private" then
+        insert_airport(object, object:as_multipolygon())
     end
 end)
-
