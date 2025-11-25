@@ -39,16 +39,30 @@ end
 
 -----------------------------------------------------------------------------
 
+themepark:add_proc("node", function(object)
+    if object.tags.aeroway == "aerodrome" then
+        local aerowaystype = get_aerowaystype(object)
+        themepark:insert("oepnv_airports", {
+            name = object.tags["name"],
+            iata = object.tags["iata"],
+            city = object.tags["addr:city"],
+            passengers = object.tags["passengers"],
+            geom = object:as_point(),
+            type = aerowaystype,
+        })
+    end
+end)
+
 themepark:add_proc("way", function(object)
     if object.tags.aeroway == "aerodrome" then
         local aerowaystype = get_aerowaystype(object)
         themepark:insert("oepnv_airports", {
-
             name = object.tags["name"],
-            geom = object:as_multipolygon(),
-            iata = object.tags.iata,
+            iata = object.tags["iata"],
+            city = object.tags["addr:city"],
             passengers = object.tags["passengers"],
             type = aerowaystype,
+            geom = object:as_multipolygon(),
         })
     end
 end)
@@ -57,27 +71,14 @@ themepark:add_proc("relation", function(object)
     if object.tags.aeroway == "aerodrome" then
         local aerowaystype = get_aerowaystype(object)
         themepark:insert("oepnv_airports", {
-
-            iata = object.tags.iata,
             name = object.tags["name"],
-            geom = object:as_multipolygon(),
-            passengers = object.tags["passengers"],
-            type = aerowaystype,
-        })
-    end
-end)
-
-themepark:add_proc("node", function(object)
-    if object.tags.aeroway == "aerodrome" then
-        local aerowaystype = get_aerowaystype(object)
-        themepark:insert("oepnv_airports", {
-
-            iata = object.tags.iata,
-            name = object.tags["name"],
+            iata = object.tags["iata"],
             city = object.tags["addr:city"],
             passengers = object.tags["passengers"],
-            geom = object:as_point(),
             type = aerowaystype,
+            geom = object:as_multipolygon(),
+
         })
     end
 end)
+
