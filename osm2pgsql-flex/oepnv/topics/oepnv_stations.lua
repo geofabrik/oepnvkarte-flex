@@ -272,120 +272,169 @@ themepark:add_proc("gen", function(data)
         sql = {
             -- if a relation changes, then delete all oepnv_stations which intersect one of that relation's members
             themepark.expand_template([[
-	    	delete from oepnv_stations where id in (
-			select stn.id from oepnv_stations_changed_interim i JOIN oepnv_station_rels r ON (i.osm_id = r.relation_id AND i.osm_type = 'R') join oepnv_stop_area_members m USING (relation_id) JOIN oepnv_stops stp ON (m.member_id = stp.osm_id AND m.member_type = stp.osm_type) JOIN oepnv_stations AS stn ON (stp.geom && stn.area AND ST_Intersects(stn.area, stp.geom)) 
-		);
-		]]),
+                DELETE FROM oepnv_stations WHERE id IN (
+                    SELECT stn.id
+                        FROM
+                            oepnv_stations_changed_interim i
+                            JOIN oepnv_station_rels r
+                                ON (i.osm_id = r.relation_id AND i.osm_type = 'R')
+                            JOIN oepnv_stop_area_members m
+                                USING (relation_id)
+                            JOIN oepnv_stops stp
+                                ON (m.member_id = stp.osm_id AND m.member_type = stp.osm_type)
+                            JOIN oepnv_stations stn
+                                ON (stp.geom && stn.area AND ST_Intersects(stn.area, stp.geom)) 
+                );
+                ]]),
             -- if another stop changes, delete all oepnv_stations which intersect that stop
             themepark.expand_template([[
-	    	delete from oepnv_stations where id in 
-		(
-		select stn.id
-		FROM (oepnv_stations_changed_interim JOIN oepnv_stops USING (osm_type, osm_id)) stp JOIN oepnv_stations stn ON (stn.area && stp.geom AND ST_Intersects(stn.area, stp.geom))
-		);
-	]]),
+                DELETE FROM oepnv_stations WHERE id IN 
+                (
+                    SELECT stn.id
+                        FROM (
+                            oepnv_stations_changed_interim
+                            JOIN oepnv_stops USING (osm_type, osm_id)
+                        ) stp
+                        JOIN oepnv_stations stn
+                            ON (stn.area && stp.geom AND ST_Intersects(stn.area, stp.geom))
+                );
+                ]]),
 
             -- Any stations which have zero stops inside? delete them.
             themepark.expand_template([[
-	    	delete from oepnv_stations where id in (
-		select stn.id from oepnv_stations stn left join oepnv_stops stp ON (ST_Intersects(stn.area, stp.geom)) where stp.geom IS NULL)
-		]]),
+                DELETE FROM oepnv_stations WHERE id IN (
+                    SELECT stn.id FROM
+                        oepnv_stations stn
+                        LEFT JOIN oepnv_stops stp
+                            ON (ST_Intersects(stn.area, stp.geom))
+                    WHERE stp.geom IS NULL
+                )
+                ]]),
+
             -- clear our todo list
-            themepark.expand_template([[ truncate table oepnv_stations_changed_interim ]]),
+            themepark.expand_template([[ TRUNCATE TABLE oepnv_stations_changed_interim ]]),
 
             -- First the public_transport=stations relations
             themepark.expand_template([[
-		WITH
-		  relations_wo_stations AS (
-			  select DISTINCT m.relation_id
-			  from
-			  	(oepnv_stops stp join oepnv_stop_area_members m ON (m.member_id = stp.osm_id and m.member_type = stp.osm_type and m.member_role = 'platform'))
-				left join oepnv_stations stn ON (ST_Intersects(stn.area, stp.geom))
-			where stn.area IS NULL
-		  )
-		  ,unalloc_stations AS ( select 'R' AS osm_type, relation_id AS osm_id, name as name_rel, type from relations_wo_stations JOIN oepnv_station_rels USING (relation_id) )
+            WITH
+                relations_wo_stations AS (
+                    select DISTINCT m.relation_id
+                    from (oepnv_stops stp
+                        join oepnv_stop_area_members m
+                        ON (m.member_id = stp.osm_id
+                            AND m.member_type = stp.osm_type
+                            AND m.member_role = 'platform')
+                    )
+                    left join oepnv_stations stn
+                        ON (ST_Intersects(stn.area, stp.geom))
+                    where stn.area IS NULL
+            ),
+            unalloc_stations AS (
+                SELECT
+                    'R' osm_type, relation_id osm_id,
+                    name name_rel, type
+                FROM relations_wo_stations
+                    JOIN oepnv_station_rels USING (relation_id)
+            ),
+            station_name_point AS (
+                SELECT
+                    -- we only want one entry
+                    DISTINCT ON (station_osm_type, station_osm_id)
+                    u.osm_type station_osm_type, u.osm_id station_osm_id, 
+                    stn.osm_type label_osm_type, stn.osm_id label_osm_id,
+                    stn.name name, stn.point point
+                FROM
+                    unalloc_stations u
+                    JOIN oepnv_stop_area_members m
+                        ON (u.osm_type = 'R' AND u.osm_id = m.relation_id)
+                    JOIN oepnv_station_objects stn
+                        ON (stn.osm_id = m.member_id
+                            AND stn.osm_type = m.member_type
+                            AND stn.osm_type = 'N')
+            ),
+            station_platforms AS (
+                SELECT
+                    u.osm_type station_osm_type,
+                    u.osm_id station_osm_id,
+                    stp.osm_type stop_osm_type,
+                    stp.osm_id stop_osm_id,
+                    stp.geom geom
+                FROM 
+                    unalloc_stations u
+                    JOIN oepnv_stop_area_members m
+                        ON (u.osm_type = 'R' AND u.osm_id = m.relation_id)
+                    JOIN oepnv_stops stp
+                        ON (m.member_id = stp.osm_id
+                            AND m.member_type = stp.osm_type
+                            AND m.member_role = 'platform')
+            ),
+            station_platform_hull AS (
+                SELECT
+                    station_osm_type, station_osm_id,
+                    ST_Collect(geom) geom
+                FROM station_platforms
+                GROUP BY (station_osm_type, station_osm_id)
+            ),
 
-		  ,station_name_point AS (
-		    select
-		      DISTINCT on (station_osm_type, station_osm_id)	-- we only want one entry
-		      u.osm_type as station_osm_type, u.osm_id as station_osm_id, 
-		      stn.osm_type as label_osm_type, stn.osm_id as label_osm_id,
-		      stn.name as name, stn.point as point
-		      from
-			unalloc_stations u
-				JOIN oepnv_stop_area_members m ON (u.osm_type = 'R' AND u.osm_id = m.relation_id)
-				join oepnv_station_objects stn ON (stn.osm_id = m.member_id and stn.osm_type = m.member_type AND stn.osm_type = 'N')
-			
-		      )
+            -- This is where we prepare the new row for oepnv_stations
+            new_data AS (
+                SELECT
+                    COALESCE(unalloc_stations.name_rel, station_name_point.name) name,
+                    type,
+                    COALESCE(station_name_point.point, ST_Centroid(geom)) point,
+                    ST_Buffer(ST_ConvexHull(geom), 20) area,
+                    ST_ConvexHull(geom) convex_hull
+                FROM
+                    unalloc_stations 
+                    LEFT JOIN station_name_point 
+                        ON (unalloc_stations.osm_type = station_osm_type
+                            AND unalloc_stations.osm_id = station_osm_id)
+                    LEFT JOIN station_platform_hull h
+                        ON (unalloc_stations.osm_type = h.station_osm_type
+                            AND unalloc_stations.osm_id = h.station_osm_id)
+            )
 
-		  ,station_platforms AS (
-		  select
-			  u.osm_type as station_osm_type,
-			  u.osm_id as station_osm_id,
-			  stp.osm_type as stop_osm_type, stp.osm_id as stop_osm_id,
-			  stp.geom as geom
-		from 
-			unalloc_stations u
-				join oepnv_stop_area_members m ON (u.osm_type = 'R' AND u.osm_id = m.relation_id)
-				join oepnv_stops stp ON (m.member_id = stp.osm_id and m.member_type = stp.osm_type AND m.member_role = 'platform')
-		)
-		  ,station_platform_hull AS ( select station_osm_type, station_osm_id, ST_Collect(geom) as geom from station_platforms group by (station_osm_type, station_osm_id) )
-
-		  -- This is where we prepare the new row for oepnv_stations
-		  ,new_data AS (
-		    select
-		      coalesce(unalloc_stations.name_rel, station_name_point.name) as name,
-		      type,
-		      coalesce(station_name_point.point, ST_Centroid(geom)) as point,
-		      ST_Buffer(ST_ConvexHull(geom), 20) as area,
-		      ST_ConvexHull(geom) as convex_hull
-		      from
-			unalloc_stations 
-			  left join station_name_point ON (unalloc_stations.osm_type = station_osm_type and unalloc_stations.osm_id = station_osm_id)
-			  left join station_platform_hull h ON (unalloc_stations.osm_type = h.station_osm_type and unalloc_stations.osm_id = h.station_osm_id)
-		  )
-
-
-		  insert into oepnv_stations (name, type, point, area, convex_hull) select * from new_data
-		  ;
-
-	     ]]),
+            INSERT INTO oepnv_stations
+                (name, type, point, area, convex_hull)
+            SELECT * FROM new_data
+            ;
+         ]]),
 
             -- Now those oepnv_stops's not in a relation. We group by nearby name
             themepark.expand_template([[
-		WITH
-		  stops_wo_stations AS (
-			  select osm_type, osm_id
-			  from
-			  	oepnv_stops stp
-					left join oepnv_stations stn ON (ST_Intersects(stn.area, stp.geom))
-			where stn.area IS NULL
-		  )
+            WITH
+                stops_wo_stations AS (
+                    SELECT osm_type, osm_id
+                    FROM
+                        oepnv_stops stp
+                        LEFT JOIN oepnv_stations stn ON (ST_Intersects(stn.area, stp.geom))
+                    WHERE stn.area IS NULL
+                ),
+                clustered_stations AS (
+                    SELECT
+                        name, type,
+                        unnest(ST_ClusterWithin(geom, 150)) points
+                    FROM 
+                        oepnv_stops stp
+                        JOIN stops_wo_stations USING (osm_type, osm_id)
+                        GROUP BY name, type
+                ),
+                new_data AS (
+                    SELECT
+                        name,
+                        type,
+                        ST_Centroid(points) point,
+                        ST_Buffer(ST_ConvexHull(points), 20) area,
+                        ST_ConvexHull(points) convex_hull
+                    FROM
+                        clustered_stations
+                )
 
-		  ,clustered_stations AS (
-			  select
-				name, type,
-				unnest(ST_ClusterWithin(geom, 150)) as points
-			  from 
-			  	oepnv_stops stp JOIN stops_wo_stations USING (osm_type, osm_id)
-			group by name, type
-		  )
+                INSERT INTO oepnv_stations
+                    (name, type, point, area, convex_hull)
+                SELECT * FROM new_data
 
-		  ,new_data AS (
-		    select
-		      name,
-		      type,
-		      ST_Centroid(points) as point,
-		      ST_Buffer(ST_ConvexHull(points), 20) as area,
-		      ST_ConvexHull(points) as convex_hull
-		      from
-			      clustered_stations
-		      
-		  )
-
-		  insert into oepnv_stations (name, type, point, area, convex_hull) select * from new_data
-	    
-	  ]]),
+            ]]),
         },
     })
 end)
