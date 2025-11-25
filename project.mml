@@ -546,8 +546,8 @@ Layer:
     <<: *extents
     Datasource:
       <<: *osm2pgsql
-      table: (SELECT name, geom, type::text,"type" as "order" FROM oepnv_airports
-        ORDER BY "order" ASC, passengers DESC) AS airports
+      table: (SELECT name, geom, type::text FROM oepnv_airports
+        ORDER BY "type" ASC, passengers DESC) AS airports
     properties:
       minzoom: 5
       maxzoom: 22
