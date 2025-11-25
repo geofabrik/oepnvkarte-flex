@@ -13,7 +13,6 @@ themepark:add_table({
     geom = "geometry",
     ids_type = "any",
     columns = themepark:columns({
-        { column = "fkey_relation_id", type = "bigint" },
         { column = "name", type = "text" },
         { column = "iata", type = "text" },
         { column = "city", type = "text" },
@@ -47,7 +46,6 @@ themepark:add_proc("way", function(object)
 
             name = object.tags["name"],
             geom = object:as_multipolygon(),
-            fkey_way_id = object.id,
             iata = object.tags.iata,
             passengers = object.tags["passengers"],
             type = aerowaystype,
@@ -64,7 +62,6 @@ themepark:add_proc("relation", function(object)
             name = object.tags["name"],
             geom = object:as_multipolygon(),
             passengers = object.tags["passengers"],
-            fkey_relation_id = object.id,
             type = aerowaystype,
         })
     end
