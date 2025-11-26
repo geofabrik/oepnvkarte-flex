@@ -51,12 +51,12 @@ Stylesheet:
 Layer:
   - id: land0
     name: land0
+    class: land
     geometry: polygon
     <<: *extents_wsg84
     properties:
       minzoom: 0
       maxzoom: 1
-    class: land
     Datasource:
       file: data/110m_physical/ne_110m_land.shp
       type: shape
@@ -65,12 +65,12 @@ Layer:
 
   - id: land1
     name: land1
+    class: land
     geometry: polygon
     <<: *extents_wsg84
     properties:
       minzoom: 2
       maxzoom: 4
-    class: land
     Datasource:
       file: data/50m_physical/ne_50m_land.shp
       type: shape
@@ -79,12 +79,12 @@ Layer:
 
   - id: land2
     name: land2
+    class: land
     geometry: polygon
     <<: *extents_wsg84
     properties:
       minzoom: 5
       maxzoom: 7
-    class: land
     Datasource:
       file: data/10m_physical/ne_10m_land.shp
       type: shape
@@ -93,12 +93,12 @@ Layer:
 
   - id: land3
     name: land3
+    class: land
     geometry: polygon
     <<: *extents
     properties:
       minzoom: 8
       maxzoom: 22
-    class: land
     Datasource:
       file: data/land-polygons-split-3857/land_polygons.shp
       type: shape
@@ -107,12 +107,12 @@ Layer:
 
   - id: lakes0
     name: lakes0
+    class: lakes
     geometry: polygon
     <<: *extents_wsg84
     properties:
       minzoom: 0
       maxzoom: 1
-    class: lakes
     Datasource:
       file: data/110m_physical/ne_110m_lakes.shp
       type: shape
@@ -121,12 +121,12 @@ Layer:
 
   - id: lakes1
     name: lakes1
+    class: lakes
     geometry: polygon
     <<: *extents_wsg84
     properties:
       minzoom: 2
       maxzoom: 4
-    class: lakes
     Datasource:
       file: data/50m_physical/ne_50m_lakes.shp
       type: shape
@@ -135,12 +135,12 @@ Layer:
 
   - id: lakes2
     name: lakes2
+    class: lakes
     geometry: polygon
     <<: *extents_wsg84
     properties:
       minzoom: 5
       maxzoom: 7
-    class: lakes
     Datasource:
       file: data/10m_physical/ne_10m_lakes.shp
       type: shape
@@ -149,12 +149,12 @@ Layer:
 
   - id: citylike0
     name: citylike0
+    class: citylike
     geometry: polygon
     <<: *extents_wsg84
     properties:
       minzoom: 2
       maxzoom: 4
-    class: citylike
     Datasource:
       file: data/50m_cultural/ne_50m_urban_areas.shp
       type: shape
@@ -163,12 +163,12 @@ Layer:
 
   - id: citylike1
     name: citylike1
+    class: citylike
     geometry: polygon
     <<: *extents_wsg84
     properties:
       minzoom: 5
       maxzoom: 7
-    class: citylike
     Datasource:
       file: data/10m_cultural/ne_10m_urban_areas.shp
       type: shape
@@ -177,12 +177,12 @@ Layer:
 
   - id: border0
     name: border0
+    class: border
     geometry: linestring
     <<: *extents_wsg84
     properties:
       minzoom: 1
       maxzoom: 2
-    class: border
     Datasource:
       file: data/110m_cultural/ne_110m_admin_0_boundary_lines_land.shp
       type: shape
@@ -191,6 +191,7 @@ Layer:
 
   - id: area00
     name: area00
+    class: area
     geometry: polygon
     <<: *extents
     Datasource:
@@ -200,7 +201,6 @@ Layer:
     properties:
       minzoom: 4
       maxzoom: 7
-    class: area
     advanced: {}
 
   - id: area0
@@ -250,6 +250,7 @@ Layer:
 
   - id: area3
     name: area3
+    class: area
     geometry: polygon
     <<: *extents
     Datasource:
@@ -260,11 +261,11 @@ Layer:
     properties:
       minzoom: 16
       maxzoom: 22
-    class: area
     advanced: {}
 
   - id: waterway0
     name: waterway0
+    class: waterway
     geometry: linestring
     <<: *extents
     Datasource:
@@ -274,11 +275,11 @@ Layer:
     properties:
       minzoom: 8
       maxzoom: 12
-    class: waterway
     advanced: {}
 
   - id: waterway1
     name: waterway1
+    class: waterway
     geometry: linestring
     <<: *extents
     Datasource:
@@ -289,11 +290,11 @@ Layer:
     properties:
       minzoom: 13
       maxzoom: 22
-    class: waterway
     advanced: {}
 
   - id: way0
     name: way0
+    class: way
     geometry: linestring
     <<: *extents
     Datasource:
@@ -304,11 +305,11 @@ Layer:
     properties:
       minzoom: 8
       maxzoom: 9
-    class: way
     advanced: {}
 
   - id: way1
     name: way1
+    class: way
     geometry: linestring
     <<: *extents
     Datasource:
@@ -320,11 +321,11 @@ Layer:
     properties:
       minzoom: 10
       maxzoom: 13
-    class: way
     advanced: {}
 
   - id: way2
     name: way2
+    class: way
     geometry: linestring
     <<: *extents
     Datasource:
@@ -338,11 +339,11 @@ Layer:
     properties:
       minzoom: 14
       maxzoom: 22
-    class: way
     advanced: {}
 
   - id: rail0
     name: rail0
+    class: rail line
     geometry: linestring
     <<: *extents
     Datasource:
@@ -352,12 +353,12 @@ Layer:
     properties:
       minzoom: 6
       maxzoom: 12
-    class: rail line
     advanced: {}
     layerId: rail0
 
   - id: rail1
     name: rail1
+    class: rail line
     geometry: linestring
     <<: *extents
     Datasource:
@@ -367,11 +368,12 @@ Layer:
     properties:
       minzoom: 13
       maxzoom: 14
-    class: rail line
     advanced: {}
     layerId: rail1
 
   - id: rail2
+    name: rail2
+    class: rail line
     geometry: linestring
     <<: *extents
     Datasource:
@@ -381,13 +383,12 @@ Layer:
     properties:
       minzoom: 15
       maxzoom: 22
-    class: rail line
     advanced: {}
-    name: rail2
     layerId: rail2
 
   - id: waybridges0
     name: waybridges0
+    class: way bridge
     geometry: linestring
     <<: *extents
     Datasource:
@@ -402,17 +403,16 @@ Layer:
     properties:
       minzoom: 15
       maxzoom: 22
-    class: way bridge
     advanced: {}
 
   - id: stateborder0
     name: stateborder0
+    class: stateborder line
     geometry: linestring
     <<: *extents_wsg84
     properties:
       minzoom: 0
       maxzoom: 2
-    class: stateborder line
     Datasource:
       file: data/110m_cultural/ne_110m_admin_0_countries.shp
       type: shape
@@ -421,12 +421,12 @@ Layer:
 
   - id: stateborder1
     name: stateborder1
+    class: stateborder line
     geometry: linestring
     <<: *extents_wsg84
     properties:
       minzoom: 3
       maxzoom: 4
-    class: stateborder line
     Datasource:
       file: data/50m_cultural/ne_50m_admin_0_boundary_lines_land.shp
       type: shape
@@ -436,12 +436,13 @@ Layer:
     advanced: {}
 
   - id: stateborder2
+    name: stateborder2
+    class: stateborder line
     geometry: linestring
     <<: *extents_wsg84
     properties:
       minzoom: 5
       maxzoom: 7
-    class: stateborder line
     Datasource:
       file: data/10m_cultural/ne_10m_admin_0_boundary_lines_land.shp
       type: shape
@@ -449,10 +450,10 @@ Layer:
     srs-name: autodetect
     srs: +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs
     advanced: {}
-    name: stateborder2
 
   - id: border0
     name: border0
+    class: border line
     geometry: linestring
     <<: *extents
     Datasource:
@@ -462,11 +463,11 @@ Layer:
     properties:
       minzoom: 8
       maxzoom: 10
-    class: border line
     advanced: {}
 
   - id: border1
     name: border1
+    class: border line
     geometry: linestring
     <<: *extents
     Datasource:
@@ -476,11 +477,11 @@ Layer:
     properties:
       minzoom: 11
       maxzoom: 22
-    class: border line
     advanced: {}
 
   - id: stationarea0
     name: stationarea0
+    class: stationarea all
     geometry: polygon
     <<: *extents
     Datasource:
@@ -490,11 +491,11 @@ Layer:
     properties:
       minzoom: 17
       maxzoom: 22
-    class: stationarea all
     advanced: {}
 
   - id: transport0
     name: transport0
+    class: transport line
     geometry: linestring
     <<: *extents
     Datasource:
@@ -504,11 +505,11 @@ Layer:
     properties:
       minzoom: 6
       maxzoom: 8
-    class: transport line
     advanced: {}
 
   - id: transport1
     name: transport1
+    class: transport line
     geometry: linestring
     <<: *extents
     Datasource:
@@ -518,14 +519,13 @@ Layer:
     properties:
       minzoom: 9
       maxzoom: 22
-    class: transport line
-      +units=m +nadgrids=@null +no_defs +over
     advanced: {}
     layerId: transport1
 
 
   - id: platform0
     name: platform0
+    class: platform geom
     <<: *extents
     Datasource:
       <<: *osm2pgsql
@@ -534,12 +534,12 @@ Layer:
     properties:
       minzoom: 17
       maxzoom: 22
-    class: platform geom
     advanced: {}
     layerId: platform0
 
   - id: airport
     name: airport
+    class: airport
     geometry: point
     <<: *extents
     Datasource:
@@ -549,11 +549,11 @@ Layer:
     properties:
       minzoom: 5
       maxzoom: 22
-    class: airport
     advanced: {}
 
   - id: place0
     name: place0
+    class: place
     geometry: point
     <<: *extents
     Datasource:
@@ -564,12 +564,12 @@ Layer:
     properties:
       minzoom: 0
       maxzoom: 3
-    class: place
     advanced:
       srid: '900913'
 
   - id: place1
     name: place1
+    class: place
     geometry: point
     <<: *extents
     Datasource:
@@ -580,12 +580,12 @@ Layer:
     properties:
       minzoom: 4
       maxzoom: 8
-    class: place
     advanced:
       srid: '900913'
 
   - id: place2
     name: place2
+    class: place
     geometry: point
     <<: *extents
     Datasource:
@@ -595,7 +595,6 @@ Layer:
     properties:
       minzoom: 9
       maxzoom: 22
-    class: place
     advanced:
       srid: '900913'
     layerId: place2
@@ -614,6 +613,8 @@ Layer:
     advanced: {}
 
   - id: oepnvpoipoint
+    name: oepnvpoipoint
+    class: oepnvpoi point
     geometry: point
     <<: *extents
     Datasource:
@@ -623,11 +624,11 @@ Layer:
     properties:
       minzoom: 14
       maxzoom: 22
-    class: oepnvpoi point
     advanced: {}
-    name: oepnvpoipoint
-    
+
   - id: platformlabel
+    name: platformlabel
+    class: platform label
     geometry: point
     <<: *extents
     Datasource:
@@ -639,13 +640,12 @@ Layer:
     properties:
       minzoom: 17
       maxzoom: 22
-    class: platform label
     advanced: {}
-    name: platformlabel
     layerId: platformlabel
 
   - id: transportlabel0
     name: transportlabel0
+    class: transport label
     geometry: linestring
     <<: *extents
     Datasource:
@@ -655,11 +655,11 @@ Layer:
     properties:
       minzoom: 6
       maxzoom: 8
-    class: transport label
     advanced: {}
 
   - id: transportlabel1
     name: transportlabel1
+    class: transport label
     geometry: linestring
     <<: *extents
     Datasource:
@@ -669,11 +669,11 @@ Layer:
     properties:
       minzoom: 9
       maxzoom: 22
-    class: transport label
     advanced: {}
 
   - id: waylabel1
     name: waylabel1
+    class: waylabel
     geometry: linestring
     <<: *extents
     Datasource:
@@ -685,11 +685,11 @@ Layer:
     properties:
       minzoom: 10
       maxzoom: 13
-    class: waylabel
     advanced: {}
 
   - id: waylabel2
     name: waylabel2
+    class: waylabel
     geometry: linestring
     <<: *extents
     Datasource:
@@ -703,7 +703,6 @@ Layer:
     properties:
       minzoom: 14
       maxzoom: 22
-    class: waylabel
     advanced: {}
 
 # vim: ft=yaml
