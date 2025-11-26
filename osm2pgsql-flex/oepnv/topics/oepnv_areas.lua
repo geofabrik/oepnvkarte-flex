@@ -24,6 +24,8 @@ themepark:add_table({
     indexes = {
         { method = "btree", column = { "type" } },
 
+        -- Might help with the generation of oepnv_largeareas
+        { method = "gist", column = { "geom" }, where = "type IN ('forest', 'farm', 'city', 'water')" },
     },
 })
 
@@ -53,7 +55,6 @@ themepark:add_table({
         minzoom = 7,
     },
 })
-
 
 -- Get the type of the area
 function get_area_type(object)
