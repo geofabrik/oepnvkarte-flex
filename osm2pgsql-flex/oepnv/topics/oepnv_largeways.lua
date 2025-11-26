@@ -13,54 +13,27 @@ themepark:add_table({
     geom = "geometry",
     ids_type = "any",
     columns = themepark:columns({
-        { column = "type", type = "text" },
+        { column = "type", type = "text", not_null = true },
     }),
     tiles = {
         minzoom = 8,
     },
 })
 
--- Getting the large types this does not filter on the way!
-function get_way_largetypes(object)
-    local highwaytag = object.tags.highway
-    local aerowaytag = object.tags.aeroway
-    local wayslargearea = nil
-
-    if highwaytag == "motorway" then
-        wayslargearea = "motorway"
-    elseif highwaytag == "trunk" then
-        wayslargearea = "trunk"
-    elseif highwaytag == "primary" then
-        wayslargearea = "primary"
-    elseif highwaytag == "secondary" then
-        wayslargearea = "secondary"
-    elseif highwaytag == "tertiary" then
-        wayslargearea = "tertiary"
-    end
-
-    return wayslargearea
-end
-
------------------------------------------------------------------------------
-
 themepark:add_proc("way", function(object)
-    local wayslargearea = get_way_largetypes(object)
-    if wayslargearea then
+    if is_in(object.tags["highway"], { "motorway", "trunk", "primary", "secondary", "tertiary" }) then
         themepark:insert("oepnv_largeways", {
-
             geom = object:as_linestring(),
-            type = wayslargearea,
+            type = object.tags["highway"],
         })
     end
 end)
 
 themepark:add_proc("relation", function(object)
-    local wayslargearea = get_way_largetypes(object)
-    if wayslargearea then
+    if is_in(object.tags["highway"], { "motorway", "trunk", "primary", "secondary", "tertiary" }) then
         themepark:insert("oepnv_largeways", {
-
             geom = object:as_multipolygon(),
-            type = wayslargearea,
+            type = object.tags["highway"],
         })
     end
 end)
