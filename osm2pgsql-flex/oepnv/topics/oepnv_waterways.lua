@@ -15,8 +15,8 @@ themepark:add_table({
     columns = themepark:columns({
         { column = "name", type = "text" },
         { column = "width", type = "smallint" },
-        { column = "bridge", type = "bool", not_null = true },
-        { column = "tunnel", type = "bool", not_null = true },
+        { column = "bridge", type = "boolean", not_null = true },
+        { column = "tunnel", type = "boolean", not_null = true },
         { column = "layer", type = "smallint" },
         { column = "type", type = "text", not_null = true },
     }),
@@ -32,8 +32,8 @@ themepark:add_table({
     columns = themepark:columns({
         { column = "name", type = "text" },
         { column = "width", type = "smallint" },
-        { column = "bridge", type = "bool", not_null = true },
-        { column = "tunnel", type = "bool", not_null = true },
+        { column = "bridge", type = "boolean", not_null = true },
+        { column = "tunnel", type = "boolean", not_null = true },
         { column = "layer", type = "smallint" },
         { column = "type", type = "text", not_null = true },
     }),

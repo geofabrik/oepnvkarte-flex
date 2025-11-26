@@ -20,7 +20,7 @@ themepark:add_table({
         { column = "stops", type = "bigint" },
         { column = "type", type = "text" },
         { column = "back_stops", type = "bigint" },
-        { column = "valid", type = "bool" },
+        { column = "valid", type = "boolean" },
         { column = "color", type = "text" },
         { column = "operator", type = "text" },
         { column = "network", type = "text" },

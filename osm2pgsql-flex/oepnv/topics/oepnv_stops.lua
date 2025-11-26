@@ -14,9 +14,9 @@ themepark:add_table({
     ids_type = "any",
     columns = themepark:columns({
         { column = "name", type = "text" },
-        { column = "platform", type = "bool" },
+        { column = "platform", type = "boolean" },
         { column = "type", type = "text" },
-        { column = "stop_position", type = "bool" },
+        { column = "stop_position", type = "boolean" },
         { column = "ref", type = "text" },
         { column = "code", type = "text" },
         { column = "polygon", type = "geometry" },
