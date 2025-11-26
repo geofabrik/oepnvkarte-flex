@@ -50,6 +50,7 @@ Stylesheet:
 
 Layer:
   - id: land0
+    name: land0
     geometry: polygon
     <<: *extents_wsg84
     properties:
@@ -61,9 +62,9 @@ Layer:
       type: shape
     layer: null
     advanced: {}
-    name: land0
 
   - id: land1
+    name: land1
     geometry: polygon
     <<: *extents_wsg84
     properties:
@@ -75,9 +76,9 @@ Layer:
       type: shape
     layer: null
     advanced: {}
-    name: land1
 
   - id: land2
+    name: land2
     geometry: polygon
     <<: *extents_wsg84
     properties:
@@ -89,9 +90,9 @@ Layer:
       type: shape
     layer: null
     advanced: {}
-    name: land2
 
   - id: land3
+    name: land3
     geometry: polygon
     <<: *extents
     properties:
@@ -103,9 +104,9 @@ Layer:
       type: shape
     layer: null
     advanced: {}
-    name: land3
 
   - id: lakes0
+    name: lakes0
     geometry: polygon
     <<: *extents_wsg84
     properties:
@@ -117,9 +118,9 @@ Layer:
       type: shape
     layer: null
     advanced: {}
-    name: lakes0
 
   - id: lakes1
+    name: lakes1
     geometry: polygon
     <<: *extents_wsg84
     properties:
@@ -131,9 +132,9 @@ Layer:
       type: shape
     layer: null
     advanced: {}
-    name: lakes1
 
   - id: lakes2
+    name: lakes2
     geometry: polygon
     <<: *extents_wsg84
     properties:
@@ -145,9 +146,9 @@ Layer:
       type: shape
     layer: null
     advanced: {}
-    name: lakes2
 
   - id: citylike0
+    name: citylike0
     geometry: polygon
     <<: *extents_wsg84
     properties:
@@ -159,9 +160,9 @@ Layer:
       type: shape
     layer: null
     advanced: {}
-    name: citylike0
 
   - id: citylike1
+    name: citylike1
     geometry: polygon
     <<: *extents_wsg84
     properties:
@@ -173,9 +174,9 @@ Layer:
       type: shape
     layer: null
     advanced: {}
-    name: citylike1
 
   - id: border0
+    name: border0
     geometry: linestring
     <<: *extents_wsg84
     properties:
@@ -187,9 +188,9 @@ Layer:
       type: shape
     layer: null
     advanced: {}
-    name: border0
 
   - id: area00
+    name: area00
     geometry: polygon
     <<: *extents
     Datasource:
@@ -201,7 +202,6 @@ Layer:
       maxzoom: 7
     class: area
     advanced: {}
-    name: area00
 
   - id: area0
     name: area0
@@ -249,6 +249,7 @@ Layer:
     advanced: {}
 
   - id: area3
+    name: area3
     geometry: polygon
     <<: *extents
     Datasource:
@@ -261,9 +262,9 @@ Layer:
       maxzoom: 22
     class: area
     advanced: {}
-    name: area3
 
   - id: waterway0
+    name: waterway0
     geometry: linestring
     <<: *extents
     Datasource:
@@ -274,11 +275,10 @@ Layer:
       minzoom: 8
       maxzoom: 12
     class: waterway
-      +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
     advanced: {}
-    name: waterway0
 
   - id: waterway1
+    name: waterway1
     geometry: linestring
     <<: *extents
     Datasource:
@@ -290,11 +290,10 @@ Layer:
       minzoom: 13
       maxzoom: 22
     class: waterway
-      +units=m +nadgrids=@null +no_defs +over
     advanced: {}
-    name: waterway1
 
   - id: way0
+    name: way0
     geometry: linestring
     <<: *extents
     Datasource:
@@ -307,9 +306,9 @@ Layer:
       maxzoom: 9
     class: way
     advanced: {}
-    name: way0
 
   - id: way1
+    name: way1
     geometry: linestring
     <<: *extents
     Datasource:
@@ -323,9 +322,9 @@ Layer:
       maxzoom: 13
     class: way
     advanced: {}
-    name: way1
 
   - id: way2
+    name: way2
     geometry: linestring
     <<: *extents
     Datasource:
@@ -341,9 +340,9 @@ Layer:
       maxzoom: 22
     class: way
     advanced: {}
-    name: way2
 
   - id: rail0
+    name: rail0
     geometry: linestring
     <<: *extents
     Datasource:
@@ -355,10 +354,10 @@ Layer:
       maxzoom: 12
     class: rail line
     advanced: {}
-    name: rail0
     layerId: rail0
 
   - id: rail1
+    name: rail1
     geometry: linestring
     <<: *extents
     Datasource:
@@ -370,7 +369,6 @@ Layer:
       maxzoom: 14
     class: rail line
     advanced: {}
-    name: rail1
     layerId: rail1
 
   - id: rail2
@@ -387,8 +385,9 @@ Layer:
     advanced: {}
     name: rail2
     layerId: rail2
-    
+
   - id: waybridges0
+    name: waybridges0
     geometry: linestring
     <<: *extents
     Datasource:
@@ -405,9 +404,9 @@ Layer:
       maxzoom: 22
     class: way bridge
     advanced: {}
-    name: waybridges0
 
   - id: stateborder0
+    name: stateborder0
     geometry: linestring
     <<: *extents_wsg84
     properties:
@@ -419,9 +418,9 @@ Layer:
       type: shape
     layer: null
     advanced: {}
-    name: stateborder0
 
   - id: stateborder1
+    name: stateborder1
     geometry: linestring
     <<: *extents_wsg84
     properties:
@@ -435,7 +434,6 @@ Layer:
     srs-name: autodetect
     srs: +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs
     advanced: {}
-    name: stateborder1
 
   - id: stateborder2
     geometry: linestring
@@ -454,6 +452,7 @@ Layer:
     name: stateborder2
 
   - id: border0
+    name: border0
     geometry: linestring
     <<: *extents
     Datasource:
@@ -465,9 +464,9 @@ Layer:
       maxzoom: 10
     class: border line
     advanced: {}
-    name: border0
 
   - id: border1
+    name: border1
     geometry: linestring
     <<: *extents
     Datasource:
@@ -479,9 +478,9 @@ Layer:
       maxzoom: 22
     class: border line
     advanced: {}
-    name: border1
 
   - id: stationarea0
+    name: stationarea0
     geometry: polygon
     <<: *extents
     Datasource:
@@ -493,9 +492,9 @@ Layer:
       maxzoom: 22
     class: stationarea all
     advanced: {}
-    name: stationarea0
 
   - id: transport0
+    name: transport0
     geometry: linestring
     <<: *extents
     Datasource:
@@ -507,9 +506,9 @@ Layer:
       maxzoom: 8
     class: transport line
     advanced: {}
-    name: transport0
 
   - id: transport1
+    name: transport1
     geometry: linestring
     <<: *extents
     Datasource:
@@ -522,12 +521,11 @@ Layer:
     class: transport line
       +units=m +nadgrids=@null +no_defs +over
     advanced: {}
-    name: transport1
     layerId: transport1
 
 
   - id: platform0
-    extent:
+    name: platform0
     <<: *extents
     Datasource:
       <<: *osm2pgsql
@@ -538,10 +536,10 @@ Layer:
       maxzoom: 22
     class: platform geom
     advanced: {}
-    name: platform0
     layerId: platform0
 
   - id: airport
+    name: airport
     geometry: point
     <<: *extents
     Datasource:
@@ -553,9 +551,9 @@ Layer:
       maxzoom: 22
     class: airport
     advanced: {}
-    name: airport
 
   - id: place0
+    name: place0
     geometry: point
     <<: *extents
     Datasource:
@@ -569,9 +567,9 @@ Layer:
     class: place
     advanced:
       srid: '900913'
-    name: place0
 
   - id: place1
+    name: place1
     geometry: point
     <<: *extents
     Datasource:
@@ -585,9 +583,9 @@ Layer:
     class: place
     advanced:
       srid: '900913'
-    name: place1
 
   - id: place2
+    name: place2
     geometry: point
     <<: *extents
     Datasource:
@@ -600,10 +598,10 @@ Layer:
     class: place
     advanced:
       srid: '900913'
-    name: place2
     layerId: place2
 
   - id: stationpoint
+    name: stationpoint
     geometry: point
     <<: *extents
     Datasource:
@@ -614,7 +612,6 @@ Layer:
       minzoom: 12
       maxzoom: 22
     advanced: {}
-    name: stationpoint
 
   - id: oepnvpoipoint
     geometry: point
@@ -648,6 +645,7 @@ Layer:
     layerId: platformlabel
 
   - id: transportlabel0
+    name: transportlabel0
     geometry: linestring
     <<: *extents
     Datasource:
@@ -659,9 +657,9 @@ Layer:
       maxzoom: 8
     class: transport label
     advanced: {}
-    name: transportlabel0
 
   - id: transportlabel1
+    name: transportlabel1
     geometry: linestring
     <<: *extents
     Datasource:
@@ -673,9 +671,9 @@ Layer:
       maxzoom: 22
     class: transport label
     advanced: {}
-    name: transportlabel1
 
   - id: waylabel1
+    name: waylabel1
     geometry: linestring
     <<: *extents
     Datasource:
@@ -689,9 +687,9 @@ Layer:
       maxzoom: 13
     class: waylabel
     advanced: {}
-    name: waylabel1
 
   - id: waylabel2
+    name: waylabel2
     geometry: linestring
     <<: *extents
     Datasource:
@@ -707,6 +705,5 @@ Layer:
       maxzoom: 22
     class: waylabel
     advanced: {}
-    name: waylabel2
 
 # vim: ft=yaml
