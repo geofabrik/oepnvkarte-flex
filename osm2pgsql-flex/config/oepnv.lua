@@ -1,4 +1,3 @@
--- ---------------------------------------------------------------------------
 --
 -- Example config for basic/generic topics
 --
@@ -22,7 +21,6 @@ themepark:add_topic('oepnv/oepnv_ways')
 themepark:add_topic('oepnv/oepnv_boundary_areas')
 themepark:add_topic('oepnv/oepnv_boundary_ways')
 themepark:add_topic('oepnv/oepnv_waterways')
-themepark:add_topic('oepnv/oepnv_minorwaterways')
 themepark:add_topic('oepnv/oepnv_lines')
 themepark:add_topic('oepnv/oepnv_minorrails')
 themepark:add_topic('oepnv/oepnv_line_parts')
