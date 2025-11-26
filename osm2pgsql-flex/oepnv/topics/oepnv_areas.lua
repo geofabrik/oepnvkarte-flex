@@ -21,6 +21,11 @@ themepark:add_table({
     tiles = {
         minzoom = 8,
     },
+    indexes = {
+        { method = "btree", column = { "type" } },
+
+    },
+})
 
 themepark:add_table({
     name = "oepnv_largeareas",
@@ -31,6 +36,9 @@ themepark:add_table({
     }),
     tiles = {
         minzoom = 8,
+    },
+    indexes = {
+        { method = "btree", column = { "type" } },
     },
 })
 
