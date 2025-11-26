@@ -174,6 +174,9 @@ themepark:add_proc("gen", function(data)
         group_by_column = "type",
         margin = 0.01,
         make_valid = true,
+
+        -- these are the only ones which are needed
+        where = "type IN ('forest', 'farm', 'city', 'water')",
     })
 end)
 
