@@ -172,7 +172,7 @@ themepark:add_proc("gen", function(data)
         zoom = 11,
         geom_column = "geom",
         group_by_column = "type",
-        margin = 0.0,
+        margin = 0.01,
         make_valid = true,
     })
 end)
