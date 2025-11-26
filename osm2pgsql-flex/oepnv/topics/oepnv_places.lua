@@ -22,16 +22,6 @@ themepark:add_table({
     },
 })
 
--- Return true iff value is contained in list
-function is_in(value, list)
-    for _, el in ipairs(list) do
-        if value == el then
-            return true
-        end
-    end
-    return false
-end
-
 -----------------------------------------------------------------------------
 
 themepark:add_proc("node", function(object)

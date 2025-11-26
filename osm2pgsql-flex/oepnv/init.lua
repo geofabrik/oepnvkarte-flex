@@ -120,6 +120,45 @@ function theme.has_area_tags(tags)
     end
 end
 
+-- Return true iff value is contained in list
+function is_in(value, list)
+    for _, el in ipairs(list) do
+        if value == el then
+            return true
+        end
+    end
+    return false
+end
+
+-- first_tag_match(object, {
+--   {{train="yes"}, "rail"},
+--   {{railway="station"}, "rail"},
+--   ...
+--   })
+function first_tag_match(object, kv_matches)
+    for _, kv_ret in ipairs(kv_matches) do
+        -- I don't know lua better
+        local count_matches = 0
+        local count_total = 0
+        local kvs = kv_ret[1]
+        local ret = kv_ret[2]
+
+        for key, value in pairs(kvs) do
+            count_total = count_total + 1
+            if object.tags[key] == value then
+                count_matches = count_matches + 1
+            end
+        end
+
+        if count_total == count_matches then
+            return ret
+        end
+    end
+    return nil
+end
+
+
+
 -- ---------------------------------------------------------------------------
 
 local theme = {}
