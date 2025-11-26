@@ -10,7 +10,7 @@ local themepark, theme, cfg = ...
 
 themepark:add_table({
     name = "oepnv_buildings",
-    geom = "geometry",
+    geom = "multipolygon",
     ids_type = "any",
     columns = themepark:columns({
         { column = "housenumber", type = "text" },
@@ -23,24 +23,12 @@ themepark:add_table({
 
 -- ---------------------------------------------------------------------------
 
-themepark:add_proc("way", function(object)
-    if object.tags.building then
+themepark:add_proc("area", function(object)
+    if object.tags["building"] then
         themepark:insert("oepnv_buildings", {
-
             name = object.tags["addr:housename"],
-            geom = object:as_linestring(),
             housenumber = object.tags["addr:housenumber"],
-        })
-    end
-end)
-
-themepark:add_proc("relation", function(object)
-    if object.tags.building then
-        themepark:insert("oepnv_buildings", {
-
-            name = object.tags["addr:housename"],
             geom = object:as_multipolygon(),
-            housenumber = object.tags["addr:housenumber"],
         })
     end
 end)
