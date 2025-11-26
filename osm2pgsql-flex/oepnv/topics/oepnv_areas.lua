@@ -21,7 +21,31 @@ themepark:add_table({
     tiles = {
         minzoom = 8,
     },
+
+themepark:add_table({
+    name = "oepnv_largeareas",
+    geom = "geometry",
+    ids_type = "tile",
+    columns = themepark:columns({
+        { column = "type", type = "text" },
+    }),
+    tiles = {
+        minzoom = 8,
+    },
 })
+
+themepark:add_table({
+    name = "oepnv_verylargeareas",
+    geom = "geometry",
+    ids_type = "tile",
+    columns = themepark:columns({
+        { column = "type", type = "text" },
+    }),
+    tiles = {
+        minzoom = 7,
+    },
+})
+
 
 -- Get the type of the area
 function get_area_type(object)
@@ -138,3 +162,35 @@ themepark:add_proc("area", function(object)
         })
     end
 end)
+
+themepark:add_proc("gen", function(data)
+    osm2pgsql.run_gen("raster-union", {
+        schema = themepark.options.schema,
+        name = "oepnv_largeareas",
+        debug = true,
+        src_table = themepark.with_prefix("oepnv_areas"),
+        dest_table = themepark.with_prefix("oepnv_largeareas"),
+        zoom = 11,
+        geom_column = "geom",
+        group_by_column = "type",
+        margin = 0.0,
+        make_valid = true,
+    })
+end)
+
+themepark:add_proc("gen", function(data)
+    osm2pgsql.run_gen("raster-union", {
+        schema = themepark.options.schema,
+        name = "oepnv_verylargeareas",
+        debug = true,
+        src_table = themepark.with_prefix("oepnv_areas"),
+        dest_table = themepark.with_prefix("oepnv_verylargeareas"),
+        zoom = 10,
+        geom_column = "geom",
+        group_by_column = "type",
+        margin = 0.0,
+        make_valid = true,
+    })
+end)
+
+
