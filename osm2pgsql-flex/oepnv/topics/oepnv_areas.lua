@@ -167,7 +167,6 @@ themepark:add_proc("gen", function(data)
     osm2pgsql.run_gen("raster-union", {
         schema = themepark.options.schema,
         name = "oepnv_largeareas",
-        debug = true,
         src_table = themepark.with_prefix("oepnv_areas"),
         dest_table = themepark.with_prefix("oepnv_largeareas"),
         zoom = 11,
@@ -182,7 +181,6 @@ themepark:add_proc("gen", function(data)
     osm2pgsql.run_gen("raster-union", {
         schema = themepark.options.schema,
         name = "oepnv_verylargeareas",
-        debug = true,
         src_table = themepark.with_prefix("oepnv_areas"),
         dest_table = themepark.with_prefix("oepnv_verylargeareas"),
         zoom = 10,
